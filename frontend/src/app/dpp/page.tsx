@@ -1,19 +1,18 @@
 "use client";
 
+import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import { api } from "@/services/api";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
-
-export default function DPPSectionPage() {
+function DPPContent() {
   const searchParams = useSearchParams();
   const section = searchParams.get("section") || "batteries";
   const [sectors, setSectors] = useState<string[]>([]);
 
   useEffect(() => {
-    fetch(`${API}/api/v1/dpp`)
-      .then((r) => r.json())
+    api.dpp.sectors()
       .then((d) => setSectors(d.sectors || []))
       .catch(() => setSectors(["batteries", "electronics", "textiles", "vehicles"]));
   }, []);
@@ -43,5 +42,13 @@ export default function DPPSectionPage() {
         </Link>
       </div>
     </div>
+  );
+}
+
+export default function DPPSectionPage() {
+  return (
+    <Suspense fallback={<div className="text-slate-400">Loading...</div>}>
+      <DPPContent />
+    </Suspense>
   );
 }

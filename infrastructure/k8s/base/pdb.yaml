@@ -1,0 +1,9 @@
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: dpp-api-pdb
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: dpp-api

@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.Python
+env/
+venv/
+.venv
+*.egg-info/
+.eggs
+dist/
+build/
+
+# Secrets - NEVER COMMIT
+.env
+.env.local
+.env.*.local
+secrets/
+*.key
+*.pem
+*.pfx
+
+# IDE
+.vscode/
+.idea
+*.swp
+*.swo
+.cursor/
+
+# Logs
+logs/
+*.log
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache
+.hypothesis/
+
+# AI Models (store references, not files)
+models/*.bin
+models/*.pt
+*.ckpt
+
+# Data (sensitive)
+data/customer/
+data/production/
+
+# Node
+node_modules/
+.next/
+out/
+.npm
+
+# Kubernetes secrets
+infrastructure/k8s/*/secrets.yaml
+**/secrets.yaml
+
+# OS
+.DS_Store
+Thumbs.db

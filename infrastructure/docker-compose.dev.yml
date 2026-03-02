@@ -1,0 +1,10 @@
+# Development overrides: run only infrastructure, backend runs locally
+# Usage: docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+# Then: cd backend && uvicorn app.main:app --reload --host 0.0.0.0
+
+version: "3.9"
+
+services:
+  dpp-api:
+    profiles:
+      - with-api

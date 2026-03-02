@@ -1,0 +1,14 @@
+-- Rollback script (reference - Neo4j uses Cypher for drop)
+-- Run equivalent in Neo4j browser or cypher-shell:
+-- DROP CONSTRAINT product_gtin IF EXISTS;
+-- DROP CONSTRAINT supplier_eoid IF EXISTS;
+-- DROP CONSTRAINT batch_id IF EXISTS;
+-- DROP CONSTRAINT battery_passport_uri IF EXISTS;
+-- DROP CONSTRAINT regulation_celex IF EXISTS;
+-- DROP CONSTRAINT regulatory_article_id IF EXISTS;
+-- DROP INDEX product_sector IF EXISTS;
+-- DROP INDEX product_manufacturing_date IF EXISTS;
+-- DROP INDEX compliance_record_entity IF EXISTS;
+-- DROP INDEX audit_entity IF EXISTS;
+-- DROP INDEX compliance_search IF EXISTS;
+-- DROP INDEX regulation_embeddings IF EXISTS;

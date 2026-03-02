@@ -1,0 +1,66 @@
+# EU DPP Platform - Base deployment (3 replicas HA)
+# Production: use overlays (overlays/production) and seal secrets
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dpp-api
+  labels:
+    app: dpp-api
+    compliance: eu-dpp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dpp-api
+  template:
+    metadata:
+      labels:
+        app: dpp-api
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      containers:
+        - name: dpp-api
+          image: dpp-api:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8000
+          env:
+            - name: ENVIRONMENT
+              value: production
+            - name: LOG_LEVEL
+              value: INFO
+          envFrom:
+            - secretRef:
+                name: dpp-api-secrets
+                optional: true
+          resources:
+            requests:
+              memory: "512Mi"
+              cpu: "250m"
+            limits:
+              memory: "2Gi"
+              cpu: "1000m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 5
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop: ["ALL"]

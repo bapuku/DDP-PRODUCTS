@@ -1,0 +1,15 @@
+{
+  "_comment": "Recorded Claude responses for CI replay (no API key needed)",
+  "compliance_check_battery": {
+    "input": "Is this battery compliant with EU Battery Regulation 2023/1542?",
+    "output": "{\"compliance_status\": \"COMPLIANT\", \"regulation\": \"32023R1542\", \"requirements_met\": [\"Annex XIII Cluster 1 - General Information\", \"Carbon footprint disclosure\", \"Chemistry specified\"], \"gaps\": [], \"confidence\": 0.88, \"regulatory_citations\": [\"EUR-Lex 32023R1542 Annex XIII\", \"EUR-Lex 32023R1542 Art.49\"], \"escalate\": false, \"reasoning\": \"Battery passport contains all mandatory Annex XIII fields.\"}"
+  },
+  "compliance_check_espr": {
+    "input": "Does this electronics product comply with ESPR?",
+    "output": "{\"compliance_status\": \"PARTIAL\", \"regulation\": \"32024R1252\", \"requirements_met\": [\"DPP created\", \"GTIN-14 assigned\"], \"gaps\": [\"Repairability index not provided\", \"Carbon footprint missing lifecycle stage breakdown\"], \"confidence\": 0.75, \"regulatory_citations\": [\"EUR-Lex 32024R1252 Art.9\", \"EUR-Lex 32024R1252 Art.10\"], \"escalate\": false, \"reasoning\": \"DPP exists but lacks some mandatory sustainability data.\"}"
+  },
+  "regulatory_citation_reach": {
+    "input": "Does SVHC content exceed REACH Article 33 threshold?",
+    "output": "{\"compliance_status\": \"NON_COMPLIANT\", \"regulation\": \"31907R0006\", \"requirements_met\": [], \"gaps\": [\"SVHC cobalt at 0.15% exceeds 0.1% threshold per Art.33\"], \"confidence\": 0.92, \"regulatory_citations\": [\"EUR-Lex 31907R0006 Art.33\"], \"escalate\": false, \"reasoning\": \"Cobalt concentration 0.15% w/w exceeds the REACH Art.33 threshold of 0.1%.\"}"
+  }
+}

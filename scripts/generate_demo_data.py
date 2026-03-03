@@ -283,12 +283,23 @@ def build_battery_api_payloads(battery_products: list[dict]) -> list[dict]:
             "carbon_footprint_class": perf_class,
             "carbon_footprint_kg_co2e_kwh": max(0.1, try_float(bp.get("carbon_footprint_per_kwh", 45.0))),
             "chemistry": bp.get("battery_chemistry", "NMC"),
-            "critical_raw_materials": ["lithium", "cobalt", "nickel"],
-            "recycled_content_pre_consumer": max(0, try_float(bp.get("recycled_cobalt_pct", 5.0))),
-            "recycled_content_post_consumer": max(0, try_float(bp.get("recycled_lithium_pct", 3.0))),
+            "critical_raw_materials": {
+                "lithium": max(0, try_float(bp.get("lithium_content_pct", 5.0))),
+                "cobalt": max(0, try_float(bp.get("cobalt_content_pct", 8.0))),
+                "nickel": max(0, try_float(bp.get("nickel_content_pct", 12.0))),
+            },
+            "recycled_content_pre_consumer": {
+                "cobalt": max(0, try_float(bp.get("recycled_cobalt_pct", 5.0))),
+                "lithium": max(0, try_float(bp.get("recycled_lithium_pct", 3.0))),
+                "nickel": max(0, try_float(bp.get("recycled_nickel_pct", 2.0))),
+            },
+            "recycled_content_post_consumer": {
+                "cobalt": max(0, try_float(bp.get("recycled_cobalt_pct", 5.0))) * 0.3,
+                "lithium": max(0, try_float(bp.get("recycled_lithium_pct", 3.0))) * 0.2,
+            },
             "take_back_points": [
-                {"name": "Berlin Collection Center", "address": "Alexanderplatz 1, 10178 Berlin"},
-                {"name": "Paris Recycling Hub", "address": "15 Rue de Rivoli, 75001 Paris"},
+                "Berlin Collection Center, Alexanderplatz 1, 10178 Berlin",
+                "Paris Recycling Hub, 15 Rue de Rivoli, 75001 Paris",
             ],
         }
         if bp.get("capacity_kwh"):

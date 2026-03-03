@@ -11,22 +11,23 @@
     "carbon_footprint_class": "B",
     "carbon_footprint_kg_co2e_kwh": 58.9,
     "chemistry": "NMC_811",
-    "critical_raw_materials": [
-      "lithium",
-      "cobalt",
-      "nickel"
-    ],
-    "recycled_content_pre_consumer": 8.1,
-    "recycled_content_post_consumer": 6.2,
+    "critical_raw_materials": {
+      "lithium": 1.93,
+      "cobalt": 5.13,
+      "nickel": 54.07
+    },
+    "recycled_content_pre_consumer": {
+      "cobalt": 8.1,
+      "lithium": 6.2,
+      "nickel": 5.8
+    },
+    "recycled_content_post_consumer": {
+      "cobalt": 2.4299999999999997,
+      "lithium": 1.2400000000000002
+    },
     "take_back_points": [
-      {
-        "name": "Berlin Collection Center",
-        "address": "Alexanderplatz 1, 10178 Berlin"
-      },
-      {
-        "name": "Paris Recycling Hub",
-        "address": "15 Rue de Rivoli, 75001 Paris"
-      }
+      "Berlin Collection Center, Alexanderplatz 1, 10178 Berlin",
+      "Paris Recycling Hub, 15 Rue de Rivoli, 75001 Paris"
     ],
     "rated_capacity_ah": 1560.2,
     "certified_usable_energy_kwh": 71.15,
@@ -45,22 +46,23 @@
     "carbon_footprint_class": "C",
     "carbon_footprint_kg_co2e_kwh": 66.6,
     "chemistry": "NCA",
-    "critical_raw_materials": [
-      "lithium",
-      "cobalt",
-      "nickel"
-    ],
-    "recycled_content_pre_consumer": 18.1,
-    "recycled_content_post_consumer": 6.2,
+    "critical_raw_materials": {
+      "lithium": 1.53,
+      "cobalt": 13.49,
+      "nickel": 49.01
+    },
+    "recycled_content_pre_consumer": {
+      "cobalt": 18.1,
+      "lithium": 6.2,
+      "nickel": 3.2
+    },
+    "recycled_content_post_consumer": {
+      "cobalt": 5.430000000000001,
+      "lithium": 1.2400000000000002
+    },
     "take_back_points": [
-      {
-        "name": "Berlin Collection Center",
-        "address": "Alexanderplatz 1, 10178 Berlin"
-      },
-      {
-        "name": "Paris Recycling Hub",
-        "address": "15 Rue de Rivoli, 75001 Paris"
-      }
+      "Berlin Collection Center, Alexanderplatz 1, 10178 Berlin",
+      "Paris Recycling Hub, 15 Rue de Rivoli, 75001 Paris"
     ],
     "rated_capacity_ah": 29.6,
     "certified_usable_energy_kwh": 1.35,
@@ -79,22 +81,23 @@
     "carbon_footprint_class": "B",
     "carbon_footprint_kg_co2e_kwh": 63.3,
     "chemistry": "NMC_532",
-    "critical_raw_materials": [
-      "lithium",
-      "cobalt",
-      "nickel"
-    ],
-    "recycled_content_pre_consumer": 11.6,
-    "recycled_content_post_consumer": 7.9,
+    "critical_raw_materials": {
+      "lithium": 3.94,
+      "cobalt": 8.43,
+      "nickel": 38.75
+    },
+    "recycled_content_pre_consumer": {
+      "cobalt": 11.6,
+      "lithium": 7.9,
+      "nickel": 9.1
+    },
+    "recycled_content_post_consumer": {
+      "cobalt": 3.48,
+      "lithium": 1.58
+    },
     "take_back_points": [
-      {
-        "name": "Berlin Collection Center",
-        "address": "Alexanderplatz 1, 10178 Berlin"
-      },
-      {
-        "name": "Paris Recycling Hub",
-        "address": "15 Rue de Rivoli, 75001 Paris"
-      }
+      "Berlin Collection Center, Alexanderplatz 1, 10178 Berlin",
+      "Paris Recycling Hub, 15 Rue de Rivoli, 75001 Paris"
     ],
     "rated_capacity_ah": 615.9,
     "certified_usable_energy_kwh": 28.08,
@@ -113,22 +116,23 @@
     "carbon_footprint_class": "C",
     "carbon_footprint_kg_co2e_kwh": 78.7,
     "chemistry": "NCA",
-    "critical_raw_materials": [
-      "lithium",
-      "cobalt",
-      "nickel"
-    ],
-    "recycled_content_pre_consumer": 8.9,
-    "recycled_content_post_consumer": 9.0,
+    "critical_raw_materials": {
+      "lithium": 3.85,
+      "cobalt": 10.79,
+      "nickel": 48.33
+    },
+    "recycled_content_pre_consumer": {
+      "cobalt": 8.9,
+      "lithium": 9.0,
+      "nickel": 9.0
+    },
+    "recycled_content_post_consumer": {
+      "cobalt": 2.67,
+      "lithium": 1.8
+    },
     "take_back_points": [
-      {
-        "name": "Berlin Collection Center",
-        "address": "Alexanderplatz 1, 10178 Berlin"
-      },
-      {
-        "name": "Paris Recycling Hub",
-        "address": "15 Rue de Rivoli, 75001 Paris"
-      }
+      "Berlin Collection Center, Alexanderplatz 1, 10178 Berlin",
+      "Paris Recycling Hub, 15 Rue de Rivoli, 75001 Paris"
     ],
     "rated_capacity_ah": 56.4,
     "certified_usable_energy_kwh": 2.57,
@@ -147,22 +151,23 @@
     "carbon_footprint_class": "E",
     "carbon_footprint_kg_co2e_kwh": 102.0,
     "chemistry": "NMC_811",
-    "critical_raw_materials": [
-      "lithium",
-      "cobalt",
-      "nickel"
-    ],
-    "recycled_content_pre_consumer": 11.5,
-    "recycled_content_post_consumer": 3.7,
+    "critical_raw_materials": {
+      "lithium": 3.23,
+      "cobalt": 7.19,
+      "nickel": 53.55
+    },
+    "recycled_content_pre_consumer": {
+      "cobalt": 11.5,
+      "lithium": 3.7,
+      "nickel": 7.9
+    },
+    "recycled_content_post_consumer": {
+      "cobalt": 3.4499999999999997,
+      "lithium": 0.7400000000000001
+    },
     "take_back_points": [
-      {
-        "name": "Berlin Collection Center",
-        "address": "Alexanderplatz 1, 10178 Berlin"
-      },
-      {
-        "name": "Paris Recycling Hub",
-        "address": "15 Rue de Rivoli, 75001 Paris"
-      }
+      "Berlin Collection Center, Alexanderplatz 1, 10178 Berlin",
+      "Paris Recycling Hub, 15 Rue de Rivoli, 75001 Paris"
     ],
     "rated_capacity_ah": 395.6,
     "certified_usable_energy_kwh": 18.04,

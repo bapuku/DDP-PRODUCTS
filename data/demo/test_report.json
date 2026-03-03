@@ -1,9 +1,9 @@
 {
   "api_url": "http://51.77.144.54:8100",
   "total": 53,
-  "passed": 36,
-  "failed": 17,
-  "duration_s": 5.9,
+  "passed": 44,
+  "failed": 9,
+  "duration_s": 5.5,
   "results": [
     {
       "test": "health:/health",
@@ -35,15 +35,15 @@
       "url": "/api/v1/dpp/sector",
       "status": 201,
       "ok": true,
-      "detail": "vehicles/01466442118724 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/01466442118724/21/SN-DEMO-"
+      "detail": "vehicles/14664421187240 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/14664421187240/21/SN-DEMO-"
     },
     {
       "test": "seed:dpp:1",
       "method": "POST",
       "url": "/api/v1/dpp/sector",
-      "status": 422,
-      "ok": false,
-      "detail": "batteries/04498513908134 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 201,
+      "ok": true,
+      "detail": "batteries/44985139081349 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/44985139081349/21/SN-DEMO-"
     },
     {
       "test": "seed:dpp:2",
@@ -51,15 +51,15 @@
       "url": "/api/v1/dpp/sector",
       "status": 201,
       "ok": true,
-      "detail": "textiles/04875862324900 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/04875862324900/21/SN-DEMO-"
+      "detail": "textiles/48758623249008 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/48758623249008/21/SN-DEMO-"
     },
     {
       "test": "seed:dpp:3",
       "method": "POST",
       "url": "/api/v1/dpp/sector",
-      "status": 422,
-      "ok": false,
-      "detail": "construction_materials/01115402766155 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 201,
+      "ok": true,
+      "detail": "construction/11154027661556 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/11154027661556/21/SN-DEMO-"
     },
     {
       "test": "seed:dpp:4",
@@ -73,9 +73,9 @@
       "test": "seed:dpp:5",
       "method": "POST",
       "url": "/api/v1/dpp/sector",
-      "status": 422,
-      "ok": false,
-      "detail": "furniture/06984704558353 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 201,
+      "ok": true,
+      "detail": "furniture/69847045583531 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/69847045583531/21/SN-DEMO-"
     },
     {
       "test": "seed:dpp:6",
@@ -89,25 +89,25 @@
       "test": "seed:dpp:7",
       "method": "POST",
       "url": "/api/v1/dpp/sector",
-      "status": 422,
-      "ok": false,
-      "detail": "vehicles/03732792648585 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 201,
+      "ok": true,
+      "detail": "vehicles/37327926485853 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/37327926485853/21/SN-DEMO-"
     },
     {
       "test": "seed:dpp:8",
       "method": "POST",
       "url": "/api/v1/dpp/sector",
-      "status": 422,
-      "ok": false,
-      "detail": "vehicles/06921744116206 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 201,
+      "ok": true,
+      "detail": "vehicles/69217441162065 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/69217441162065/21/SN-DEMO-"
     },
     {
       "test": "seed:dpp:9",
       "method": "POST",
       "url": "/api/v1/dpp/sector",
-      "status": 422,
-      "ok": false,
-      "detail": "batteries/02628231594989 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 201,
+      "ok": true,
+      "detail": "batteries/26282315949894 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/26282315949894/21/SN-DEMO-"
     },
     {
       "test": "seed:dpp:10",
@@ -152,34 +152,34 @@
     {
       "test": "get:dpp:vehicles",
       "method": "GET",
-      "url": "/api/v1/dpp/sector/vehicles/01466442118724/SN-DEMO-VEH-0001",
+      "url": "/api/v1/dpp/sector/vehicles/14664421187240/SN-DEMO-VEH-0001",
       "status": 200,
       "ok": true,
-      "detail": "{\"rohs_compliance\":\"Compliant\",\"gtin\":\"01466442118724\",\"weight_kg\":736.2,\"reach_"
+      "detail": "{\"rohs_compliance\":\"Compliant\",\"gtin\":\"14664421187240\",\"weight_kg\":736.2,\"reach_"
     },
     {
       "test": "get:dpp:batteries",
       "method": "GET",
-      "url": "/api/v1/dpp/sector/batteries/04498513908134/SN-DEMO-BAT-0002",
-      "status": 404,
-      "ok": false,
-      "detail": "{\"detail\":\"DPP not found\"}"
+      "url": "/api/v1/dpp/sector/batteries/44985139081349/SN-DEMO-BAT-0002",
+      "status": 200,
+      "ok": true,
+      "detail": "{\"rohs_compliance\":\"Compliant\",\"gtin\":\"44985139081349\",\"weight_kg\":15.19,\"reach_"
     },
     {
       "test": "get:dpp:textiles",
       "method": "GET",
-      "url": "/api/v1/dpp/sector/textiles/04875862324900/SN-DEMO-TEX-0003",
+      "url": "/api/v1/dpp/sector/textiles/48758623249008/SN-DEMO-TEX-0003",
       "status": 200,
       "ok": true,
-      "detail": "{\"rohs_compliance\":\"Compliant\",\"gtin\":\"04875862324900\",\"weight_kg\":0.46,\"reach_s"
+      "detail": "{\"rohs_compliance\":\"Compliant\",\"gtin\":\"48758623249008\",\"weight_kg\":0.46,\"reach_s"
     },
     {
-      "test": "get:dpp:construction_materials",
+      "test": "get:dpp:construction",
       "method": "GET",
-      "url": "/api/v1/dpp/sector/construction_materials/01115402766155/SN-DEMO-CON-0004",
-      "status": 422,
-      "ok": false,
-      "detail": "{\"detail\":[{\"type\":\"enum\",\"loc\":[\"path\",\"sector\"],\"msg\":\"Input should be 'batter"
+      "url": "/api/v1/dpp/sector/construction/11154027661556/SN-DEMO-CON-0004",
+      "status": 200,
+      "ok": true,
+      "detail": "{\"rohs_compliance\":\"Compliant\",\"gtin\":\"11154027661556\",\"weight_kg\":10.21,\"reach_"
     },
     {
       "test": "get:dpp:electronics",
@@ -203,7 +203,7 @@
       "url": "/api/v1/dpp/sector/batteries?limit=5",
       "status": 200,
       "ok": true,
-      "detail": "[]"
+      "detail": "[{\"rohs_compliance\":\"Compliant\",\"gtin\":\"44985139081349\",\"weight_kg\":15.19,\"reach"
     },
     {
       "test": "list:sector:textiles",
@@ -217,102 +217,102 @@
       "test": "seed:battery:0",
       "method": "POST",
       "url": "/api/v1/dpp/battery",
-      "status": 422,
-      "ok": false,
-      "detail": "05096777394726/SN-DEMO-BAT-0016 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 200,
+      "ok": true,
+      "detail": "50967773947268/SN-DEMO-BAT-0016 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/50967773947268/21/SN-DEMO-"
     },
     {
       "test": "seed:battery:1",
       "method": "POST",
       "url": "/api/v1/dpp/battery",
-      "status": 422,
-      "ok": false,
-      "detail": "02777543012274/SN-DEMO-BAT-0017 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 200,
+      "ok": true,
+      "detail": "27775430122741/SN-DEMO-BAT-0017 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/27775430122741/21/SN-DEMO-"
     },
     {
       "test": "seed:battery:2",
       "method": "POST",
       "url": "/api/v1/dpp/battery",
-      "status": 422,
-      "ok": false,
-      "detail": "05889305412567/SN-DEMO-BAT-0018 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 200,
+      "ok": true,
+      "detail": "58893054125679/SN-DEMO-BAT-0018 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/58893054125679/21/SN-DEMO-"
     },
     {
       "test": "seed:battery:3",
       "method": "POST",
       "url": "/api/v1/dpp/battery",
-      "status": 422,
-      "ok": false,
-      "detail": "07420263617246/SN-DEMO-BAT-0019 \u2192 {\"detail\":[{\"type\":\"value_error\",\"loc\":[\"body\",\"gtin\"],\"msg\""
+      "status": 200,
+      "ok": true,
+      "detail": "74202636172464/SN-DEMO-BAT-0019 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/74202636172464/21/SN-DEMO-"
     },
     {
       "test": "seed:battery:4",
       "method": "POST",
       "url": "/api/v1/dpp/battery",
-      "status": 422,
-      "ok": false,
-      "detail": "07511869014761/SN-DEMO-BAT-0020 \u2192 {\"detail\":[{\"type\":\"dict_type\",\"loc\":[\"body\",\"critical_raw_m"
-    },
-    {
-      "test": "get:battery:05096777",
-      "method": "GET",
-      "url": "/api/v1/dpp/battery/05096777394726/SN-DEMO-BAT-0016",
-      "status": 404,
-      "ok": false,
-      "detail": "{\"detail\":\"Passport not found\"}"
-    },
-    {
-      "test": "get:battery:02777543",
-      "method": "GET",
-      "url": "/api/v1/dpp/battery/02777543012274/SN-DEMO-BAT-0017",
-      "status": 404,
-      "ok": false,
-      "detail": "{\"detail\":\"Passport not found\"}"
-    },
-    {
-      "test": "get:battery:05889305",
-      "method": "GET",
-      "url": "/api/v1/dpp/battery/05889305412567/SN-DEMO-BAT-0018",
-      "status": 404,
-      "ok": false,
-      "detail": "{\"detail\":\"Passport not found\"}"
-    },
-    {
-      "test": "supply-chain:01466442",
-      "method": "GET",
-      "url": "/api/v1/dpp/sector/supply-chain/01466442118724",
       "status": 200,
       "ok": true,
-      "detail": "{\"gtin\":\"01466442118724\",\"product\":{\"rohs_compliance\":\"Compliant\",\"gtin\":\"014664"
+      "detail": "75118690147616/SN-DEMO-BAT-0020 \u2192 {\"dpp_uri\":\"https://id.gs1.org/01/75118690147616/21/SN-DEMO-"
     },
     {
-      "test": "supply-chain:04498513",
+      "test": "get:battery:50967773",
       "method": "GET",
-      "url": "/api/v1/dpp/sector/supply-chain/04498513908134",
-      "status": 404,
+      "url": "/api/v1/dpp/battery/50967773947268/SN-DEMO-BAT-0016",
+      "status": 500,
       "ok": false,
-      "detail": "{\"detail\":\"Product not found\"}"
+      "detail": "{\"error\":\"INTERNAL_ERROR\",\"message\":\"An internal error occurred.\"}"
     },
     {
-      "test": "supply-chain:04875862",
+      "test": "get:battery:27775430",
       "method": "GET",
-      "url": "/api/v1/dpp/sector/supply-chain/04875862324900",
+      "url": "/api/v1/dpp/battery/27775430122741/SN-DEMO-BAT-0017",
+      "status": 500,
+      "ok": false,
+      "detail": "{\"error\":\"INTERNAL_ERROR\",\"message\":\"An internal error occurred.\"}"
+    },
+    {
+      "test": "get:battery:58893054",
+      "method": "GET",
+      "url": "/api/v1/dpp/battery/58893054125679/SN-DEMO-BAT-0018",
+      "status": 500,
+      "ok": false,
+      "detail": "{\"error\":\"INTERNAL_ERROR\",\"message\":\"An internal error occurred.\"}"
+    },
+    {
+      "test": "supply-chain:14664421",
+      "method": "GET",
+      "url": "/api/v1/dpp/sector/supply-chain/14664421187240",
       "status": 200,
       "ok": true,
-      "detail": "{\"gtin\":\"04875862324900\",\"product\":{\"rohs_compliance\":\"Compliant\",\"gtin\":\"048758"
+      "detail": "{\"gtin\":\"14664421187240\",\"product\":{\"rohs_compliance\":\"Compliant\",\"gtin\":\"146644"
+    },
+    {
+      "test": "supply-chain:44985139",
+      "method": "GET",
+      "url": "/api/v1/dpp/sector/supply-chain/44985139081349",
+      "status": 200,
+      "ok": true,
+      "detail": "{\"gtin\":\"44985139081349\",\"product\":{\"rohs_compliance\":\"Compliant\",\"gtin\":\"449851"
+    },
+    {
+      "test": "supply-chain:48758623",
+      "method": "GET",
+      "url": "/api/v1/dpp/sector/supply-chain/48758623249008",
+      "status": 200,
+      "ok": true,
+      "detail": "{\"gtin\":\"48758623249008\",\"product\":{\"rohs_compliance\":\"Compliant\",\"gtin\":\"487586"
     },
     {
       "test": "carrier:info",
       "method": "GET",
-      "url": "/api/v1/dpp/01466442118724/SN-DEMO-VEH-0001/carrier",
+      "url": "/api/v1/dpp/14664421187240/SN-DEMO-VEH-0001/carrier",
       "status": 200,
       "ok": true,
-      "detail": "{\"qr_data\":\"https://dpp.example.eu/01/01466442118724/21/SN-DEMO-VEH-0001\",\"gs1_d"
+      "detail": "{\"qr_data\":\"https://dpp.example.eu/01/14664421187240/21/SN-DEMO-VEH-0001\",\"gs1_d"
     },
     {
       "test": "carrier:qr",
       "method": "GET",
-      "url": "/api/v1/dpp/01466442118724/SN-DEMO-VEH-0001/carrier/qr.png",
+      "url": "/api/v1/dpp/14664421187240/SN-DEMO-VEH-0001/carrier/qr.png",
       "status": 200,
       "ok": true,
       "detail": "content-type=image/png"
@@ -353,9 +353,9 @@
       "test": "ml:predict:0",
       "method": "POST",
       "url": "/api/v1/ml/predict/compliance",
-      "status": 200,
-      "ok": true,
-      "detail": "{\"espr_class\":\"Unknown\",\"rohs_class\":\"Compliant\",\"reach_class\":\"No_SVHC\",\"carbon"
+      "status": 429,
+      "ok": false,
+      "detail": "{\"detail\":\"Too many requests\"}"
     },
     {
       "test": "ml:predict:1",
@@ -369,9 +369,9 @@
       "test": "ml:predict:2",
       "method": "POST",
       "url": "/api/v1/ml/predict/compliance",
-      "status": 200,
-      "ok": true,
-      "detail": "{\"espr_class\":\"Unknown\",\"rohs_class\":\"Compliant\",\"reach_class\":\"No_SVHC\",\"carbon"
+      "status": 429,
+      "ok": false,
+      "detail": "{\"detail\":\"Too many requests\"}"
     },
     {
       "test": "ml:predict:get",
@@ -385,25 +385,25 @@
       "test": "lifecycle:create:0",
       "method": "POST",
       "url": "/api/v1/dpp/lifecycle/create",
-      "status": 200,
-      "ok": true,
-      "detail": "{\"ddp_uri\":\"https://dpp.example.eu/product/01466442118724/SN-DEMO-VEH-0001\",\"fin"
+      "status": 429,
+      "ok": false,
+      "detail": "{\"detail\":\"Too many requests\"}"
     },
     {
       "test": "lifecycle:create:1",
       "method": "POST",
       "url": "/api/v1/dpp/lifecycle/create",
-      "status": 200,
-      "ok": true,
-      "detail": "{\"ddp_uri\":\"https://dpp.example.eu/product/04498513908134/SN-DEMO-BAT-0002\",\"fin"
+      "status": 429,
+      "ok": false,
+      "detail": "{\"detail\":\"Too many requests\"}"
     },
     {
       "test": "lifecycle:create:2",
       "method": "POST",
       "url": "/api/v1/dpp/lifecycle/create",
-      "status": 200,
-      "ok": true,
-      "detail": "{\"ddp_uri\":\"https://dpp.example.eu/product/04875862324900/SN-DEMO-TEX-0003\",\"fin"
+      "status": 429,
+      "ok": false,
+      "detail": "{\"detail\":\"Too many requests\"}"
     },
     {
       "test": "audit:log",
@@ -417,9 +417,9 @@
       "test": "human-review:pending",
       "method": "GET",
       "url": "/api/v1/human-review/pending",
-      "status": 200,
-      "ok": true,
-      "detail": "[]"
+      "status": 429,
+      "ok": false,
+      "detail": "{\"detail\":\"Too many requests\"}"
     },
     {
       "test": "workflow:run",

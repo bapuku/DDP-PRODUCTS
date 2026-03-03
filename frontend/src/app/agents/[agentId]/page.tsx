@@ -4,21 +4,9 @@ import { useEffect, useState, useRef } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import { AGENTS, type AgentInfo } from "@/data/registry";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "";
-
-interface Agent {
-  id: string;
-  name: string;
-  description: string;
-  category: string;
-  phase: string;
-  compliance_refs: string[];
-  skills: string[];
-  tools: string[];
-  llm_model: string | null;
-  status: string;
-}
+const API = "";
 
 interface ChatMessage {
   role: "user" | "assistant";
@@ -36,7 +24,7 @@ export default function AgentDetailPage() {
   const tCommon = useTranslations("common");
   const params = useParams();
   const agentId = params?.agentId as string;
-  const [agent, setAgent] = useState<Agent | null>(null);
+  const [agent, setAgent] = useState<AgentInfo | null>(null);
   const [loading, setLoading] = useState(true);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
@@ -49,7 +37,7 @@ export default function AgentDetailPage() {
     })
       .then((r) => r.json())
       .then(setAgent)
-      .catch(() => setAgent(null))
+      .catch(() => setAgent(AGENTS.find((a) => a.id === agentId) || null))
       .finally(() => setLoading(false));
   }, [agentId]);
 

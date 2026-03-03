@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "";
+const API = "";
 
 const FRAMEWORKS = [
   { abbr: "ESPR", name: "Ecodesign for Sustainable Products Regulation" },

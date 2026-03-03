@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
-const API = process.env.NEXT_PUBLIC_API_URL || "";
+const API = "";
 
 const BATTERY_CLUSTERS = [
   { id: 1, name: "General Information", fields: 14, example: "Manufacturer, chemistry, mass, category" },

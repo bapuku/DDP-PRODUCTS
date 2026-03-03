@@ -153,15 +153,13 @@ services:
     build:
       context: ../frontend
       dockerfile: Dockerfile
-      args:
-        NEXT_PUBLIC_API_URL: http://51.77.144.54:8100
     container_name: dpp-frontend
     restart: unless-stopped
     depends_on:
       dpp-api:
         condition: service_healthy
     environment:
-      NEXT_PUBLIC_API_URL: http://51.77.144.54:8100
+      BACKEND_URL: http://dpp-api:8000
     ports:
       - "3100:3000"
     networks:

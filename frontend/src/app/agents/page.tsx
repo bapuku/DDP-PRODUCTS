@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import PageAssistant from "@/components/PageAssistant";
 import { AGENTS } from "@/data/registry";
 
 const CAT_STYLE: Record<string, { bg: string; text: string; icon: string }> = {
@@ -92,6 +93,7 @@ export default function AgentRegistryPage() {
           );
         })}
       </div>
+      <PageAssistant agentId="supervisor" agentLabel="Agent Supervisor" pageContext="agent-registry" />
     </div>
   );
 }

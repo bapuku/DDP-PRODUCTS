@@ -215,6 +215,18 @@
     "askAgent": "Ask this agent…",
     "send": "Send"
   },
+  "assistant": {
+    "askAssistant": "AI Assistant",
+    "title": "AI Assistant",
+    "poweredBy": "Powered by Claude Sonnet 4",
+    "placeholder": "Ask me anything about this page...",
+    "thinking": "Thinking...",
+    "inputPlaceholder": "Type your question...",
+    "error": "Connection error. Please try again.",
+    "suggestion1": "What can I do here?",
+    "suggestion2": "Which regulations apply?",
+    "suggestion3": "How does this work?"
+  },
   "reports": {
     "title": "EU Compliance Reports",
     "description": "Compliance status per EU regulation article. EU AI Act Annex IV technical documentation. Each report links to the responsible agent and API endpoint.",

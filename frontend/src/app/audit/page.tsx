@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import PageAssistant from "@/components/PageAssistant";
 import { api } from "@/services/api";
 
 interface AuditRow {
@@ -155,6 +156,7 @@ export default function AuditPage() {
           </table>
         </div>
       )}
+      <PageAssistant agentId="audit_trail" agentLabel="Audit Trail" pageContext="audit-log" />
     </div>
   );
 }

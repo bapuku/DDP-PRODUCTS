@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import PageAssistant from "@/components/PageAssistant";
 import { api } from "@/services/api";
 
 interface PendingItem {
@@ -143,6 +144,7 @@ export default function HumanReviewPage() {
           ))}
         </ul>
       )}
+      <PageAssistant agentId="human_review" agentLabel="Human Review" pageContext="human-review-queue" />
     </div>
   );
 }

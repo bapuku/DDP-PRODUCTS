@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
+import PageAssistant from "@/components/PageAssistant";
 import { buildSkills } from "@/data/registry";
 
 const skills = buildSkills();
@@ -44,6 +45,7 @@ export default function SkillsRegistryPage() {
           </div>
         </div>
       ))}
+      <PageAssistant agentId="supervisor" agentLabel="Skills Registry" pageContext="skills-registry" />
     </div>
   );
 }

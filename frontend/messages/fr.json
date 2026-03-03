@@ -215,6 +215,18 @@
     "askAgent": "Interroger cet agent…",
     "send": "Envoyer"
   },
+  "assistant": {
+    "askAssistant": "Assistant IA",
+    "title": "Assistant IA",
+    "poweredBy": "Propulsé par Claude Sonnet 4",
+    "placeholder": "Posez-moi une question sur cette page...",
+    "thinking": "Réflexion...",
+    "inputPlaceholder": "Tapez votre question...",
+    "error": "Erreur de connexion. Veuillez réessayer.",
+    "suggestion1": "Que puis-je faire ici ?",
+    "suggestion2": "Quelles réglementations s'appliquent ?",
+    "suggestion3": "Comment ça fonctionne ?"
+  },
   "reports": {
     "title": "Rapports de Conformité UE",
     "description": "Statut de conformité par article de réglementation UE. Documentation technique EU AI Act Annexe IV. Chaque rapport est lié à l'agent responsable et à l'endpoint API.",

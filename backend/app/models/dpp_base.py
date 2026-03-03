@@ -50,7 +50,7 @@ class DPPSector(str, Enum):
 class DPPBase(BaseModel):
     """Base DPP fields - multi-sector."""
 
-    model_config = ConfigDict(strict=True, extra="forbid")
+    model_config = ConfigDict(extra="forbid")
 
     product_id: str = Field(..., min_length=1, max_length=64, description="Internal product ID")
     dpp_unique_id: Optional[str] = Field(None, max_length=64)

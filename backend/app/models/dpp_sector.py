@@ -11,7 +11,7 @@ from pydantic import field_validator
 
 class DPPCreateRequest(BaseModel):
     """Create a DPP record for any sector."""
-    model_config = ConfigDict(strict=True, extra="forbid")
+    model_config = ConfigDict(extra="forbid")
 
     gtin: str = Field(..., description="GS1 GTIN-14")
     serial_number: str = Field(..., max_length=50)

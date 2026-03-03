@@ -1,0 +1,322 @@
+[
+  {
+    "from_gtin": "01466442118724",
+    "to_supplier": "EcoTransport SA",
+    "supplier_country": "France",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "logistics",
+    "tier": 2
+  },
+  {
+    "from_gtin": "04498513908134",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 1
+  },
+  {
+    "from_gtin": "04875862324900",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 2
+  },
+  {
+    "from_gtin": "04875862324900",
+    "to_supplier": "Samsung SDI",
+    "supplier_country": "South Korea",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "batteries",
+    "tier": 2
+  },
+  {
+    "from_gtin": "04875862324900",
+    "to_supplier": "BASF Chemicals",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "chemicals",
+    "tier": 1
+  },
+  {
+    "from_gtin": "01115402766155",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 2
+  },
+  {
+    "from_gtin": "01115402766155",
+    "to_supplier": "RhineSteel GmbH",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "raw_materials",
+    "tier": 1
+  },
+  {
+    "from_gtin": "01115402766155",
+    "to_supplier": "BASF Chemicals",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "chemicals",
+    "tier": 1
+  },
+  {
+    "from_gtin": "88169269830105",
+    "to_supplier": "BASF Chemicals",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "chemicals",
+    "tier": 2
+  },
+  {
+    "from_gtin": "06984704558353",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 1
+  },
+  {
+    "from_gtin": "12040700115647",
+    "to_supplier": "EcoTransport SA",
+    "supplier_country": "France",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "logistics",
+    "tier": 1
+  },
+  {
+    "from_gtin": "12040700115647",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 2
+  },
+  {
+    "from_gtin": "03732792648585",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 1
+  },
+  {
+    "from_gtin": "03732792648585",
+    "to_supplier": "RhineSteel GmbH",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "raw_materials",
+    "tier": 1
+  },
+  {
+    "from_gtin": "03732792648585",
+    "to_supplier": "ArcelorMittal",
+    "supplier_country": "Luxembourg",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "steel",
+    "tier": 1
+  },
+  {
+    "from_gtin": "06921744116206",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 2
+  },
+  {
+    "from_gtin": "02628231594989",
+    "to_supplier": "BASF Chemicals",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "chemicals",
+    "tier": 2
+  },
+  {
+    "from_gtin": "02628231594989",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 1
+  },
+  {
+    "from_gtin": "00297578300933",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 1
+  },
+  {
+    "from_gtin": "06008838265787",
+    "to_supplier": "Lenzing AG",
+    "supplier_country": "Austria",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "fibers",
+    "tier": 2
+  },
+  {
+    "from_gtin": "06008838265787",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 2
+  },
+  {
+    "from_gtin": "07427520242049",
+    "to_supplier": "EcoTransport SA",
+    "supplier_country": "France",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "logistics",
+    "tier": 1
+  },
+  {
+    "from_gtin": "07427520242049",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 2
+  },
+  {
+    "from_gtin": "08816926983011",
+    "to_supplier": "RhineSteel GmbH",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "raw_materials",
+    "tier": 1
+  },
+  {
+    "from_gtin": "07431550852338",
+    "to_supplier": "ArcelorMittal",
+    "supplier_country": "Luxembourg",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "steel",
+    "tier": 2
+  },
+  {
+    "from_gtin": "07431550852338",
+    "to_supplier": "RhineSteel GmbH",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "raw_materials",
+    "tier": 1
+  },
+  {
+    "from_gtin": "07431550852338",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 1
+  },
+  {
+    "from_gtin": "05096777394726",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 1
+  },
+  {
+    "from_gtin": "05096777394726",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 1
+  },
+  {
+    "from_gtin": "05096777394726",
+    "to_supplier": "EcoTransport SA",
+    "supplier_country": "France",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "logistics",
+    "tier": 1
+  },
+  {
+    "from_gtin": "02777543012274",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 1
+  },
+  {
+    "from_gtin": "02777543012274",
+    "to_supplier": "Lenzing AG",
+    "supplier_country": "Austria",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "fibers",
+    "tier": 1
+  },
+  {
+    "from_gtin": "05889305412567",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 2
+  },
+  {
+    "from_gtin": "05889305412567",
+    "to_supplier": "BASF Chemicals",
+    "supplier_country": "Germany",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "chemicals",
+    "tier": 2
+  },
+  {
+    "from_gtin": "05889305412567",
+    "to_supplier": "ArcelorMittal",
+    "supplier_country": "Luxembourg",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "steel",
+    "tier": 1
+  },
+  {
+    "from_gtin": "07420263617246",
+    "to_supplier": "ArcelorMittal",
+    "supplier_country": "Luxembourg",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "steel",
+    "tier": 2
+  },
+  {
+    "from_gtin": "07420263617246",
+    "to_supplier": "Shenzhen MicroTech",
+    "supplier_country": "China",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "components",
+    "tier": 1
+  },
+  {
+    "from_gtin": "07420263617246",
+    "to_supplier": "Samsung SDI",
+    "supplier_country": "South Korea",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "batteries",
+    "tier": 2
+  },
+  {
+    "from_gtin": "07511869014761",
+    "to_supplier": "ArcelorMittal",
+    "supplier_country": "Luxembourg",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "steel",
+    "tier": 1
+  },
+  {
+    "from_gtin": "07511869014761",
+    "to_supplier": "Umicore NV",
+    "supplier_country": "Belgium",
+    "relationship": "SUPPLIED_BY",
+    "supply_type": "recycling",
+    "tier": 1
+  }
+]

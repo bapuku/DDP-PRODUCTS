@@ -50,7 +50,7 @@ class BatteryPassportCreate(BaseModel):
     GS1 GTIN-14 + serial; clusters 1-7 represented.
     """
 
-    model_config = ConfigDict(strict=True, extra="forbid")
+    model_config = ConfigDict(extra="forbid")
 
     # Identifiers (GS1)
     gtin: str = Field(..., description="GS1 GTIN-14")
@@ -123,7 +123,7 @@ class BatteryPassportCreate(BaseModel):
 class BatteryPassportResponse(BaseModel):
     """Response after creating or fetching a Battery DPP."""
 
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
 
     dpp_uri: str
     gtin: str

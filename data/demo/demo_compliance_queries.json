@@ -1,0 +1,22 @@
+[
+  {
+    "query": "Check ESPR compliance for a smartphone manufactured in China with carbon footprint 45 kg CO2eq",
+    "product_gtin": null
+  },
+  {
+    "query": "Is this textile product REACH compliant? Contains 0.05% SVHC substances",
+    "product_gtin": null
+  },
+  {
+    "query": "Verify RoHS compliance for electronic component with lead content 0.08%",
+    "product_gtin": null
+  },
+  {
+    "query": "Battery regulation compliance check for EV battery with 60kWh capacity, NMC chemistry",
+    "product_gtin": null
+  },
+  {
+    "query": "Construction product CE marking requirements under CPR for insulation material",
+    "product_gtin": null
+  }
+]

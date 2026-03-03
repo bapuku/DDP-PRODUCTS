@@ -1,0 +1,37 @@
+[
+  {
+    "sector": "electronics",
+    "weight_kg": 0.8,
+    "carbon_footprint_kg_co2e": 35.0,
+    "circularity_index": 72.0,
+    "ddp_completeness": 0.85
+  },
+  {
+    "sector": "batteries",
+    "weight_kg": 350.0,
+    "carbon_footprint_kg_co2e": 4500.0,
+    "circularity_index": 55.0,
+    "ddp_completeness": 0.92
+  },
+  {
+    "sector": "textiles",
+    "weight_kg": 0.3,
+    "carbon_footprint_kg_co2e": 8.5,
+    "circularity_index": 40.0,
+    "ddp_completeness": 0.7
+  },
+  {
+    "sector": "construction",
+    "weight_kg": 25.0,
+    "carbon_footprint_kg_co2e": 120.0,
+    "circularity_index": 60.0,
+    "ddp_completeness": 0.8
+  },
+  {
+    "sector": "plastics",
+    "weight_kg": 1.2,
+    "carbon_footprint_kg_co2e": 5.0,
+    "circularity_index": 30.0,
+    "ddp_completeness": 0.65
+  }
+]

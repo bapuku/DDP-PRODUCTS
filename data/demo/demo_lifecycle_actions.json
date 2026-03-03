@@ -1,0 +1,98 @@
+[
+  {
+    "action": "create",
+    "endpoint": "POST /api/v1/dpp/lifecycle/create",
+    "body": {
+      "product_gtin": "01466442118724",
+      "serial_number": "SN-DEMO-VEH-0001",
+      "query": "Create DPP for vehicles from Germany"
+    }
+  },
+  {
+    "action": "create",
+    "endpoint": "POST /api/v1/dpp/lifecycle/create",
+    "body": {
+      "product_gtin": "04498513908134",
+      "serial_number": "SN-DEMO-BAT-0002",
+      "query": "Create DPP for batteries from China"
+    }
+  },
+  {
+    "action": "create",
+    "endpoint": "POST /api/v1/dpp/lifecycle/create",
+    "body": {
+      "product_gtin": "04875862324900",
+      "serial_number": "SN-DEMO-TEX-0003",
+      "query": "Create DPP for textiles from Portugal"
+    }
+  },
+  {
+    "action": "create",
+    "endpoint": "POST /api/v1/dpp/lifecycle/create",
+    "body": {
+      "product_gtin": "01115402766155",
+      "serial_number": "SN-DEMO-CON-0004",
+      "query": "Create DPP for construction_materials from China"
+    }
+  },
+  {
+    "action": "create",
+    "endpoint": "POST /api/v1/dpp/lifecycle/create",
+    "body": {
+      "product_gtin": "88169269830105",
+      "serial_number": "SN-DEMO-ELE-0005",
+      "query": "Create DPP for electronics from Estonia"
+    }
+  },
+  {
+    "action": "create",
+    "endpoint": "POST /api/v1/dpp/lifecycle/create",
+    "body": {
+      "product_gtin": "06984704558353",
+      "serial_number": "SN-DEMO-FUR-0006",
+      "query": "Create DPP for furniture from China"
+    }
+  },
+  {
+    "action": "create",
+    "endpoint": "POST /api/v1/dpp/lifecycle/create",
+    "body": {
+      "product_gtin": "12040700115647",
+      "serial_number": "SN-DEMO-ELE-0007",
+      "query": "Create DPP for electronics from China"
+    }
+  },
+  {
+    "action": "create",
+    "endpoint": "POST /api/v1/dpp/lifecycle/create",
+    "body": {
+      "product_gtin": "03732792648585",
+      "serial_number": "SN-DEMO-VEH-0008",
+      "query": "Create DPP for vehicles from Mexico"
+    }
+  },
+  {
+    "action": "update",
+    "endpoint": "PUT /api/v1/dpp/lifecycle/01466442118724/SN-DEMO-VEH-0001/update",
+    "body": {
+      "update_type": "maintenance",
+      "query": "Routine maintenance performed, firmware updated"
+    }
+  },
+  {
+    "action": "update",
+    "endpoint": "PUT /api/v1/dpp/lifecycle/04498513908134/SN-DEMO-BAT-0002/update",
+    "body": {
+      "update_type": "maintenance",
+      "query": "Routine maintenance performed, firmware updated"
+    }
+  },
+  {
+    "action": "update",
+    "endpoint": "PUT /api/v1/dpp/lifecycle/04875862324900/SN-DEMO-TEX-0003/update",
+    "body": {
+      "update_type": "maintenance",
+      "query": "Routine maintenance performed, firmware updated"
+    }
+  }
+]

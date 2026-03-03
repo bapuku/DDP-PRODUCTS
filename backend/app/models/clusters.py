@@ -13,7 +13,7 @@ from app.models.compliance import BatteryCategory, BatteryStatus, CarbonPerforma
 # Cluster 1: General Information (12 fields)
 class BatteryPassportCluster1(BaseModel):
     """Annex XIII Cluster 1 - General Information."""
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
     battery_passport_identifier: Optional[str] = None  # UUID, item, public
     battery_serial_number: str = Field(..., max_length=50)
     batch_number: str = Field(..., max_length=50)
@@ -31,7 +31,7 @@ class BatteryPassportCluster1(BaseModel):
 # Cluster 2: Compliance & Certifications (9 fields)
 class BatteryPassportCluster2(BaseModel):
     """Annex XIII Cluster 2 - Compliance & Certifications."""
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
     separate_collection_symbol_uri: Optional[str] = None  # Image
     cadmium_lead_symbols_uri: Optional[str] = None  # If applicable
     carbon_footprint_label: CarbonPerformanceClass  # A-G from Aug 2026
@@ -46,7 +46,7 @@ class BatteryPassportCluster2(BaseModel):
 # Cluster 3: Carbon Footprint (8 fields)
 class BatteryPassportCluster3(BaseModel):
     """Annex XIII Cluster 3 - Carbon Footprint (kgCO2e/kWh)."""
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
     total_carbon_footprint_kwh: float = Field(..., ge=0, description="kgCO2e/kWh cradle-to-gate")
     raw_material_acquisition_kg_co2e_kwh: Optional[float] = Field(None, ge=0)
     manufacturing_stage_kg_co2e_kwh: Optional[float] = Field(None, ge=0)
@@ -60,7 +60,7 @@ class BatteryPassportCluster3(BaseModel):
 # Cluster 4: Due Diligence (6 fields)
 class BatteryPassportCluster4(BaseModel):
     """Annex XIII Cluster 4 - Due Diligence (Art. 49-52)."""
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
     due_diligence_report_uri: Optional[HttpUrl] = None  # Art. 52
     management_system_docs_uri: Optional[HttpUrl] = None  # Art. 49
     risk_management_plan_uri: Optional[HttpUrl] = None  # Art. 50
@@ -72,7 +72,7 @@ class BatteryPassportCluster4(BaseModel):
 # Cluster 5: Materials & Composition (8 fields)
 class BatteryPassportCluster5(BaseModel):
     """Annex XIII Cluster 5 - Materials & Composition."""
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
     battery_chemistry: str = Field(..., max_length=100)
     critical_raw_materials: dict[str, float] = Field(default_factory=dict)  # Co, Li, Ni, graphite %
     cathode_materials: Optional[str] = None
@@ -86,7 +86,7 @@ class BatteryPassportCluster5(BaseModel):
 # Cluster 6: Circularity (14 fields)
 class BatteryPassportCluster6(BaseModel):
     """Annex XIII Cluster 6 - Circularity & resource efficiency."""
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
     pre_consumer_recycled_content_pct: dict[str, float] = Field(default_factory=dict)  # Ni, Co, Li, Pb
     post_consumer_recycled_content_pct: dict[str, float] = Field(default_factory=dict)
     renewable_content_share_pct: Optional[float] = Field(None, ge=0, le=100)
@@ -106,7 +106,7 @@ class BatteryPassportCluster6(BaseModel):
 # Cluster 7: Performance & Durability (30+ fields - static + dynamic)
 class BatteryPassportCluster7Static(BaseModel):
     """Annex XIII Cluster 7 - Static (model-level)."""
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
     rated_capacity_ah: Optional[float] = Field(None, gt=0)
     certified_usable_energy_kwh: Optional[float] = Field(None, gt=0)
     voltage_min_v: Optional[float] = None
@@ -130,7 +130,7 @@ class BatteryPassportCluster7Static(BaseModel):
 
 class BatteryPassportCluster7Dynamic(BaseModel):
     """Annex XIII Cluster 7 - Dynamic (BMS updated, item-level)."""
-    model_config = ConfigDict(strict=True)
+    model_config = ConfigDict()
     capacity_fade_pct: Optional[float] = Field(None, ge=0, le=100)
     remaining_capacity_ah: Optional[float] = Field(None, ge=0)
     state_of_certified_energy_soce_pct: Optional[float] = Field(None, ge=0, le=100)

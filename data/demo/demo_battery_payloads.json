@@ -1,0 +1,172 @@
+[
+  {
+    "gtin": "05096777394726",
+    "serial_number": "SN-DEMO-BAT-0016",
+    "batch_number": "BATCH-DEMO-8508",
+    "manufacturer_eoid": "EOID-751332",
+    "manufacturer_identification": "BYD Co.",
+    "manufacturing_date": "2025-07-14",
+    "battery_category": "Industrial",
+    "battery_mass_kg": 580.36,
+    "carbon_footprint_class": "B",
+    "carbon_footprint_kg_co2e_kwh": 58.9,
+    "chemistry": "NMC_811",
+    "critical_raw_materials": [
+      "lithium",
+      "cobalt",
+      "nickel"
+    ],
+    "recycled_content_pre_consumer": 8.1,
+    "recycled_content_post_consumer": 6.2,
+    "take_back_points": [
+      {
+        "name": "Berlin Collection Center",
+        "address": "Alexanderplatz 1, 10178 Berlin"
+      },
+      {
+        "name": "Paris Recycling Hub",
+        "address": "15 Rue de Rivoli, 75001 Paris"
+      }
+    ],
+    "rated_capacity_ah": 1560.2,
+    "certified_usable_energy_kwh": 71.15,
+    "expected_lifetime_years": 10,
+    "expected_cycle_life": 660
+  },
+  {
+    "gtin": "02777543012274",
+    "serial_number": "SN-DEMO-BAT-0017",
+    "batch_number": "BATCH-DEMO-2638",
+    "manufacturer_eoid": "EOID-176819",
+    "manufacturer_identification": "BYD Co.",
+    "manufacturing_date": "2024-10-14",
+    "battery_category": "Industrial",
+    "battery_mass_kg": 7.93,
+    "carbon_footprint_class": "C",
+    "carbon_footprint_kg_co2e_kwh": 66.6,
+    "chemistry": "NCA",
+    "critical_raw_materials": [
+      "lithium",
+      "cobalt",
+      "nickel"
+    ],
+    "recycled_content_pre_consumer": 18.1,
+    "recycled_content_post_consumer": 6.2,
+    "take_back_points": [
+      {
+        "name": "Berlin Collection Center",
+        "address": "Alexanderplatz 1, 10178 Berlin"
+      },
+      {
+        "name": "Paris Recycling Hub",
+        "address": "15 Rue de Rivoli, 75001 Paris"
+      }
+    ],
+    "rated_capacity_ah": 29.6,
+    "certified_usable_energy_kwh": 1.35,
+    "expected_lifetime_years": 17,
+    "expected_cycle_life": 1770
+  },
+  {
+    "gtin": "05889305412567",
+    "serial_number": "SN-DEMO-BAT-0018",
+    "batch_number": "BATCH-DEMO-4492",
+    "manufacturer_eoid": "EOID-630458",
+    "manufacturer_identification": "LG Energy Solution",
+    "manufacturing_date": "2024-07-25",
+    "battery_category": "Industrial",
+    "battery_mass_kg": 196.55,
+    "carbon_footprint_class": "B",
+    "carbon_footprint_kg_co2e_kwh": 63.3,
+    "chemistry": "NMC_532",
+    "critical_raw_materials": [
+      "lithium",
+      "cobalt",
+      "nickel"
+    ],
+    "recycled_content_pre_consumer": 11.6,
+    "recycled_content_post_consumer": 7.9,
+    "take_back_points": [
+      {
+        "name": "Berlin Collection Center",
+        "address": "Alexanderplatz 1, 10178 Berlin"
+      },
+      {
+        "name": "Paris Recycling Hub",
+        "address": "15 Rue de Rivoli, 75001 Paris"
+      }
+    ],
+    "rated_capacity_ah": 615.9,
+    "certified_usable_energy_kwh": 28.08,
+    "expected_lifetime_years": 19,
+    "expected_cycle_life": 575
+  },
+  {
+    "gtin": "07420263617246",
+    "serial_number": "SN-DEMO-BAT-0019",
+    "batch_number": "BATCH-DEMO-3170",
+    "manufacturer_eoid": "EOID-465962",
+    "manufacturer_identification": "CATL Battery Co.",
+    "manufacturing_date": "2025-10-08",
+    "battery_category": "Industrial",
+    "battery_mass_kg": 15.41,
+    "carbon_footprint_class": "C",
+    "carbon_footprint_kg_co2e_kwh": 78.7,
+    "chemistry": "NCA",
+    "critical_raw_materials": [
+      "lithium",
+      "cobalt",
+      "nickel"
+    ],
+    "recycled_content_pre_consumer": 8.9,
+    "recycled_content_post_consumer": 9.0,
+    "take_back_points": [
+      {
+        "name": "Berlin Collection Center",
+        "address": "Alexanderplatz 1, 10178 Berlin"
+      },
+      {
+        "name": "Paris Recycling Hub",
+        "address": "15 Rue de Rivoli, 75001 Paris"
+      }
+    ],
+    "rated_capacity_ah": 56.4,
+    "certified_usable_energy_kwh": 2.57,
+    "expected_lifetime_years": 12,
+    "expected_cycle_life": 2292
+  },
+  {
+    "gtin": "07511869014761",
+    "serial_number": "SN-DEMO-BAT-0020",
+    "batch_number": "BATCH-DEMO-5002",
+    "manufacturer_eoid": "EOID-487477",
+    "manufacturer_identification": "LG Energy Solution",
+    "manufacturing_date": "2024-12-09",
+    "battery_category": "Industrial",
+    "battery_mass_kg": 103.56,
+    "carbon_footprint_class": "E",
+    "carbon_footprint_kg_co2e_kwh": 102.0,
+    "chemistry": "NMC_811",
+    "critical_raw_materials": [
+      "lithium",
+      "cobalt",
+      "nickel"
+    ],
+    "recycled_content_pre_consumer": 11.5,
+    "recycled_content_post_consumer": 3.7,
+    "take_back_points": [
+      {
+        "name": "Berlin Collection Center",
+        "address": "Alexanderplatz 1, 10178 Berlin"
+      },
+      {
+        "name": "Paris Recycling Hub",
+        "address": "15 Rue de Rivoli, 75001 Paris"
+      }
+    ],
+    "rated_capacity_ah": 395.6,
+    "certified_usable_energy_kwh": 18.04,
+    "expected_lifetime_years": 10,
+    "expected_cycle_life": 927
+  }
+]

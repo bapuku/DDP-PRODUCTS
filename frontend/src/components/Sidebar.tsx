@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 
 const NAV_KEYS = [
   { href: "/", key: "dashboard", icon: "🏠" },
+  { href: "/agents", key: "agentRegistry", icon: "🤖" },
+  { href: "/reports", key: "complianceReports", icon: "📊" },
   { href: "/dpp", key: "dppExplorer", icon: "📋" },
   { href: "/dpp/lifecycle/new", key: "newDpp", icon: "🆕" },
   { href: "/dpp/battery/new", key: "newBatteryPassport", icon: "🔋" },
@@ -14,7 +16,7 @@ const NAV_KEYS = [
   { href: "/supply-chain", key: "supplyChain", icon: "🔗" },
   { href: "/human-review", key: "humanReview", icon: "👁️" },
   { href: "/audit", key: "auditLog", icon: "📜" },
-  { href: "/ml/predictions", key: "mlPredictions", icon: "🤖" },
+  { href: "/ml/predictions", key: "mlPredictions", icon: "📈" },
 ] as const;
 
 export default function Sidebar() {

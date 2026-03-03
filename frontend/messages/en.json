@@ -25,6 +25,8 @@
     "humanReview": "Human Review (Art.14)",
     "auditLog": "Audit Log (Art.12)",
     "mlPredictions": "ML Predictions",
+    "agentRegistry": "Agent Registry",
+    "complianceReports": "EU Reports",
     "footerCompliant": "EU AI Act Art. 12/13/14 compliant"
   },
   "layout": {
@@ -185,5 +187,38 @@
     "rohs": "RoHS:",
     "reach": "REACH:",
     "complianceScore": "Compliance score:"
+  },
+  "agentRegistry": {
+    "title": "Agent Registry",
+    "description": "EU AI Act Art. 13 — All AI agents, their capabilities, tools, and compliance references. Full transparency.",
+    "skillsRegistry": "Skills Registry",
+    "toolsRegistry": "Tool Registry",
+    "totalAgents": "{count} agents registered",
+    "all": "All",
+    "skills": "skills",
+    "tools": "tools",
+    "phase": "Phase",
+    "agents": "agents",
+    "backToAgents": "← Agent Registry",
+    "skillsTitle": "Skills Registry",
+    "skillsDescription": "All capabilities across agents. Each skill is linked to the agents that provide it.",
+    "toolsTitle": "Tool Registry",
+    "toolsDescription": "All tools available to agents: databases, ML models, APIs, validators, and generators.",
+    "agentNotFound": "Agent not found",
+    "complianceRefs": "Compliance References",
+    "metadata": "Metadata",
+    "category": "Category",
+    "llmModel": "LLM Model",
+    "assistantTitle": "AI Assistant",
+    "assistantPlaceholder": "Ask this agent anything about its domain of expertise…",
+    "thinking": "Thinking…",
+    "askAgent": "Ask this agent…",
+    "send": "Send"
+  },
+  "reports": {
+    "title": "EU Compliance Reports",
+    "description": "Compliance status per EU regulation article. EU AI Act Annex IV technical documentation. Each report links to the responsible agent and API endpoint.",
+    "agent": "Agent",
+    "endpoint": "Endpoint"
   }
 }

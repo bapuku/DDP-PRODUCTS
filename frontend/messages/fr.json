@@ -25,6 +25,8 @@
     "humanReview": "Revue humaine (Art.14)",
     "auditLog": "Journal d'audit (Art.12)",
     "mlPredictions": "Prédictions ML",
+    "agentRegistry": "Registre d'Agents",
+    "complianceReports": "Rapports UE",
     "footerCompliant": "Conforme EU AI Act Art. 12/13/14"
   },
   "layout": {
@@ -185,5 +187,38 @@
     "rohs": "RoHS :",
     "reach": "REACH :",
     "complianceScore": "Score de conformité :"
+  },
+  "agentRegistry": {
+    "title": "Registre d'Agents",
+    "description": "EU AI Act Art. 13 — Tous les agents IA, leurs capacités, outils et références de conformité. Transparence complète.",
+    "skillsRegistry": "Registre de Compétences",
+    "toolsRegistry": "Registre d'Outils",
+    "totalAgents": "{count} agents enregistrés",
+    "all": "Tous",
+    "skills": "compétences",
+    "tools": "outils",
+    "phase": "Phase",
+    "agents": "agents",
+    "backToAgents": "← Registre d'Agents",
+    "skillsTitle": "Registre de Compétences",
+    "skillsDescription": "Toutes les capacités par agent. Chaque compétence est liée aux agents qui la fournissent.",
+    "toolsTitle": "Registre d'Outils",
+    "toolsDescription": "Tous les outils disponibles pour les agents : bases de données, modèles ML, APIs, validateurs et générateurs.",
+    "agentNotFound": "Agent introuvable",
+    "complianceRefs": "Références de Conformité",
+    "metadata": "Métadonnées",
+    "category": "Catégorie",
+    "llmModel": "Modèle LLM",
+    "assistantTitle": "Assistant IA",
+    "assistantPlaceholder": "Posez une question à cet agent sur son domaine d'expertise…",
+    "thinking": "Réflexion…",
+    "askAgent": "Interroger cet agent…",
+    "send": "Envoyer"
+  },
+  "reports": {
+    "title": "Rapports de Conformité UE",
+    "description": "Statut de conformité par article de réglementation UE. Documentation technique EU AI Act Annexe IV. Chaque rapport est lié à l'agent responsable et à l'endpoint API.",
+    "agent": "Agent",
+    "endpoint": "Endpoint"
   }
 }

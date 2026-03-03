@@ -2,7 +2,7 @@
  * DPP Platform API client - typed fetch wrappers for all backend endpoints.
  */
 
-const BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
+const BASE = process.env.NEXT_PUBLIC_API_URL ?? "";
 
 function getLocaleFromCookie(): string {
   if (typeof document === "undefined") return "en";

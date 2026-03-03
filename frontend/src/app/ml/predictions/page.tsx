@@ -2,7 +2,16 @@
 
 import { useState } from "react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 import { api } from "@/services/api";
+
+const MODELS = [
+  { name: "ESPR Classifier", type: "Classification", target: "Ecodesign compliance class" },
+  { name: "RoHS Classifier", type: "Classification", target: "Hazardous-substance compliance" },
+  { name: "REACH Classifier", type: "Classification", target: "Chemical-registration status" },
+  { name: "Carbon Regressor", type: "Regression", target: "Carbon footprint (kg CO₂e)" },
+  { name: "Circularity Regressor", type: "Regression", target: "Circularity score (0–1)" },
+];
 
 export default function MLPredictionsPage() {
   const t = useTranslations("ml");
@@ -29,6 +38,49 @@ export default function MLPredictionsPage() {
     <div className="max-w-xl space-y-6">
       <h2 className="text-2xl font-semibold text-slate-800">{t("title")}</h2>
       <p className="text-slate-600 text-sm">{t("description")}</p>
+
+      {/* EU AI Act explainer */}
+      <div className="rounded-xl border border-blue-200 bg-blue-50 p-5 space-y-3">
+        <h3 className="text-sm font-semibold text-blue-900">
+          ML Compliance Predictions &mdash; EU AI Act Art.&nbsp;9, 10, 15
+        </h3>
+        <p className="text-sm text-blue-800 leading-relaxed">
+          Five GradientBoosting models predict regulatory compliance outcomes before the full
+          verification pipeline runs. Art.&nbsp;9 (risk management), Art.&nbsp;10 (data governance),
+          and Art.&nbsp;15 (accuracy &amp; robustness) govern how these models are trained,
+          monitored, and audited.
+        </p>
+        <Link
+          href="/agents/predictive"
+          className="inline-block text-sm font-medium text-blue-700 hover:text-blue-900 hover:underline"
+        >
+          Powered by: Predictive Risk Scoring Agent &rarr;
+        </Link>
+      </div>
+
+      {/* 5 models overview */}
+      <div className="rounded-xl border border-slate-200 bg-white p-5 space-y-3">
+        <h3 className="text-sm font-semibold text-slate-700">Model Ensemble (5 models)</h3>
+        <div className="space-y-2">
+          {MODELS.map((m) => (
+            <div key={m.name} className="flex items-center gap-3 text-sm">
+              <span className={`inline-block h-2 w-2 rounded-full ${m.type === "Classification" ? "bg-violet-500" : "bg-amber-500"}`} />
+              <span className="font-medium text-slate-800 w-40">{m.name}</span>
+              <span className="text-slate-500">{m.target}</span>
+            </div>
+          ))}
+        </div>
+        <div className="flex gap-3 mt-1">
+          <span className="flex items-center gap-1.5 text-xs text-slate-500">
+            <span className="inline-block h-2 w-2 rounded-full bg-violet-500" /> Classification
+          </span>
+          <span className="flex items-center gap-1.5 text-xs text-slate-500">
+            <span className="inline-block h-2 w-2 rounded-full bg-amber-500" /> Regression
+          </span>
+        </div>
+      </div>
+
+      {/* Prediction form */}
       <div className="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
         <div>
           <label className="block text-sm font-medium text-slate-400 mb-1">{t("sector")}</label>
@@ -75,6 +127,19 @@ export default function MLPredictionsPage() {
           <p className="text-red-600 text-sm">{String(result.error)}</p>
         )}
       </div>
+
+      {/* Context after results */}
+      {result && !("error" in result) && (
+        <div className="rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-500 leading-relaxed">
+          These predictions use GradientBoosting models trained on 80k products.
+          Confidence scores above 85% are auto-approved; lower scores are routed
+          to{" "}
+          <Link href="/human-review" className="text-sky-600 hover:underline">
+            human review
+          </Link>
+          .
+        </div>
+      )}
     </div>
   );
 }

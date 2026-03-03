@@ -159,9 +159,11 @@ def pick_diverse_rows(filepath: str, n: int, diversity_col: str = "product_categ
 
 def build_product(row: dict, sector: str, idx: int, gtin_override: str = None) -> dict:
     """Build a normalized product dict from a CSV row."""
-    gtin = gtin_override or normalize_gtin(row.get("gtin", ""))
-    if not gtin or gtin == "00000000000000":
-        gtin = f"0{random.randint(1000000000000, 9999999999999)}"[:14]
+    raw = gtin_override or row.get("gtin", "")
+    gtin = normalize_gtin(raw)
+    if not gtin or len(gtin) != 14 or gtin == "00000000000000":
+        base = str(random.randint(1000000000000, 9999999999999))[:13].zfill(13)
+        gtin = base + str(gtin14_checksum(base))
 
     sector = SECTOR_MAP.get(sector, sector)
     if sector not in VALID_SECTORS:
@@ -408,9 +410,12 @@ def main():
     ml_inputs = build_ml_test_inputs()
     lifecycle_actions = build_lifecycle_test_inputs(all_products)
 
-    # 6. Build DPP create requests (sector API — strict Pydantic validation)
+    # 6. Build DPP create requests (sector API — Pydantic validation)
     dpp_create_requests = []
     for p in all_products[:15]:
+        p["sector"] = SECTOR_MAP.get(p["sector"], p["sector"])
+        if p["sector"] not in VALID_SECTORS:
+            p["sector"] = "electronics"
         mfg_date = p.get("manufacturing_date", "2024-01-15")
         if isinstance(mfg_date, str) and len(mfg_date) >= 10:
             mfg_date = mfg_date[:10]

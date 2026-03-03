@@ -1,6 +1,6 @@
 [
   {
-    "gtin": "01466442118724",
+    "gtin": "14664421187240",
     "serial_number": "SN-DEMO-VEH-0001",
     "sector": "vehicles",
     "product_category": "vehicles",
@@ -22,7 +22,7 @@
     "weee_registration": "Registered"
   },
   {
-    "gtin": "04498513908134",
+    "gtin": "44985139081349",
     "serial_number": "SN-DEMO-BAT-0002",
     "sector": "batteries",
     "product_category": "batteries",
@@ -44,7 +44,7 @@
     "weee_registration": "Registered"
   },
   {
-    "gtin": "04875862324900",
+    "gtin": "48758623249008",
     "serial_number": "SN-DEMO-TEX-0003",
     "sector": "textiles",
     "product_category": "textiles",
@@ -66,9 +66,9 @@
     "weee_registration": "Registered"
   },
   {
-    "gtin": "01115402766155",
+    "gtin": "11154027661556",
     "serial_number": "SN-DEMO-CON-0004",
-    "sector": "construction_materials",
+    "sector": "construction",
     "product_category": "construction_materials",
     "subcategory": "roofing",
     "manufacturing_country": "China",
@@ -110,7 +110,7 @@
     "weee_registration": "Registered"
   },
   {
-    "gtin": "06984704558353",
+    "gtin": "69847045583531",
     "serial_number": "SN-DEMO-FUR-0006",
     "sector": "furniture",
     "product_category": "furniture",
@@ -154,7 +154,7 @@
     "weee_registration": "Registered"
   },
   {
-    "gtin": "03732792648585",
+    "gtin": "37327926485853",
     "serial_number": "SN-DEMO-VEH-0008",
     "sector": "vehicles",
     "product_category": "vehicles",
@@ -176,7 +176,7 @@
     "weee_registration": "Registered"
   },
   {
-    "gtin": "06921744116206",
+    "gtin": "69217441162065",
     "serial_number": "SN-DEMO-VEH-0009",
     "sector": "vehicles",
     "product_category": "vehicles",
@@ -198,7 +198,7 @@
     "weee_registration": "Registered"
   },
   {
-    "gtin": "02628231594989",
+    "gtin": "26282315949894",
     "serial_number": "SN-DEMO-BAT-0010",
     "sector": "batteries",
     "product_category": "batteries",

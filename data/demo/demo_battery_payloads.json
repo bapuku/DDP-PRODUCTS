@@ -1,6 +1,6 @@
 [
   {
-    "gtin": "05096777394726",
+    "gtin": "50967773947268",
     "serial_number": "SN-DEMO-BAT-0016",
     "batch_number": "BATCH-DEMO-8508",
     "manufacturer_eoid": "EOID-751332",
@@ -34,7 +34,7 @@
     "expected_cycle_life": 660
   },
   {
-    "gtin": "02777543012274",
+    "gtin": "27775430122741",
     "serial_number": "SN-DEMO-BAT-0017",
     "batch_number": "BATCH-DEMO-2638",
     "manufacturer_eoid": "EOID-176819",
@@ -68,7 +68,7 @@
     "expected_cycle_life": 1770
   },
   {
-    "gtin": "05889305412567",
+    "gtin": "58893054125679",
     "serial_number": "SN-DEMO-BAT-0018",
     "batch_number": "BATCH-DEMO-4492",
     "manufacturer_eoid": "EOID-630458",
@@ -102,7 +102,7 @@
     "expected_cycle_life": 575
   },
   {
-    "gtin": "07420263617246",
+    "gtin": "74202636172464",
     "serial_number": "SN-DEMO-BAT-0019",
     "batch_number": "BATCH-DEMO-3170",
     "manufacturer_eoid": "EOID-465962",
@@ -136,7 +136,7 @@
     "expected_cycle_life": 2292
   },
   {
-    "gtin": "07511869014761",
+    "gtin": "75118690147616",
     "serial_number": "SN-DEMO-BAT-0020",
     "batch_number": "BATCH-DEMO-5002",
     "manufacturer_eoid": "EOID-487477",

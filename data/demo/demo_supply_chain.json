@@ -1,6 +1,6 @@
 [
   {
-    "from_gtin": "01466442118724",
+    "from_gtin": "14664421187240",
     "to_supplier": "EcoTransport SA",
     "supplier_country": "France",
     "relationship": "SUPPLIED_BY",
@@ -8,7 +8,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "04498513908134",
+    "from_gtin": "44985139081349",
     "to_supplier": "Shenzhen MicroTech",
     "supplier_country": "China",
     "relationship": "SUPPLIED_BY",
@@ -16,7 +16,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "04875862324900",
+    "from_gtin": "48758623249008",
     "to_supplier": "Umicore NV",
     "supplier_country": "Belgium",
     "relationship": "SUPPLIED_BY",
@@ -24,7 +24,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "04875862324900",
+    "from_gtin": "48758623249008",
     "to_supplier": "Samsung SDI",
     "supplier_country": "South Korea",
     "relationship": "SUPPLIED_BY",
@@ -32,7 +32,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "04875862324900",
+    "from_gtin": "48758623249008",
     "to_supplier": "BASF Chemicals",
     "supplier_country": "Germany",
     "relationship": "SUPPLIED_BY",
@@ -40,7 +40,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "01115402766155",
+    "from_gtin": "11154027661556",
     "to_supplier": "Shenzhen MicroTech",
     "supplier_country": "China",
     "relationship": "SUPPLIED_BY",
@@ -48,7 +48,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "01115402766155",
+    "from_gtin": "11154027661556",
     "to_supplier": "RhineSteel GmbH",
     "supplier_country": "Germany",
     "relationship": "SUPPLIED_BY",
@@ -56,7 +56,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "01115402766155",
+    "from_gtin": "11154027661556",
     "to_supplier": "BASF Chemicals",
     "supplier_country": "Germany",
     "relationship": "SUPPLIED_BY",
@@ -72,7 +72,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "06984704558353",
+    "from_gtin": "69847045583531",
     "to_supplier": "Umicore NV",
     "supplier_country": "Belgium",
     "relationship": "SUPPLIED_BY",
@@ -96,7 +96,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "03732792648585",
+    "from_gtin": "37327926485853",
     "to_supplier": "Shenzhen MicroTech",
     "supplier_country": "China",
     "relationship": "SUPPLIED_BY",
@@ -104,7 +104,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "03732792648585",
+    "from_gtin": "37327926485853",
     "to_supplier": "RhineSteel GmbH",
     "supplier_country": "Germany",
     "relationship": "SUPPLIED_BY",
@@ -112,7 +112,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "03732792648585",
+    "from_gtin": "37327926485853",
     "to_supplier": "ArcelorMittal",
     "supplier_country": "Luxembourg",
     "relationship": "SUPPLIED_BY",
@@ -120,7 +120,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "06921744116206",
+    "from_gtin": "69217441162065",
     "to_supplier": "Umicore NV",
     "supplier_country": "Belgium",
     "relationship": "SUPPLIED_BY",
@@ -128,7 +128,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "02628231594989",
+    "from_gtin": "26282315949894",
     "to_supplier": "BASF Chemicals",
     "supplier_country": "Germany",
     "relationship": "SUPPLIED_BY",
@@ -136,7 +136,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "02628231594989",
+    "from_gtin": "26282315949894",
     "to_supplier": "Umicore NV",
     "supplier_country": "Belgium",
     "relationship": "SUPPLIED_BY",
@@ -216,7 +216,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "05096777394726",
+    "from_gtin": "50967773947268",
     "to_supplier": "Shenzhen MicroTech",
     "supplier_country": "China",
     "relationship": "SUPPLIED_BY",
@@ -224,7 +224,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "05096777394726",
+    "from_gtin": "50967773947268",
     "to_supplier": "Umicore NV",
     "supplier_country": "Belgium",
     "relationship": "SUPPLIED_BY",
@@ -232,7 +232,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "05096777394726",
+    "from_gtin": "50967773947268",
     "to_supplier": "EcoTransport SA",
     "supplier_country": "France",
     "relationship": "SUPPLIED_BY",
@@ -240,7 +240,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "02777543012274",
+    "from_gtin": "27775430122741",
     "to_supplier": "Shenzhen MicroTech",
     "supplier_country": "China",
     "relationship": "SUPPLIED_BY",
@@ -248,7 +248,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "02777543012274",
+    "from_gtin": "27775430122741",
     "to_supplier": "Lenzing AG",
     "supplier_country": "Austria",
     "relationship": "SUPPLIED_BY",
@@ -256,7 +256,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "05889305412567",
+    "from_gtin": "58893054125679",
     "to_supplier": "Shenzhen MicroTech",
     "supplier_country": "China",
     "relationship": "SUPPLIED_BY",
@@ -264,7 +264,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "05889305412567",
+    "from_gtin": "58893054125679",
     "to_supplier": "BASF Chemicals",
     "supplier_country": "Germany",
     "relationship": "SUPPLIED_BY",
@@ -272,7 +272,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "05889305412567",
+    "from_gtin": "58893054125679",
     "to_supplier": "ArcelorMittal",
     "supplier_country": "Luxembourg",
     "relationship": "SUPPLIED_BY",
@@ -280,7 +280,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "07420263617246",
+    "from_gtin": "74202636172464",
     "to_supplier": "ArcelorMittal",
     "supplier_country": "Luxembourg",
     "relationship": "SUPPLIED_BY",
@@ -288,7 +288,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "07420263617246",
+    "from_gtin": "74202636172464",
     "to_supplier": "Shenzhen MicroTech",
     "supplier_country": "China",
     "relationship": "SUPPLIED_BY",
@@ -296,7 +296,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "07420263617246",
+    "from_gtin": "74202636172464",
     "to_supplier": "Samsung SDI",
     "supplier_country": "South Korea",
     "relationship": "SUPPLIED_BY",
@@ -304,7 +304,7 @@
     "tier": 2
   },
   {
-    "from_gtin": "07511869014761",
+    "from_gtin": "75118690147616",
     "to_supplier": "ArcelorMittal",
     "supplier_country": "Luxembourg",
     "relationship": "SUPPLIED_BY",
@@ -312,7 +312,7 @@
     "tier": 1
   },
   {
-    "from_gtin": "07511869014761",
+    "from_gtin": "75118690147616",
     "to_supplier": "Umicore NV",
     "supplier_country": "Belgium",
     "relationship": "SUPPLIED_BY",

@@ -3,7 +3,7 @@
     "action": "create",
     "endpoint": "POST /api/v1/dpp/lifecycle/create",
     "body": {
-      "product_gtin": "01466442118724",
+      "product_gtin": "14664421187240",
       "serial_number": "SN-DEMO-VEH-0001",
       "query": "Create DPP for vehicles from Germany"
     }
@@ -12,7 +12,7 @@
     "action": "create",
     "endpoint": "POST /api/v1/dpp/lifecycle/create",
     "body": {
-      "product_gtin": "04498513908134",
+      "product_gtin": "44985139081349",
       "serial_number": "SN-DEMO-BAT-0002",
       "query": "Create DPP for batteries from China"
     }
@@ -21,7 +21,7 @@
     "action": "create",
     "endpoint": "POST /api/v1/dpp/lifecycle/create",
     "body": {
-      "product_gtin": "04875862324900",
+      "product_gtin": "48758623249008",
       "serial_number": "SN-DEMO-TEX-0003",
       "query": "Create DPP for textiles from Portugal"
     }
@@ -30,7 +30,7 @@
     "action": "create",
     "endpoint": "POST /api/v1/dpp/lifecycle/create",
     "body": {
-      "product_gtin": "01115402766155",
+      "product_gtin": "11154027661556",
       "serial_number": "SN-DEMO-CON-0004",
       "query": "Create DPP for construction_materials from China"
     }
@@ -48,7 +48,7 @@
     "action": "create",
     "endpoint": "POST /api/v1/dpp/lifecycle/create",
     "body": {
-      "product_gtin": "06984704558353",
+      "product_gtin": "69847045583531",
       "serial_number": "SN-DEMO-FUR-0006",
       "query": "Create DPP for furniture from China"
     }
@@ -66,14 +66,14 @@
     "action": "create",
     "endpoint": "POST /api/v1/dpp/lifecycle/create",
     "body": {
-      "product_gtin": "03732792648585",
+      "product_gtin": "37327926485853",
       "serial_number": "SN-DEMO-VEH-0008",
       "query": "Create DPP for vehicles from Mexico"
     }
   },
   {
     "action": "update",
-    "endpoint": "PUT /api/v1/dpp/lifecycle/01466442118724/SN-DEMO-VEH-0001/update",
+    "endpoint": "PUT /api/v1/dpp/lifecycle/14664421187240/SN-DEMO-VEH-0001/update",
     "body": {
       "update_type": "maintenance",
       "query": "Routine maintenance performed, firmware updated"
@@ -81,7 +81,7 @@
   },
   {
     "action": "update",
-    "endpoint": "PUT /api/v1/dpp/lifecycle/04498513908134/SN-DEMO-BAT-0002/update",
+    "endpoint": "PUT /api/v1/dpp/lifecycle/44985139081349/SN-DEMO-BAT-0002/update",
     "body": {
       "update_type": "maintenance",
       "query": "Routine maintenance performed, firmware updated"
@@ -89,7 +89,7 @@
   },
   {
     "action": "update",
-    "endpoint": "PUT /api/v1/dpp/lifecycle/04875862324900/SN-DEMO-TEX-0003/update",
+    "endpoint": "PUT /api/v1/dpp/lifecycle/48758623249008/SN-DEMO-TEX-0003/update",
     "body": {
       "update_type": "maintenance",
       "query": "Routine maintenance performed, firmware updated"

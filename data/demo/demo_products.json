@@ -1,6 +1,6 @@
 [
   {
-    "gtin": "01466442118724",
+    "gtin": "14664421187240",
     "serial_number": "SN-DEMO-VEH-0001",
     "sector": "vehicles",
     "product_id": "VEHI-00000007",
@@ -33,7 +33,7 @@
     "expected_lifespan_km": "210328.0"
   },
   {
-    "gtin": "04498513908134",
+    "gtin": "44985139081349",
     "serial_number": "SN-DEMO-BAT-0002",
     "sector": "batteries",
     "product_id": "BATT-00000007",
@@ -78,7 +78,7 @@
     "mercury_content_ppm": 0.02
   },
   {
-    "gtin": "04875862324900",
+    "gtin": "48758623249008",
     "serial_number": "SN-DEMO-TEX-0003",
     "sector": "textiles",
     "product_id": "TEXT-00000004",
@@ -119,9 +119,9 @@
     "care_label_iso3758_compliant": "True"
   },
   {
-    "gtin": "01115402766155",
+    "gtin": "11154027661556",
     "serial_number": "SN-DEMO-CON-0004",
-    "sector": "construction_materials",
+    "sector": "construction",
     "product_id": "CONS-00000003",
     "dpp_unique_id": "DPP-A026871E",
     "product_category": "construction_materials",
@@ -175,7 +175,7 @@
     "conflict_minerals_status": "Certified_Free"
   },
   {
-    "gtin": "06984704558353",
+    "gtin": "69847045583531",
     "serial_number": "SN-DEMO-FUR-0006",
     "sector": "furniture",
     "product_id": "FURN-00000000",
@@ -236,7 +236,7 @@
     "conflict_minerals_status": "Due_Diligence"
   },
   {
-    "gtin": "03732792648585",
+    "gtin": "37327926485853",
     "serial_number": "SN-DEMO-VEH-0008",
     "sector": "vehicles",
     "product_id": "VEHI-00000000",
@@ -269,7 +269,7 @@
     "expected_lifespan_km": "199964.0"
   },
   {
-    "gtin": "06921744116206",
+    "gtin": "69217441162065",
     "serial_number": "SN-DEMO-VEH-0009",
     "sector": "vehicles",
     "product_id": "VEHI-00000008",
@@ -302,7 +302,7 @@
     "expected_lifespan_km": "248596.0"
   },
   {
-    "gtin": "02628231594989",
+    "gtin": "26282315949894",
     "serial_number": "SN-DEMO-BAT-0010",
     "sector": "batteries",
     "product_id": "BATT-00000017",
@@ -527,7 +527,7 @@
     "conflict_minerals_status": "Under_Review"
   },
   {
-    "gtin": "05096777394726",
+    "gtin": "50967773947268",
     "serial_number": "SN-DEMO-BAT-0016",
     "sector": "batteries",
     "product_id": "BATT-00000002",
@@ -572,7 +572,7 @@
     "mercury_content_ppm": 0.83
   },
   {
-    "gtin": "02777543012274",
+    "gtin": "27775430122741",
     "serial_number": "SN-DEMO-BAT-0017",
     "sector": "batteries",
     "product_id": "BATT-00000012",
@@ -617,7 +617,7 @@
     "mercury_content_ppm": 0.82
   },
   {
-    "gtin": "05889305412567",
+    "gtin": "58893054125679",
     "serial_number": "SN-DEMO-BAT-0018",
     "sector": "batteries",
     "product_id": "BATT-00000003",
@@ -662,7 +662,7 @@
     "mercury_content_ppm": 0.54
   },
   {
-    "gtin": "07420263617246",
+    "gtin": "74202636172464",
     "serial_number": "SN-DEMO-BAT-0019",
     "sector": "batteries",
     "product_id": "BATT-00000009",
@@ -707,7 +707,7 @@
     "mercury_content_ppm": 0.81
   },
   {
-    "gtin": "07511869014761",
+    "gtin": "75118690147616",
     "serial_number": "SN-DEMO-BAT-0020",
     "sector": "batteries",
     "product_id": "BATT-00000004",
@@ -752,7 +752,7 @@
     "mercury_content_ppm": 0.36
   },
   {
-    "gtin": "05028919575309",
+    "gtin": "50289195753099",
     "serial_number": "SN-DEMO-TEX-0021",
     "sector": "textiles",
     "product_id": "TEXT-00000011",
@@ -793,7 +793,7 @@
     "care_label_iso3758_compliant": "True"
   },
   {
-    "gtin": "01566170331051",
+    "gtin": "15661703310517",
     "serial_number": "SN-DEMO-TEX-0022",
     "sector": "textiles",
     "product_id": "TEXT-00000008",
@@ -834,7 +834,7 @@
     "care_label_iso3758_compliant": "True"
   },
   {
-    "gtin": "06552555391822",
+    "gtin": "65525553918222",
     "serial_number": "SN-DEMO-TEX-0023",
     "sector": "textiles",
     "product_id": "TEXT-00000005",
@@ -875,7 +875,7 @@
     "care_label_iso3758_compliant": "True"
   },
   {
-    "gtin": "05709007146075",
+    "gtin": "57090071460757",
     "serial_number": "SN-DEMO-TEX-0024",
     "sector": "textiles",
     "product_id": "TEXT-00000006",
@@ -916,7 +916,7 @@
     "care_label_iso3758_compliant": "True"
   },
   {
-    "gtin": "04711136021633",
+    "gtin": "47111360216336",
     "serial_number": "SN-DEMO-TEX-0025",
     "sector": "textiles",
     "product_id": "TEXT-00000016",
@@ -957,7 +957,7 @@
     "care_label_iso3758_compliant": "True"
   },
   {
-    "gtin": "08535883414905",
+    "gtin": "85358834149053",
     "serial_number": "SN-DEMO-VEH-0026",
     "sector": "vehicles",
     "product_id": "VEHI-00000018",
@@ -990,7 +990,7 @@
     "expected_lifespan_km": "324938.0"
   },
   {
-    "gtin": "07366856944791",
+    "gtin": "73668569447917",
     "serial_number": "SN-DEMO-VEH-0027",
     "sector": "vehicles",
     "product_id": "VEHI-00000006",
@@ -1023,7 +1023,7 @@
     "expected_lifespan_km": "317829.0"
   },
   {
-    "gtin": "03435235880944",
+    "gtin": "34352358809444",
     "serial_number": "SN-DEMO-VEH-0028",
     "sector": "vehicles",
     "product_id": "VEHI-00000013",
@@ -1056,7 +1056,7 @@
     "expected_lifespan_km": "281554.0"
   },
   {
-    "gtin": "09682317303976",
+    "gtin": "96823173039762",
     "serial_number": "SN-DEMO-VEH-0029",
     "sector": "vehicles",
     "product_id": "VEHI-00000004",
@@ -1089,7 +1089,7 @@
     "expected_lifespan_km": "362404.0"
   },
   {
-    "gtin": "03689120466741",
+    "gtin": "36891204667411",
     "serial_number": "SN-DEMO-VEH-0030",
     "sector": "vehicles",
     "product_id": "VEHI-00000005",
@@ -1122,7 +1122,7 @@
     "expected_lifespan_km": "267786.0"
   },
   {
-    "gtin": "05693329282832",
+    "gtin": "56933292828320",
     "serial_number": "SN-DEMO-CON-0031",
     "sector": "construction",
     "product_id": "CONS-00000005",
@@ -1142,7 +1142,7 @@
     "voc_content_g_l": 0.0
   },
   {
-    "gtin": "02959966129519",
+    "gtin": "29599661295191",
     "serial_number": "SN-DEMO-CON-0032",
     "sector": "construction",
     "product_id": "CONS-00000002",
@@ -1162,7 +1162,7 @@
     "voc_content_g_l": 0.0
   },
   {
-    "gtin": "08646302360328",
+    "gtin": "86463023603281",
     "serial_number": "SN-DEMO-CON-0033",
     "sector": "construction",
     "product_id": "CONS-00000014",
@@ -1182,7 +1182,7 @@
     "voc_content_g_l": 0.0
   },
   {
-    "gtin": "08980728518346",
+    "gtin": "89807285183469",
     "serial_number": "SN-DEMO-CON-0034",
     "sector": "construction",
     "product_id": "CONS-00000019",
@@ -1202,7 +1202,7 @@
     "voc_content_g_l": 0.0
   },
   {
-    "gtin": "05633065750027",
+    "gtin": "56330657500271",
     "serial_number": "SN-DEMO-CON-0035",
     "sector": "construction",
     "product_id": "CONS-00000000",
@@ -1222,7 +1222,7 @@
     "voc_content_g_l": 0.0
   },
   {
-    "gtin": "09595621798971",
+    "gtin": "95956217989714",
     "serial_number": "SN-DEMO-FUR-0036",
     "sector": "furniture",
     "product_id": "FURN-00000016",
@@ -1247,7 +1247,7 @@
     "formaldehyde_emission_class": "Not_Tested"
   },
   {
-    "gtin": "02967178673538",
+    "gtin": "29671786735384",
     "serial_number": "SN-DEMO-FUR-0037",
     "sector": "furniture",
     "product_id": "FURN-00000017",
@@ -1272,7 +1272,7 @@
     "formaldehyde_emission_class": "E1"
   },
   {
-    "gtin": "07386311850033",
+    "gtin": "73863118500338",
     "serial_number": "SN-DEMO-FUR-0038",
     "sector": "furniture",
     "product_id": "FURN-00000009",
@@ -1297,7 +1297,7 @@
     "formaldehyde_emission_class": "E2"
   },
   {
-    "gtin": "05210388713215",
+    "gtin": "52103887132154",
     "serial_number": "SN-DEMO-FUR-0039",
     "sector": "furniture",
     "product_id": "FURN-00000004",
@@ -1322,7 +1322,7 @@
     "formaldehyde_emission_class": "E1"
   },
   {
-    "gtin": "05235086540570",
+    "gtin": "52350865405704",
     "serial_number": "SN-DEMO-FUR-0040",
     "sector": "furniture",
     "product_id": "FURN-00000006",
@@ -1347,7 +1347,7 @@
     "formaldehyde_emission_class": "E1"
   },
   {
-    "gtin": "08019315372954",
+    "gtin": "80193153729549",
     "serial_number": "SN-DEMO-PLA-0041",
     "sector": "plastics",
     "product_id": "PLAS-00000018",
@@ -1375,7 +1375,7 @@
     "eu_packaging_regulation_compliant": "True"
   },
   {
-    "gtin": "07569796200590",
+    "gtin": "75697962005903",
     "serial_number": "SN-DEMO-PLA-0042",
     "sector": "plastics",
     "product_id": "PLAS-00000002",
@@ -1403,7 +1403,7 @@
     "eu_packaging_regulation_compliant": "False"
   },
   {
-    "gtin": "08943617501620",
+    "gtin": "89436175016206",
     "serial_number": "SN-DEMO-PLA-0043",
     "sector": "plastics",
     "product_id": "PLAS-00000003",
@@ -1431,7 +1431,7 @@
     "eu_packaging_regulation_compliant": "True"
   },
   {
-    "gtin": "05359911514519",
+    "gtin": "53599115145192",
     "serial_number": "SN-DEMO-PLA-0044",
     "sector": "plastics",
     "product_id": "PLAS-00000006",
@@ -1459,7 +1459,7 @@
     "eu_packaging_regulation_compliant": "True"
   },
   {
-    "gtin": "02126246499279",
+    "gtin": "21262464992793",
     "serial_number": "SN-DEMO-PLA-0045",
     "sector": "plastics",
     "product_id": "PLAS-00000008",
@@ -1487,7 +1487,7 @@
     "eu_packaging_regulation_compliant": "True"
   },
   {
-    "gtin": "02246959695420",
+    "gtin": "22469596954203",
     "serial_number": "SN-DEMO-CHE-0046",
     "sector": "chemicals",
     "product_id": "CHEM-00000010",
@@ -1514,7 +1514,7 @@
     "hazardous_waste_classification": "False"
   },
   {
-    "gtin": "05185506430032",
+    "gtin": "51855064300320",
     "serial_number": "SN-DEMO-CHE-0047",
     "sector": "chemicals",
     "product_id": "CHEM-00000019",
@@ -1543,7 +1543,7 @@
     "hazardous_waste_classification": "False"
   },
   {
-    "gtin": "04768771157991",
+    "gtin": "47687711579912",
     "serial_number": "SN-DEMO-CHE-0048",
     "sector": "chemicals",
     "product_id": "CHEM-00000007",
@@ -1570,7 +1570,7 @@
     "hazardous_waste_classification": "True"
   },
   {
-    "gtin": "03325893299251",
+    "gtin": "33258932992513",
     "serial_number": "SN-DEMO-CHE-0049",
     "sector": "chemicals",
     "product_id": "CHEM-00000002",
@@ -1599,7 +1599,7 @@
     "hazardous_waste_classification": "False"
   },
   {
-    "gtin": "09317531495235",
+    "gtin": "93175314952359",
     "serial_number": "SN-DEMO-CHE-0050",
     "sector": "chemicals",
     "product_id": "CHEM-00000009",

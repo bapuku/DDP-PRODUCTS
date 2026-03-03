@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import PageAssistant from "@/components/PageAssistant";
 import { api, SupplyChainResult } from "@/services/api";
 
 export default function SupplyChainPage() {
@@ -162,7 +161,6 @@ export default function SupplyChainPage() {
           </div>
         </div>
       )}
-      <PageAssistant agentId="supply_chain" agentLabel="Supply Chain" pageContext="supply-chain-trace" />
     </div>
   );
 }

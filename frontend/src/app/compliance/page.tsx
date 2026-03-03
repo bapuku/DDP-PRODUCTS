@@ -3,8 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import PageAssistant from "@/components/PageAssistant";
-
 const API = "";
 
 const FRAMEWORKS = [
@@ -155,7 +153,6 @@ export default function CompliancePage() {
           </div>
         </div>
       )}
-      <PageAssistant agentId="regulatory_compliance" agentLabel="Regulatory Compliance" pageContext="compliance-check" />
     </div>
   );
 }

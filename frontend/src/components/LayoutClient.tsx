@@ -3,6 +3,7 @@
 import { NextIntlClientProvider } from "next-intl";
 import Sidebar from "@/components/Sidebar";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
+import SystemAssistant from "@/components/SystemAssistant";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
 
@@ -42,6 +43,7 @@ export default function LayoutClient({
           <main className="flex-1 p-6 overflow-auto">{children}</main>
         </div>
       </div>
+      <SystemAssistant />
     </NextIntlClientProvider>
   );
 }

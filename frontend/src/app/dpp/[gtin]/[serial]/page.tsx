@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import PageAssistant from "@/components/PageAssistant";
 import { api } from "@/services/api";
 
 export default function DPPDetailPage() {
@@ -144,7 +143,6 @@ export default function DPPDetailPage() {
           <img src={`/api/v1/dpp/${gtin}/${serial}/carrier/qr.png`} alt="QR" className="mt-3 h-24 w-24" />
         </div>
       )}
-      <PageAssistant agentId="ddp_generation" agentLabel="DPP Generation" pageContext="dpp-detail" />
     </div>
   );
 }

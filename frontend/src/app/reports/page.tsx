@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import PageAssistant from "@/components/PageAssistant";
 import { REPORTS } from "@/data/registry";
 
 const STATUS_BADGES: Record<string, string> = {
@@ -47,7 +46,6 @@ export default function ReportsPage() {
           ))}
         </div>
       ))}
-      <PageAssistant agentId="regulatory_compliance" agentLabel="Compliance Reports" pageContext="eu-compliance-reports" />
     </div>
   );
 }

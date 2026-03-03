@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import PageAssistant from "@/components/PageAssistant";
 import { api } from "@/services/api";
 
 const MODELS = [
@@ -141,7 +140,6 @@ export default function MLPredictionsPage() {
           .
         </div>
       )}
-      <PageAssistant agentId="predictive" agentLabel="Predictive Scoring" pageContext="ml-predictions" />
     </div>
   );
 }

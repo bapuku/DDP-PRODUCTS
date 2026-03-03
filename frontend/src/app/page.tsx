@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import PageAssistant from "@/components/PageAssistant";
 import { api } from "@/services/api";
 
 const SECTOR_IDS = ["batteries", "electronics", "textiles", "vehicles", "construction", "furniture", "plastics", "chemicals"] as const;
@@ -126,7 +125,6 @@ export default function HomePage() {
           </Link>
         </div>
       </section>
-      <PageAssistant agentId="supervisor" agentLabel="Supervisor" pageContext="dashboard" />
     </div>
   );
 }

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import PageAssistant from "@/components/PageAssistant";
 import { api } from "@/services/api";
 
 const WORKFLOW_STEPS = [
@@ -166,7 +165,6 @@ export default function NewLifecyclePage() {
           {loading ? t("creating") : t("createDpp")}
         </button>
       </form>
-      <PageAssistant agentId="data_collection" agentLabel="Data Collection" pageContext="new-dpp-lifecycle" />
     </div>
   );
 }

@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import PageAssistant from "@/components/PageAssistant";
 import { api } from "@/services/api";
 
 interface CalendarEntry {
@@ -152,7 +151,6 @@ export default function ComplianceCalendarPage() {
           </table>
         </div>
       )}
-      <PageAssistant agentId="regulatory_compliance" agentLabel="Regulatory Compliance" pageContext="compliance-calendar" />
     </div>
   );
 }

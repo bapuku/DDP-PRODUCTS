@@ -4,8 +4,6 @@ import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import PageAssistant from "@/components/PageAssistant";
-
 /* ────────────────────────────── sector registry ────────────────────────────── */
 
 interface SectorMeta {
@@ -311,7 +309,6 @@ function DPPContent() {
           </div>
         </div>
       </section>
-      <PageAssistant agentId="ddp_generation" agentLabel="DPP Generation" pageContext="dpp-explorer" />
     </div>
   );
 }

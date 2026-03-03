@@ -3,8 +3,6 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
-import PageAssistant from "@/components/PageAssistant";
-
 const API = "";
 
 const BATTERY_CLUSTERS = [
@@ -133,7 +131,6 @@ export default function NewBatteryPassportPage() {
           )}
         </div>
       )}
-      <PageAssistant agentId="ddp_generation" agentLabel="Battery Passport" pageContext="new-battery-passport" />
     </div>
   );
 }

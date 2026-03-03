@@ -4,12 +4,13 @@ EU AI Act Article 14. Frontend polls pending-reviews and submits actions here.
 """
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
 
 from app.agents.state import DPPWorkflowState
 from app.agents.workflow import get_compiled_workflow
 from app.api.v1.shared_state import pending_reviews as _pending_reviews
+from app.core.i18n import get_locale, t
 
 router = APIRouter()
 
@@ -26,10 +27,10 @@ class HumanReviewActionBody(BaseModel):
 
 
 @router.post("/{thread_id}/action")
-async def submit_action(thread_id: str, body: HumanReviewActionBody) -> dict:
+async def submit_action(thread_id: str, body: HumanReviewActionBody, locale: str = Depends(get_locale)) -> dict:
     """Approve, reject, or modify (with feedback) and continue workflow."""
     if thread_id not in _pending_reviews:
-        raise HTTPException(status_code=404, detail="Thread not found or already processed")
+        raise HTTPException(status_code=404, detail=t("errors.thread_not_found", locale))
     feedback = body.feedback or f"Human {body.action}"
     try:
         graph = get_compiled_workflow()
@@ -39,4 +40,4 @@ async def submit_action(thread_id: str, body: HumanReviewActionBody) -> dict:
         del _pending_reviews[thread_id]
         return {"status": "processed", "action": body.action, "final_response": result.get("final_response")}
     except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=t("errors.workflow_error", locale, detail=str(e)))

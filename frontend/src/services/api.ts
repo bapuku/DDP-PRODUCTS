@@ -4,10 +4,22 @@
 
 const BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:8000";
 
+function getLocaleFromCookie(): string {
+  if (typeof document === "undefined") return "en";
+  const m = document.cookie.match(/locale=([^;]+)/);
+  const locale = m ? m[1].trim() : "en";
+  return locale === "fr" ? "fr" : "en";
+}
+
 async function json<T>(path: string, init?: RequestInit): Promise<T> {
+  const headers: Record<string, string> = {
+    "Content-Type": "application/json",
+    "Accept-Language": getLocaleFromCookie(),
+    ...(init?.headers as Record<string, string>),
+  };
   const res = await fetch(`${BASE}${path}`, {
-    headers: { "Content-Type": "application/json", ...init?.headers },
     ...init,
+    headers,
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({ detail: res.statusText }));
@@ -180,7 +192,10 @@ export const api = {
       return fetch(`${BASE}/api/v1/auth/token`, {
         method: "POST",
         body,
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "Accept-Language": getLocaleFromCookie(),
+        },
       }).then((r) => r.json());
     },
   },

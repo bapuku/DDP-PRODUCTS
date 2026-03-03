@@ -4,12 +4,12 @@ v3.0: pending-reviews (live), human-review action.
 """
 from typing import Any, Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from pydantic import BaseModel, Field
 
 from app.agents.state import DPPWorkflowState
 from app.agents.workflow import get_compiled_workflow
-
+from app.core.i18n import get_locale, t
 from app.api.v1.shared_state import pending_reviews as _pending_reviews
 
 router = APIRouter()
@@ -30,7 +30,7 @@ class WorkflowRunResponse(BaseModel):
 
 
 @router.post("/run", response_model=WorkflowRunResponse)
-async def run_workflow(body: WorkflowRunRequest) -> WorkflowRunResponse:
+async def run_workflow(body: WorkflowRunRequest, locale: str = Depends(get_locale)) -> WorkflowRunResponse:
     """Run the DPP agent workflow for the given query (and optional GTIN)."""
     initial: DPPWorkflowState = {
         "query": body.query,
@@ -48,7 +48,7 @@ async def run_workflow(body: WorkflowRunRequest) -> WorkflowRunResponse:
         graph = get_compiled_workflow()
         result = await graph.ainvoke(initial, config=config or None)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Workflow error: {e!s}")
+        raise HTTPException(status_code=500, detail=t("errors.workflow_error", locale, detail=str(e)))
     if result.get("requires_human_review") and body.thread_id:
         _pending_reviews[body.thread_id] = {"query": body.query, "product_gtin": body.product_gtin}
     return WorkflowRunResponse(
@@ -72,10 +72,10 @@ class HumanReviewActionRequest(BaseModel):
 
 
 @router.post("/human-review/{thread_id}/action")
-async def human_review_action(thread_id: str, body: HumanReviewActionRequest) -> dict[str, Any]:
+async def human_review_action(thread_id: str, body: HumanReviewActionRequest, locale: str = Depends(get_locale)) -> dict[str, Any]:
     """Submit human review action (approve/reject/modify) and optionally continue workflow."""
     if thread_id not in _pending_reviews:
-        raise HTTPException(status_code=404, detail="Thread not found or already processed")
+        raise HTTPException(status_code=404, detail=t("errors.thread_not_found", locale))
     feedback = body.feedback or f"Human {body.action}"
     try:
         graph = get_compiled_workflow()

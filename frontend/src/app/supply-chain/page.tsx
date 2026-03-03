@@ -1,9 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useTranslations } from "next-intl";
 import { api, SupplyChainResult } from "@/services/api";
 
 export default function SupplyChainPage() {
+  const t = useTranslations("supplyChain");
   const [gtin, setGtin] = useState("06374692674370");
   const [result, setResult] = useState<SupplyChainResult | null>(null);
   const [loading, setLoading] = useState(false);
@@ -21,16 +23,13 @@ export default function SupplyChainPage() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      <h2 className="text-2xl font-semibold">Supply Chain Traceability</h2>
-      <p className="text-slate-400">
-        Multi-tier supply chain trace from product to raw materials via Neo4j knowledge graph.
-        Battery Regulation Article 49 – due diligence traceability.
-      </p>
+      <h2 className="text-2xl font-semibold">{t("title")}</h2>
+      <p className="text-slate-400">{t("description")}</p>
       <div className="flex gap-3">
         <input
           value={gtin}
           onChange={(e) => setGtin(e.target.value)}
-          placeholder="GTIN-14 (14 digits)"
+          placeholder={t("placeholderGtin")}
           className="flex-1 rounded bg-slate-800 border border-slate-600 px-3 py-2"
         />
         <button
@@ -38,7 +37,7 @@ export default function SupplyChainPage() {
           disabled={loading}
           className="px-4 py-2 rounded bg-sky-600 hover:bg-sky-500 disabled:opacity-50"
         >
-          {loading ? "Tracing…" : "Trace"}
+          {loading ? t("tracing") : t("trace")}
         </button>
       </div>
       {error && <p className="text-red-400 text-sm">{error}</p>}
@@ -46,17 +45,17 @@ export default function SupplyChainPage() {
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-4">
             <div className="rounded-lg border border-slate-700 p-4">
-              <p className="text-sm text-slate-400">GTIN</p>
+              <p className="text-sm text-slate-400">{t("gtin")}</p>
               <p className="font-mono">{result.gtin}</p>
             </div>
             <div className="rounded-lg border border-slate-700 p-4">
-              <p className="text-sm text-slate-400">Chain depth</p>
+              <p className="text-sm text-slate-400">{t("chainDepth")}</p>
               <p className="text-2xl font-semibold">{result.supply_chain_depth}</p>
             </div>
           </div>
           {result.upstream_nodes.length > 0 ? (
             <div>
-              <h3 className="font-medium mb-2">Upstream nodes</h3>
+              <h3 className="font-medium mb-2">{t("upstreamNodes")}</h3>
               <div className="space-y-2">
                 {result.upstream_nodes.map((node, i) => (
                   <div key={i} className="rounded border border-slate-700 p-3 text-sm">
@@ -66,10 +65,10 @@ export default function SupplyChainPage() {
               </div>
             </div>
           ) : (
-            <p className="text-slate-500 text-sm">No upstream nodes found. Seed data or add supply chain relationships in Neo4j.</p>
+            <p className="text-slate-500 text-sm">{t("noUpstream")}</p>
           )}
           <div className="rounded border border-slate-700 p-4">
-            <h3 className="font-medium mb-2">Product data</h3>
+            <h3 className="font-medium mb-2">{t("productData")}</h3>
             <pre className="text-xs overflow-auto text-slate-300">
               {JSON.stringify(result, null, 2)}
             </pre>

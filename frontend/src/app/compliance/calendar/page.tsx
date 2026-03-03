@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { api } from "@/services/api";
 
 interface CalendarEntry {
@@ -11,6 +12,8 @@ interface CalendarEntry {
 }
 
 export default function ComplianceCalendarPage() {
+  const t = useTranslations("complianceCalendar");
+  const tCommon = useTranslations("common");
   const [entries, setEntries] = useState<CalendarEntry[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -23,21 +26,19 @@ export default function ComplianceCalendarPage() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      <h2 className="text-2xl font-semibold">Compliance calendar</h2>
-      <p className="text-slate-400 text-sm">
-        Regulatory deadlines 2025–2036 (ESPR, Battery Regulation). Plan DPP rollout and reporting.
-      </p>
+      <h2 className="text-2xl font-semibold">{t("title")}</h2>
+      <p className="text-slate-400 text-sm">{t("description")}</p>
       {loading ? (
-        <p className="text-slate-500">Loading…</p>
+        <p className="text-slate-500">{tCommon("loading")}</p>
       ) : (
         <div className="rounded-lg border border-slate-700 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="bg-slate-800 text-left text-slate-300">
-                <th className="px-4 py-3">Year</th>
-                <th className="px-4 py-3">Regulation</th>
-                <th className="px-4 py-3">Deadline</th>
-                <th className="px-4 py-3">Description</th>
+                <th className="px-4 py-3">{t("year")}</th>
+                <th className="px-4 py-3">{t("regulation")}</th>
+                <th className="px-4 py-3">{t("deadline")}</th>
+                <th className="px-4 py-3">{t("descriptionCol")}</th>
               </tr>
             </thead>
             <tbody>

@@ -3,8 +3,9 @@ Multi-sector DPP API - generic CRUD for electronics, textiles, vehicles,
 construction, furniture, plastics, chemicals (ESPR Article 9).
 """
 from typing import Optional
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Depends
 
+from app.core.i18n import get_locale, t
 from app.models.dpp_base import DPPSector
 from app.models.dpp_sector import DPPCreateRequest, DPPResponse
 from app.services.neo4j import get_neo4j
@@ -79,7 +80,7 @@ async def list_dpp_by_sector(
 
 
 @router.get("/{sector}/{gtin}/{serial}", response_model=dict)
-async def get_dpp(sector: DPPSector, gtin: str, serial: str) -> dict:
+async def get_dpp(sector: DPPSector, gtin: str, serial: str, locale: str = Depends(get_locale)) -> dict:
     """Retrieve a DPP record (public per ESPR Article 9(4))."""
     gtin_clean = "".join(c for c in gtin if c.isdigit()).zfill(14)
     neo4j = get_neo4j()
@@ -88,13 +89,13 @@ async def get_dpp(sector: DPPSector, gtin: str, serial: str) -> dict:
         {"gtin": gtin_clean, "serial": serial},
     )
     if not records or not records[0].get("p"):
-        raise HTTPException(status_code=404, detail="DPP not found")
+        raise HTTPException(status_code=404, detail=t("errors.dpp_not_found", locale))
     node = records[0]["p"]
     return dict(node) if hasattr(node, "items") else {"gtin": gtin_clean, "serial_number": serial}
 
 
 @router.get("/supply-chain/{gtin}", response_model=dict)
-async def get_supply_chain(gtin: str) -> dict:
+async def get_supply_chain(gtin: str, locale: str = Depends(get_locale)) -> dict:
     """Trace supply chain for a product (Neo4j graph traversal)."""
     gtin_clean = "".join(c for c in gtin if c.isdigit()).zfill(14)
     neo4j = get_neo4j()
@@ -107,7 +108,7 @@ async def get_supply_chain(gtin: str) -> dict:
         {"gtin": gtin_clean},
     )
     if not records:
-        raise HTTPException(status_code=404, detail="Product not found")
+        raise HTTPException(status_code=404, detail=t("errors.product_not_found", locale))
     r = records[0]
     node = r.get("p", {})
     chain = r.get("chain", [])

@@ -1,0 +1,189 @@
+{
+  "common": {
+    "apiStatus": "API",
+    "checking": "checking...",
+    "ready": "ready",
+    "offline": "offline",
+    "degraded": "degraded",
+    "loading": "Loading…",
+    "yes": "Yes",
+    "no": "No",
+    "optional": "optional",
+    "requestFailed": "Request failed",
+    "apiUnavailable": "API unavailable"
+  },
+  "sidebar": {
+    "platformName": "EU DPP Platform",
+    "version": "v0.1.0",
+    "dashboard": "Dashboard",
+    "dppExplorer": "DPP Explorer",
+    "newDpp": "New DPP (Lifecycle)",
+    "newBatteryPassport": "New Battery Passport",
+    "complianceCheck": "Compliance Check",
+    "complianceCalendar": "Compliance Calendar",
+    "supplyChain": "Supply Chain",
+    "humanReview": "Human Review (Art.14)",
+    "auditLog": "Audit Log (Art.12)",
+    "mlPredictions": "ML Predictions",
+    "footerCompliant": "EU AI Act Art. 12/13/14 compliant"
+  },
+  "layout": {
+    "title": "EU Digital Product Passport Platform",
+    "regulatoryRef": "ESPR · Battery Reg 2023/1542 · EU AI Act 2024/1689"
+  },
+  "home": {
+    "aiDisclosureTitle": "EU AI Act Art. 13 — AI Disclosure:",
+    "aiDisclosureBody": "This platform uses AI agents (Claude Sonnet/Opus 4) to interpret EU regulations. All decisions are logged (Art. 12). Human review required when confidence < 85% (Art. 14).",
+    "dppBySector": "DPP by Sector",
+    "quickActions": "Quick actions",
+    "sectors": {
+      "batteries": "Batteries",
+      "electronics": "Electronics",
+      "textiles": "Textiles",
+      "vehicles": "Vehicles",
+      "construction": "Construction",
+      "furniture": "Furniture",
+      "plastics": "Plastics",
+      "chemicals": "Chemicals"
+    },
+    "regs": {
+      "eu2023": "EU 2023/1542",
+      "espr": "ESPR",
+      "elv": "ELV Directive",
+      "cpr": "CPR",
+      "eu2019": "EU 2019/904",
+      "reach": "REACH / CLP"
+    },
+    "actionBattery": "New Battery Passport",
+    "actionBatteryDesc": "EU Reg. 2023/1542 Annex XIII · 87 fields",
+    "actionCompliance": "Run compliance check",
+    "actionComplianceDesc": "AI-assisted · EUR-Lex citations",
+    "actionSupplyChain": "Trace supply chain",
+    "actionSupplyChainDesc": "Battery Reg. Art. 49 · Neo4j graph"
+  },
+  "dpp": {
+    "title": "DPP – {section}",
+    "description": "List and detail views for Battery Passport and multi-sector DPPs. Use the API to create and fetch passports.",
+    "batteryPassportTitle": "Battery Passport (EU 2023/1542 Annex XIII)",
+    "batteryPassportApi": "Create: POST /api/v1/dpp/battery · Get: GET /api/v1/dpp/battery/{gtin}/{serial}",
+    "newBatteryFormLink": "New Battery Passport form →"
+  },
+  "dppDetail": {
+    "title": "DPP detail",
+    "viewLifecycle": "View lifecycle timeline →",
+    "gtinSerial": "GTIN: {gtin} · Serial: {serial}",
+    "completenessScore": "Completeness score",
+    "dppUri": "DPP URI",
+    "productDataTitle": "Product data (7 clusters / Annex XIII)",
+    "dataCarriers": "Data carriers",
+    "qrGs1": "QR / GS1 Digital Link:",
+    "nfcNdef": "NFC NDEF:",
+    "rfidEpc": "RFID EPC SGTIN-96:",
+    "dppNotFound": "DPP not found"
+  },
+  "lifecycle": {
+    "backToDpp": "← DPP detail",
+    "timelineTitle": "Lifecycle timeline",
+    "description": "Product lifecycle phases (0–9) per EU DPP Orchestration v3.0. Use the Lifecycle Update API to transition phases.",
+    "phases": {
+      "phase0": "Phase 0: Pre-conception",
+      "phase1": "Phase 1: Design",
+      "phase2": "Phase 2: Prototyping",
+      "phase3": "Phase 3: Suppliers",
+      "phase4": "Phase 4: Manufacturing and Generation",
+      "phase5": "Phase 5: Distribution EPCIS",
+      "phase6": "Phase 6: Use (BMS IoT)",
+      "phase7": "Phase 7: Second life",
+      "phase8": "Phase 8: Recycling",
+      "phase9": "Phase 9: Destruction"
+    }
+  },
+  "lifecycleNew": {
+    "title": "New DPP (Lifecycle wizard)",
+    "description": "Phase 0–4: Pre-conception to Manufacturing. Triggers the full DDP Creation workflow (data collection → generate DDP → validate → compliance).",
+    "gtin14": "GTIN-14",
+    "serialNumber": "Serial number",
+    "batchOptional": "Batch (optional)",
+    "ddpUri": "DDP URI:",
+    "validationPassed": "Validation passed:",
+    "humanReviewRequired": "Human review required:",
+    "creating": "Creating…",
+    "createDpp": "Create DPP",
+    "placeholderGtin": "01234567890123",
+    "placeholderSerial": "SN001"
+  },
+  "battery": {
+    "title": "New Battery Passport",
+    "gtin14": "GTIN-14",
+    "serialNumber": "Serial number",
+    "batchNumber": "Batch number",
+    "creating": "Creating…",
+    "createPassport": "Create passport"
+  },
+  "compliance": {
+    "title": "Compliance check",
+    "description": "Run compliance verification via the agent workflow (regulatory + product data). EU AI Act Art. 12 audit trail.",
+    "query": "Query",
+    "productGtinOptional": "Product GTIN (optional)",
+    "placeholderGtin": "14 digits",
+    "running": "Running…",
+    "runCheck": "Run compliance check",
+    "defaultQuery": "Is this battery compliant with EU Battery Regulation?"
+  },
+  "complianceCalendar": {
+    "title": "Compliance calendar",
+    "description": "Regulatory deadlines 2025–2036 (ESPR, Battery Regulation). Plan DPP rollout and reporting.",
+    "year": "Year",
+    "regulation": "Regulation",
+    "deadline": "Deadline",
+    "descriptionCol": "Description"
+  },
+  "supplyChain": {
+    "title": "Supply Chain Traceability",
+    "description": "Multi-tier supply chain trace from product to raw materials via Neo4j knowledge graph. Battery Regulation Article 49 – due diligence traceability.",
+    "placeholderGtin": "GTIN-14 (14 digits)",
+    "tracing": "Tracing…",
+    "trace": "Trace",
+    "gtin": "GTIN",
+    "chainDepth": "Chain depth",
+    "upstreamNodes": "Upstream nodes",
+    "noUpstream": "No upstream nodes found. Seed data or add supply chain relationships in Neo4j.",
+    "productData": "Product data"
+  },
+  "humanReview": {
+    "title": "Human review queue (live)",
+    "description": "EU AI Act Article 14 – human-in-the-loop for decisions with confidence < 85%. Polls /api/v1/human-review/pending every 5s.",
+    "noItems": "No items in queue. When the workflow escalates (confidence 0.70–0.85 or < 0.70), tasks will appear here for approval or override.",
+    "approve": "Approve",
+    "reject": "Reject",
+    "modify": "Modify"
+  },
+  "audit": {
+    "title": "Audit log (live)",
+    "description": "EU AI Act Article 12 – record-keeping. Entries from PostgreSQL audit_log. Polls every 10s. Retention: 10 years.",
+    "filterByEntity": "Filter by entity_id",
+    "noEntries": "No audit entries yet. Agent decisions will appear here.",
+    "time": "Time",
+    "agent": "Agent",
+    "decision": "Decision",
+    "confidence": "Confidence",
+    "entityId": "Entity ID"
+  },
+  "ml": {
+    "title": "ML compliance predictions",
+    "description": "Real-time predictions via v2 GradientBoosting models (ESPR, RoHS, REACH, carbon, circularity). EU AI Act Art. 9, 10, 15.",
+    "sector": "Sector",
+    "ddpCompleteness": "DDP completeness (0–1)",
+    "generic": "Generic",
+    "battery": "Battery",
+    "textile": "Textile",
+    "electronics": "Electronics",
+    "vehicles": "Vehicles",
+    "predicting": "Predicting…",
+    "predictCompliance": "Predict compliance",
+    "espr": "ESPR:",
+    "rohs": "RoHS:",
+    "reach": "REACH:",
+    "complianceScore": "Compliance score:"
+  }
+}

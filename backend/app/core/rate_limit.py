@@ -9,6 +9,8 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from starlette.requests import Request
 from starlette.responses import Response, JSONResponse
 
+from app.core.i18n import get_locale_from_request, t
+
 # 100 req/min per IP
 RATE_LIMIT_REQUESTS = 100
 RATE_LIMIT_WINDOW = 60.0
@@ -35,5 +37,7 @@ class RateLimitMiddleware(BaseHTTPMiddleware):
         client = request.client
         key = client.host if client else "unknown"
         if is_rate_limited(key):
-            return JSONResponse({"detail": "Too many requests"}, status_code=429)
+            locale = get_locale_from_request(request)
+            detail = t("errors.too_many_requests", locale)
+            return JSONResponse({"detail": detail}, status_code=429)
         return await call_next(request)

@@ -8,12 +8,13 @@ from typing import Optional
 import qrcode
 import io
 import base64
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from fastapi.responses import Response
 
 from app.models.battery_passport import BatteryPassportCreate, BatteryPassportResponse
 from app.services.neo4j import get_neo4j
 from app.services.kafka import get_kafka
+from app.core.i18n import get_locale, t
 
 router = APIRouter()
 
@@ -24,7 +25,7 @@ def _serialize_passport(p: dict) -> dict:
 
 
 @router.post("", response_model=BatteryPassportResponse)
-async def create_battery_passport(passport: BatteryPassportCreate):
+async def create_battery_passport(passport: BatteryPassportCreate, locale: str = Depends(get_locale)):
     """Create Battery DPP per EU Regulation 2023/1542 Annex XIII. GS1 Digital Link URI, store in Neo4j."""
     dpp_uri = passport.to_dpp_uri()
     gtin_clean = "".join(c for c in passport.gtin if c.isdigit()).zfill(14)
@@ -55,7 +56,7 @@ async def create_battery_passport(passport: BatteryPassportCreate):
         )
     except Exception as e:
         if "already exists" in str(e).lower() or "unique" in str(e).lower():
-            raise HTTPException(status_code=409, detail="Duplicate serial number or GTIN")
+            raise HTTPException(status_code=409, detail=t("errors.duplicate_serial_gtin", locale))
         raise HTTPException(status_code=500, detail=str(e))
 
     try:
@@ -88,7 +89,7 @@ async def create_battery_passport(passport: BatteryPassportCreate):
 
 
 @router.get("/{gtin}/{serial}", response_model=dict)
-async def get_battery_passport(gtin: str, serial: str, lang: Optional[str] = None):
+async def get_battery_passport(gtin: str, serial: str, lang: Optional[str] = None, locale: str = Depends(get_locale)):
     """Public endpoint per ESPR Article 9(4) - no auth. Multi-language support via query param."""
     gtin_clean = "".join(c for c in gtin if c.isdigit()).zfill(14)
     neo4j = get_neo4j()
@@ -97,7 +98,7 @@ async def get_battery_passport(gtin: str, serial: str, lang: Optional[str] = Non
         {"gtin": gtin_clean, "serial": serial},
     )
     if not records or not records[0].get("p"):
-        raise HTTPException(status_code=404, detail="Passport not found")
+        raise HTTPException(status_code=404, detail=t("errors.passport_not_found", locale))
     node = records[0]["p"]
     if isinstance(node, dict):
         return node

@@ -14,6 +14,7 @@ from starlette.middleware.base import BaseHTTPMiddleware
 from app.core.exceptions import (
     DPPException, ValidationError, NotFoundError, ConflictError, UnauthorizedError, ComplianceError
 )
+from app.core.i18n import get_locale_from_request, t
 
 log = structlog.get_logger()
 
@@ -87,5 +88,6 @@ def add_exception_handlers(app) -> None:
     @app.exception_handler(Exception)
     async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
         log.error("unhandled_exception", error=str(exc), exc_info=True)
-        # Never expose stack trace externally
-        return JSONResponse(status_code=500, content={"error": "INTERNAL_ERROR", "message": "An internal error occurred."})
+        locale = get_locale_from_request(request)
+        message = t("errors.internal_error", locale)
+        return JSONResponse(status_code=500, content={"error": "INTERNAL_ERROR", "message": message})

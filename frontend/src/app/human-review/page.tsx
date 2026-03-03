@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 import { api } from "@/services/api";
 
 interface PendingItem {
@@ -10,6 +11,8 @@ interface PendingItem {
 }
 
 export default function HumanReviewPage() {
+  const t = useTranslations("humanReview");
+  const tCommon = useTranslations("common");
   const [items, setItems] = useState<PendingItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [acting, setActing] = useState<string | null>(null);
@@ -23,8 +26,8 @@ export default function HumanReviewPage() {
 
   useEffect(() => {
     fetchPending();
-    const t = setInterval(fetchPending, 5000);
-    return () => clearInterval(t);
+    const interval = setInterval(fetchPending, 5000);
+    return () => clearInterval(interval);
   }, []);
 
   async function handleAction(threadId: string, action: string) {
@@ -39,15 +42,13 @@ export default function HumanReviewPage() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      <h2 className="text-2xl font-semibold">Human review queue (live)</h2>
-      <p className="text-slate-400">
-        EU AI Act Article 14 – human-in-the-loop for decisions with confidence &lt; 85%. Polls /api/v1/human-review/pending every 5s.
-      </p>
+      <h2 className="text-2xl font-semibold">{t("title")}</h2>
+      <p className="text-slate-400">{t("description")}</p>
       {loading ? (
-        <p className="text-slate-500">Loading…</p>
+        <p className="text-slate-500">{tCommon("loading")}</p>
       ) : items.length === 0 ? (
         <div className="rounded-lg border border-slate-700 p-6 text-center text-slate-500">
-          No items in queue. When the workflow escalates (confidence 0.70–0.85 or &lt; 0.70), tasks will appear here for approval or override.
+          {t("noItems")}
         </div>
       ) : (
         <ul className="space-y-3">
@@ -63,21 +64,21 @@ export default function HumanReviewPage() {
                   disabled={acting === item.thread_id}
                   className="rounded bg-emerald-600 hover:bg-emerald-500 px-3 py-1 text-sm text-white disabled:opacity-50"
                 >
-                  Approve
+                  {t("approve")}
                 </button>
                 <button
                   onClick={() => handleAction(item.thread_id, "reject")}
                   disabled={acting === item.thread_id}
                   className="rounded bg-red-600 hover:bg-red-500 px-3 py-1 text-sm text-white disabled:opacity-50"
                 >
-                  Reject
+                  {t("reject")}
                 </button>
                 <button
                   onClick={() => handleAction(item.thread_id, "modify")}
                   disabled={acting === item.thread_id}
                   className="rounded bg-slate-600 hover:bg-slate-500 px-3 py-1 text-sm text-white disabled:opacity-50"
                 >
-                  Modify
+                  {t("modify")}
                 </button>
               </div>
             </li>

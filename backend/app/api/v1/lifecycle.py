@@ -4,7 +4,7 @@ POST /lifecycle/create, PUT /lifecycle/{gtin}/{serial}/update, POST /audit/{gtin
 """
 from typing import Any, Optional
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Depends
 from fastapi.responses import Response
 from pydantic import BaseModel, Field
 
@@ -14,6 +14,7 @@ from app.agents.workflow import (
     compile_lifecycle_update_workflow,
     compile_audit_workflow,
 )
+from app.core.i18n import get_locale, t
 from app.services.data_carriers import carrier_payload, generate_qr_png, qr_data
 from app.services.kafka import get_kafka
 from app.services.audit import get_audit_service
@@ -51,7 +52,7 @@ def _emit(topic: str, key: str, value: str) -> None:
 
 
 @router.post("/lifecycle/create")
-async def lifecycle_create(body: LifecycleCreateRequest) -> dict[str, Any]:
+async def lifecycle_create(body: LifecycleCreateRequest, locale: str = Depends(get_locale)) -> dict[str, Any]:
     """Trigger full DDP Creation workflow (classify → data_collection → generate_ddp → validate → compliance → publish|remediate)."""
     initial: DDPLifecycleState = {
         "product_gtin": body.product_gtin,
@@ -76,7 +77,7 @@ async def lifecycle_create(body: LifecycleCreateRequest) -> dict[str, Any]:
         graph = compile_ddp_creation_workflow()
         result = await graph.ainvoke(initial, config=config or None)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Workflow error: {e!s}")
+        raise HTTPException(status_code=500, detail=t("errors.workflow_error", locale, detail=str(e)))
     ddp_uri = result.get("ddp_uri")
     if ddp_uri:
         _emit(TOPIC_DDP_CREATED, body.product_gtin, ddp_uri)
@@ -91,7 +92,7 @@ async def lifecycle_create(body: LifecycleCreateRequest) -> dict[str, Any]:
 
 
 @router.put("/lifecycle/{gtin}/{serial}/update")
-async def lifecycle_update(gtin: str, serial: str, body: LifecycleUpdateRequest) -> dict[str, Any]:
+async def lifecycle_update(gtin: str, serial: str, body: LifecycleUpdateRequest, locale: str = Depends(get_locale)) -> dict[str, Any]:
     """Trigger Lifecycle Update workflow (classify_update → anomaly_check → apply_update | eol_chain)."""
     initial: DDPLifecycleState = {
         "product_gtin": gtin,
@@ -112,7 +113,7 @@ async def lifecycle_update(gtin: str, serial: str, body: LifecycleUpdateRequest)
         graph = compile_lifecycle_update_workflow()
         result = await graph.ainvoke(initial, config=config or None)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Workflow error: {e!s}")
+        raise HTTPException(status_code=500, detail=t("errors.workflow_error", locale, detail=str(e)))
     _emit(TOPIC_DDP_UPDATED, gtin, result.get("final_response", ""))
     if result.get("current_phase") == "destruction":
         _emit(TOPIC_DDP_LIFECYCLE_CLOSED, gtin, serial)
@@ -124,7 +125,7 @@ async def lifecycle_update(gtin: str, serial: str, body: LifecycleUpdateRequest)
 
 
 @router.post("/audit/{gtin}/{serial}")
-async def audit_trigger(gtin: str, serial: str, thread_id: Optional[str] = None) -> dict[str, Any]:
+async def audit_trigger(gtin: str, serial: str, thread_id: Optional[str] = None, locale: str = Depends(get_locale)) -> dict[str, Any]:
     """Trigger DDP Audit workflow (determine_scope → collect_evidence → validation → regulatory → execute_checks → report)."""
     initial: DDPLifecycleState = {
         "product_gtin": gtin,
@@ -144,7 +145,7 @@ async def audit_trigger(gtin: str, serial: str, thread_id: Optional[str] = None)
         graph = compile_audit_workflow()
         result = await graph.ainvoke(initial, config=config or None)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Audit workflow error: {e!s}")
+        raise HTTPException(status_code=500, detail=t("errors.workflow_error", locale, detail=str(e)))
     return {
         "audit_report": result.get("audit_report"),
         "findings_count": len(result.get("audit_findings", [])),

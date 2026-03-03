@@ -9,10 +9,11 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "fetch": "latest",
     "next": "14.2.0",
+    "next-intl": "^4.8.3",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0",
-    "fetch": "latest"
+    "react-dom": "^18.3.0"
   },
   "devDependencies": {
     "@types/node": "^20",

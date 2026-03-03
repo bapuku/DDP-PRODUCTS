@@ -31,37 +31,37 @@ export default function CompliancePage() {
 
   return (
     <div className="max-w-2xl space-y-6">
-      <h2 className="text-2xl font-semibold">{t("title")}</h2>
-      <p className="text-slate-400">{t("description")}</p>
+      <h2 className="text-2xl font-semibold text-slate-800">{t("title")}</h2>
+      <p className="text-slate-600">{t("description")}</p>
       <div className="space-y-2">
-        <label className="block text-sm font-medium">{t("query")}</label>
+        <label className="block text-sm font-medium text-slate-400">{t("query")}</label>
         <textarea
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={defaultQuery}
-          className="w-full rounded bg-slate-800 border border-slate-600 p-2 text-sm"
+          className="w-full rounded-lg bg-white border border-slate-300 p-2 text-sm text-slate-800"
           rows={3}
         />
       </div>
       <div className="space-y-2">
-        <label className="block text-sm font-medium">{t("productGtinOptional")}</label>
+        <label className="block text-sm font-medium text-slate-400">{t("productGtinOptional")}</label>
         <input
           type="text"
           value={gtin}
           onChange={(e) => setGtin(e.target.value)}
           placeholder={t("placeholderGtin")}
-          className="w-full rounded bg-slate-800 border border-slate-600 p-2"
+          className="w-full rounded-lg bg-white border border-slate-300 p-2 text-slate-800"
         />
       </div>
       <button
         onClick={runCheck}
         disabled={loading}
-        className="px-4 py-2 rounded bg-sky-600 hover:bg-sky-500 disabled:opacity-50"
+        className="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white disabled:opacity-50 transition"
       >
         {loading ? t("running") : t("runCheck")}
       </button>
       {result && (
-        <pre className="rounded bg-slate-900 border border-slate-700 p-4 text-xs overflow-auto max-h-96">
+        <pre className="rounded-xl bg-white border border-slate-200 p-4 text-xs overflow-auto max-h-96 text-slate-600">
           {JSON.stringify(result, null, 2)}
         </pre>
       )}

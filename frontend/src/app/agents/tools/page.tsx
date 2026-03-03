@@ -44,30 +44,30 @@ export default function ToolsRegistryPage() {
   return (
     <div className="max-w-4xl space-y-6">
       <div className="flex items-center gap-4">
-        <Link href="/agents" className="text-sky-400 text-sm hover:underline">{t("backToAgents")}</Link>
-        <h2 className="text-2xl font-semibold">{t("toolsTitle")}</h2>
+        <Link href="/agents" className="text-sky-500 text-sm hover:text-sky-600 hover:underline">{t("backToAgents")}</Link>
+        <h2 className="text-2xl font-semibold text-slate-800">{t("toolsTitle")}</h2>
       </div>
-      <p className="text-slate-400 text-sm">{t("toolsDescription")}</p>
+      <p className="text-slate-600 text-sm">{t("toolsDescription")}</p>
 
       {loading ? (
-        <p className="text-slate-500">{tCommon("loading")}</p>
+        <p className="text-slate-400">{tCommon("loading")}</p>
       ) : (
         Object.entries(grouped).map(([category, items]) => (
           <div key={category} className="space-y-2">
-            <h3 className="text-lg font-medium capitalize text-slate-300">{category}</h3>
+            <h3 className="text-lg font-medium capitalize text-slate-600">{category}</h3>
             <div className="space-y-2">
               {items.map((tool) => (
-                <div key={tool.id} className="rounded-lg border border-slate-700 p-4 bg-slate-800/50">
+                <div key={tool.id} className="bg-white rounded-xl border border-slate-200 p-4">
                   <div className="flex items-start justify-between mb-2">
                     <div>
-                      <h4 className="font-medium text-sm">{tool.name}</h4>
-                      <p className="text-xs text-slate-400 mt-1">{tool.description}</p>
+                      <h4 className="font-medium text-sm text-slate-800">{tool.name}</h4>
+                      <p className="text-xs text-slate-500 mt-1">{tool.description}</p>
                     </div>
-                    <span className="text-xs text-slate-500 whitespace-nowrap ml-4">{tool.used_by.length} {t("agents")}</span>
+                    <span className="text-xs text-slate-400 whitespace-nowrap ml-4">{tool.used_by.length} {t("agents")}</span>
                   </div>
                   <div className="flex flex-wrap gap-1 mt-2">
                     {tool.used_by.map((agentId) => (
-                      <Link key={agentId} href={`/agents/${agentId}`} className="text-xs px-2 py-0.5 rounded bg-sky-900/50 text-sky-300 hover:bg-sky-800/50">
+                      <Link key={agentId} href={`/agents/${agentId}`} className="text-xs px-2 py-0.5 rounded bg-sky-50 text-sky-700 hover:bg-sky-100 transition">
                         {agentId}
                       </Link>
                     ))}

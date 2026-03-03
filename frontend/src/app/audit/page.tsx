@@ -39,8 +39,8 @@ export default function AuditPage() {
 
   return (
     <div className="max-w-4xl space-y-6">
-      <h2 className="text-2xl font-semibold">{t("title")}</h2>
-      <p className="text-slate-400">{t("description")}</p>
+      <h2 className="text-2xl font-semibold text-slate-800">{t("title")}</h2>
+      <p className="text-slate-600">{t("description")}</p>
       <div className="flex gap-2 items-center">
         <label className="text-sm text-slate-400">{t("filterByEntity")}</label>
         <input
@@ -48,35 +48,35 @@ export default function AuditPage() {
           value={entityFilter}
           onChange={(e) => setEntityFilter(e.target.value)}
           placeholder={tCommon("optional")}
-          className="rounded bg-slate-800 border border-slate-600 px-2 py-1 text-sm w-48"
+          className="rounded-lg bg-white border border-slate-300 px-2 py-1 text-sm w-48 text-slate-800"
         />
       </div>
       {loading && entries.length === 0 ? (
-        <p className="text-slate-500">{tCommon("loading")}</p>
+        <p className="text-slate-400">{tCommon("loading")}</p>
       ) : entries.length === 0 ? (
-        <div className="rounded-lg border border-slate-700 p-6 text-center text-slate-500">
+        <div className="bg-white rounded-xl border border-slate-200 p-6 text-center text-slate-400">
           {t("noEntries")}
         </div>
       ) : (
-        <div className="rounded-lg border border-slate-700 overflow-hidden">
+        <div className="bg-white rounded-xl border border-slate-200 overflow-hidden">
           <table className="w-full text-sm">
             <thead>
-              <tr className="bg-slate-800 text-left text-slate-300">
-                <th className="px-4 py-2">{t("time")}</th>
-                <th className="px-4 py-2">{t("agent")}</th>
-                <th className="px-4 py-2">{t("decision")}</th>
-                <th className="px-4 py-2">{t("confidence")}</th>
-                <th className="px-4 py-2">{t("entityId")}</th>
+              <tr className="bg-slate-50 text-left text-slate-600">
+                <th className="px-4 py-2 font-medium">{t("time")}</th>
+                <th className="px-4 py-2 font-medium">{t("agent")}</th>
+                <th className="px-4 py-2 font-medium">{t("decision")}</th>
+                <th className="px-4 py-2 font-medium">{t("confidence")}</th>
+                <th className="px-4 py-2 font-medium">{t("entityId")}</th>
               </tr>
             </thead>
             <tbody>
               {entries.map((e) => (
-                <tr key={e.id} className="border-t border-slate-700 hover:bg-slate-800/50">
-                  <td className="px-4 py-2 text-slate-400">{e.timestamp}</td>
+                <tr key={e.id} className="border-t border-slate-200 hover:bg-slate-50 text-slate-800">
+                  <td className="px-4 py-2 text-slate-500">{e.timestamp}</td>
                   <td className="px-4 py-2">{e.agent_id}</td>
                   <td className="px-4 py-2">{e.decision_type}</td>
                   <td className="px-4 py-2">{e.confidence_score != null ? String(e.confidence_score) : "—"}</td>
-                  <td className="px-4 py-2 text-slate-400">{e.entity_id ?? "—"}</td>
+                  <td className="px-4 py-2 text-slate-500">{e.entity_id ?? "—"}</td>
                 </tr>
               ))}
             </tbody>

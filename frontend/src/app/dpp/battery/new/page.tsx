@@ -41,26 +41,26 @@ export default function NewBatteryPassportPage() {
 
   return (
     <div className="max-w-xl space-y-4">
-      <h2 className="text-xl font-semibold">{t("title")}</h2>
+      <h2 className="text-xl font-semibold text-slate-800">{t("title")}</h2>
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block text-sm text-slate-400">{t("gtin14")}</label>
-          <input value={gtin} onChange={(e) => setGtin(e.target.value)} className="w-full rounded bg-slate-800 border border-slate-600 p-2" />
+          <input value={gtin} onChange={(e) => setGtin(e.target.value)} className="w-full rounded-lg bg-white border border-slate-300 p-2 text-slate-800" />
         </div>
         <div>
           <label className="block text-sm text-slate-400">{t("serialNumber")}</label>
-          <input value={serial} onChange={(e) => setSerial(e.target.value)} className="w-full rounded bg-slate-800 border border-slate-600 p-2" />
+          <input value={serial} onChange={(e) => setSerial(e.target.value)} className="w-full rounded-lg bg-white border border-slate-300 p-2 text-slate-800" />
         </div>
         <div>
           <label className="block text-sm text-slate-400">{t("batchNumber")}</label>
-          <input value={batch} onChange={(e) => setBatch(e.target.value)} className="w-full rounded bg-slate-800 border border-slate-600 p-2" />
+          <input value={batch} onChange={(e) => setBatch(e.target.value)} className="w-full rounded-lg bg-white border border-slate-300 p-2 text-slate-800" />
         </div>
       </div>
-      <button onClick={submit} disabled={loading} className="px-4 py-2 rounded bg-sky-600 hover:bg-sky-500 disabled:opacity-50">
+      <button onClick={submit} disabled={loading} className="px-4 py-2 rounded-lg bg-sky-500 hover:bg-sky-600 text-white disabled:opacity-50 transition">
         {loading ? t("creating") : t("createPassport")}
       </button>
       {result && (
-        <pre className="rounded bg-slate-900 border border-slate-700 p-4 text-xs overflow-auto">
+        <pre className="rounded-xl bg-white border border-slate-200 p-4 text-xs overflow-auto text-slate-600">
           {JSON.stringify(result, null, 2)}
         </pre>
       )}

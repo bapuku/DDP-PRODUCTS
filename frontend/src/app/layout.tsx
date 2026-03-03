@@ -17,7 +17,7 @@ export default async function RootLayout({
   const messages = (await import(`../../messages/${locale}.json`)).default;
   return (
     <html lang={locale}>
-      <body className="min-h-screen bg-slate-950 text-slate-100 font-sans antialiased">
+      <body className="min-h-screen font-sans antialiased">
         <LayoutClient locale={locale} messages={messages}>
           {children}
         </LayoutClient>

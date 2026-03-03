@@ -22,23 +22,23 @@ function DPPContent() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-semibold capitalize">{t("title", { section })}</h2>
-      <p className="text-slate-400">{t("description")}</p>
+      <h2 className="text-2xl font-semibold capitalize text-slate-800">{t("title", { section })}</h2>
+      <p className="text-slate-600">{t("description")}</p>
       <div className="flex gap-4 flex-wrap">
         {sectors.map((s) => (
           <Link
             key={s}
             href={`/dpp?section=${s}`}
-            className={`px-4 py-2 rounded ${section === s ? "bg-sky-600" : "bg-slate-800"} hover:bg-slate-700`}
+            className={`px-4 py-2 rounded-lg ${section === s ? "bg-sky-500 text-white" : "bg-white border border-slate-200 text-slate-700"} hover:bg-sky-600 hover:text-white transition`}
           >
             {s}
           </Link>
         ))}
       </div>
-      <div className="border border-slate-700 rounded-lg p-4">
-        <h3 className="font-medium mb-2">{t("batteryPassportTitle")}</h3>
-        <p className="text-sm text-slate-500 mb-2">{t("batteryPassportApi")}</p>
-        <Link href="/dpp/battery/new" className="text-sky-400 hover:underline text-sm">
+      <div className="bg-white border border-slate-200 rounded-xl p-4">
+        <h3 className="font-medium mb-2 text-slate-800">{t("batteryPassportTitle")}</h3>
+        <p className="text-sm text-slate-400 mb-2">{t("batteryPassportApi")}</p>
+        <Link href="/dpp/battery/new" className="text-sky-500 hover:text-sky-600 hover:underline text-sm">
           {t("newBatteryFormLink")}
         </Link>
       </div>

@@ -16,12 +16,12 @@ export default function LanguageSwitcher() {
   }
 
   return (
-    <div className="flex items-center gap-1">
+    <div className="flex items-center rounded-lg border border-slate-200 bg-white overflow-hidden">
       <button
         type="button"
         onClick={() => setLocale("en")}
-        className={`px-2 py-1 text-xs font-medium rounded transition ${
-          locale === "en" ? "bg-sky-600 text-white" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+        className={`px-3 py-1.5 text-xs font-medium transition ${
+          locale === "en" ? "bg-sky-500 text-white" : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
         }`}
       >
         EN
@@ -29,8 +29,8 @@ export default function LanguageSwitcher() {
       <button
         type="button"
         onClick={() => setLocale("fr")}
-        className={`px-2 py-1 text-xs font-medium rounded transition ${
-          locale === "fr" ? "bg-sky-600 text-white" : "text-slate-400 hover:text-slate-200 hover:bg-slate-800"
+        className={`px-3 py-1.5 text-xs font-medium transition ${
+          locale === "fr" ? "bg-sky-500 text-white" : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
         }`}
       >
         FR

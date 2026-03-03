@@ -18,22 +18,22 @@ export default function LifecycleTimelinePage() {
   return (
     <div className="max-w-2xl space-y-6">
       <div className="flex items-center gap-4">
-        <Link href={`/dpp/${gtin}/${serial}`} className="text-sky-400 text-sm hover:underline">
+        <Link href={`/dpp/${gtin}/${serial}`} className="text-sky-500 text-sm hover:text-sky-600 hover:underline">
           {t("backToDpp")}
         </Link>
-        <h2 className="text-2xl font-semibold">{t("timelineTitle")}</h2>
+        <h2 className="text-2xl font-semibold text-slate-800">{t("timelineTitle")}</h2>
       </div>
-      <p className="text-slate-400 text-sm">{t("description")}</p>
+      <p className="text-slate-600 text-sm">{t("description")}</p>
       <ul className="space-y-2">
         {PHASE_KEYS.map((key, i) => (
           <li
             key={key}
-            className="flex items-center gap-3 rounded-lg border border-slate-700 p-4"
+            className="flex items-center gap-3 bg-white rounded-xl border border-slate-200 p-4"
           >
-            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-slate-700 text-sm font-medium text-slate-300">
+            <span className="flex h-8 w-8 items-center justify-center rounded-full bg-sky-100 text-sm font-medium text-sky-700">
               {i}
             </span>
-            <span className="text-slate-200">{t(`phases.${key}`)}</span>
+            <span className="text-slate-800">{t(`phases.${key}`)}</span>
           </li>
         ))}
       </ul>

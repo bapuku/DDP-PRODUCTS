@@ -39,52 +39,52 @@ export default function NewLifecyclePage() {
 
   return (
     <div className="max-w-xl space-y-6">
-      <h2 className="text-2xl font-semibold">{t("title")}</h2>
-      <p className="text-slate-400 text-sm">{t("description")}</p>
-      <form onSubmit={handleSubmit} className="rounded-lg border border-slate-700 p-6 space-y-4">
+      <h2 className="text-2xl font-semibold text-slate-800">{t("title")}</h2>
+      <p className="text-slate-600 text-sm">{t("description")}</p>
+      <form onSubmit={handleSubmit} className="bg-white rounded-xl border border-slate-200 p-6 space-y-4">
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">{t("gtin14")}</label>
+          <label className="block text-sm font-medium text-slate-400 mb-1">{t("gtin14")}</label>
           <input
             type="text"
             value={gtin}
             onChange={(e) => setGtin(e.target.value)}
             placeholder={t("placeholderGtin")}
-            className="w-full rounded bg-slate-800 border border-slate-600 px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-sm text-slate-800"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">{t("serialNumber")}</label>
+          <label className="block text-sm font-medium text-slate-400 mb-1">{t("serialNumber")}</label>
           <input
             type="text"
             value={serial}
             onChange={(e) => setSerial(e.target.value)}
             placeholder={t("placeholderSerial")}
-            className="w-full rounded bg-slate-800 border border-slate-600 px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-sm text-slate-800"
             required
           />
         </div>
         <div>
-          <label className="block text-sm font-medium text-slate-300 mb-1">{t("batchOptional")}</label>
+          <label className="block text-sm font-medium text-slate-400 mb-1">{t("batchOptional")}</label>
           <input
             type="text"
             value={batch}
             onChange={(e) => setBatch(e.target.value)}
-            className="w-full rounded bg-slate-800 border border-slate-600 px-3 py-2 text-sm"
+            className="w-full rounded-lg bg-white border border-slate-300 px-3 py-2 text-sm text-slate-800"
           />
         </div>
-        {error && <p className="text-red-400 text-sm">{error}</p>}
+        {error && <p className="text-red-600 text-sm">{error}</p>}
         {result && (
-          <div className="rounded bg-slate-800 p-3 text-sm">
-            <p className="text-slate-300">{t("ddpUri")} {result.ddp_uri ?? "—"}</p>
-            <p>{t("validationPassed")} {result.validation_passed ? tCommon("yes") : tCommon("no")}</p>
-            <p>{t("humanReviewRequired")} {result.requires_human_review ? tCommon("yes") : tCommon("no")}</p>
+          <div className="rounded-lg bg-slate-50 p-3 text-sm">
+            <p className="text-slate-600">{t("ddpUri")} {result.ddp_uri ?? "—"}</p>
+            <p className="text-slate-600">{t("validationPassed")} {result.validation_passed ? tCommon("yes") : tCommon("no")}</p>
+            <p className="text-slate-600">{t("humanReviewRequired")} {result.requires_human_review ? tCommon("yes") : tCommon("no")}</p>
           </div>
         )}
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded bg-sky-600 hover:bg-sky-500 text-white py-2 text-sm font-medium disabled:opacity-50"
+          className="w-full rounded-lg bg-sky-500 hover:bg-sky-600 text-white py-2 text-sm font-medium disabled:opacity-50 transition"
         >
           {loading ? t("creating") : t("createDpp")}
         </button>

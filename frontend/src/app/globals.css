@@ -3,11 +3,45 @@
 @tailwind utilities;
 
 :root {
-  --foreground: 226 232 240;
-  --background: 2 6 23;
+  --foreground: 30 41 59;
+  --background: 248 250 252;
 }
 
 body {
   color: rgb(var(--foreground));
   background: rgb(var(--background));
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+}
+
+/* Smooth transitions for interactive elements */
+a, button, [role="button"] {
+  transition: all 150ms ease;
+}
+
+/* Subtle card hover lift */
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.08), 0 4px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Active indicator for sidebar */
+.nav-active {
+  background: linear-gradient(135deg, rgb(14 165 233 / 0.15), rgb(56 189 248 / 0.08));
+  border-left: 3px solid rgb(14 165 233);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(203 213 225);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(148 163 184);
 }

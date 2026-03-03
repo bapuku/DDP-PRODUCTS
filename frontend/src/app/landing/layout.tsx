@@ -1,13 +1,25 @@
-import { getLocale } from "@/i18n/request";
-import { NextIntlClientProvider } from "next-intl";
+"use client";
 
-export default async function LandingLayout({
+import { NextIntlClientProvider } from "next-intl";
+import { useEffect, useState } from "react";
+
+export default function LandingLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getLocale();
-  const messages = (await import(`../../../messages/${locale}.json`)).default;
+  const [messages, setMessages] = useState<Record<string, unknown> | null>(null);
+  const [locale, setLocale] = useState("en");
+
+  useEffect(() => {
+    const cookieLocale = document.cookie.match(/locale=([^;]+)/)?.[1]?.trim() || "en";
+    const loc = cookieLocale === "fr" ? "fr" : "en";
+    setLocale(loc);
+    import(`../../../messages/${loc}.json`).then((m) => setMessages(m.default));
+  }, []);
+
+  if (!messages) return null;
+
   return (
     <NextIntlClientProvider locale={locale} messages={messages}>
       {children}

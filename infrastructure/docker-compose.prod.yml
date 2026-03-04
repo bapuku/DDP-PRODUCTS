@@ -138,6 +138,13 @@ services:
       SCHEMA_REGISTRY_URL: http://schema-registry:8081
       SECRET_KEY: ${SECRET_KEY:-change-me-in-production-min-16-chars}
       CORS_ORIGINS: '["http://51.77.144.54:3100","http://51.77.144.54:8110","http://51.77.144.54:8100"]'
+      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
+      ANTHROPIC_MODEL: ${ANTHROPIC_MODEL:-claude-sonnet-4-20250514}
+      OPENAI_API_KEY: ${OPENAI_API_KEY:-}
+      OPENAI_MODEL: ${OPENAI_MODEL:-gpt-4o}
+      OPENAI_EMBEDDING_MODEL: ${OPENAI_EMBEDDING_MODEL:-text-embedding-3-large}
+      HUGGINGFACE_API_KEY: ${HUGGINGFACE_API_KEY:-}
+      HF_MODEL: ${HF_MODEL:-mistralai/Mistral-7B-Instruct-v0.3}
     ports:
       - "8100:8000"
     healthcheck:

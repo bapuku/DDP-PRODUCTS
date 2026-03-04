@@ -289,6 +289,13 @@ def _localize(obj: dict[str, str], locale: str) -> str:
     return obj.get(locale, obj.get("en", ""))
 
 
+@router.get("/providers")
+async def llm_providers() -> list[dict[str, Any]]:
+    """List configured LLM providers (Anthropic, OpenAI, HuggingFace) and their status."""
+    from app.services.llm_providers import list_available_providers
+    return list_available_providers()
+
+
 @router.get("/registry")
 async def agent_registry(locale: str = Depends(get_locale)) -> list[dict[str, Any]]:
     """Agent Registry — EU AI Act Art. 13 transparency. Lists all agents with metadata."""
@@ -403,8 +410,8 @@ async def agent_assist(agent_id: str, body: AssistRequest, locale: str = Depends
     refs = ", ".join(agent["compliance_refs"])
 
     try:
-        from langchain_anthropic import ChatAnthropic
-        llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0.3, max_tokens=1500)
+        from app.services.llm_providers import get_best_available_llm
+        llm, provider_name = get_best_available_llm(task="regulatory", temperature=0.3, max_tokens=1500)
         system_prompt = (
             f"You are the '{agent_name}' agent of the EU Digital Product Passport Platform.\n"
             f"Description: {agent_desc}\n"

@@ -114,10 +114,10 @@ Context: The user is on page "{body.context.get('page', 'unknown') if body.conte
 """
 
     try:
-        from langchain_anthropic import ChatAnthropic
+        from app.services.llm_providers import get_best_available_llm
         from langchain_core.messages import SystemMessage, HumanMessage, AIMessage
 
-        llm = ChatAnthropic(model="claude-sonnet-4-20250514", temperature=0.3, max_tokens=2000)
+        llm, provider_name = get_best_available_llm(task="general", temperature=0.3, max_tokens=2000)
 
         messages = [SystemMessage(content=system_prompt)]
         for msg in body.history[-6:]:

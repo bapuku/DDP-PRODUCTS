@@ -33,8 +33,17 @@ passlib[bcrypt]>=1.7.4
 # LangGraph & AI (Sprint 2)
 langgraph>=0.2.0,<0.3
 langgraph-checkpoint-postgres>=2.0.0,<3
+langchain>=0.3.0,<0.4
 langchain-core>=0.3.0,<0.4
 langchain-anthropic>=0.2.0,<0.3
+langchain-openai>=0.2.0,<0.3
+langchain-huggingface>=0.1.0,<0.2
+langchain-community>=0.3.0,<0.4
+
+# Hugging Face
+huggingface-hub>=0.25.0,<0.26
+transformers>=4.44.0,<5
+sentence-transformers>=3.0.0,<4
 
 # QR codes (Sprint 3)
 qrcode[pil]>=7.4.2,<8

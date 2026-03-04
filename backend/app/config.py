@@ -48,6 +48,15 @@ class Settings(BaseSettings):
     SECRET_KEY: str = Field(default="dpp-dev-secret-change-in-production", min_length=16)
     ACCESS_TOKEN_EXPIRE_MINUTES: int = Field(default=30, ge=1, le=1440)
 
+    # LLM Providers
+    ANTHROPIC_API_KEY: str = Field(default="")
+    ANTHROPIC_MODEL: str = Field(default="claude-sonnet-4-20250514")
+    OPENAI_API_KEY: str = Field(default="")
+    OPENAI_MODEL: str = Field(default="gpt-4o")
+    OPENAI_EMBEDDING_MODEL: str = Field(default="text-embedding-3-large")
+    HUGGINGFACE_API_KEY: str = Field(default="")
+    HF_MODEL: str = Field(default="mistralai/Mistral-7B-Instruct-v0.3")
+
     # EU AI Act
     AUDIT_RETENTION_YEARS: int = Field(default=10, ge=1, le=30)
     HUMAN_REVIEW_CONFIDENCE_THRESHOLD: float = Field(default=0.85, ge=0.0, le=1.0)

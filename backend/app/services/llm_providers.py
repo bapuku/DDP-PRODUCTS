@@ -57,27 +57,16 @@ def get_openai_embeddings(model: Optional[str] = None):
 
 
 def get_huggingface_llm(model: Optional[str] = None, temperature: float = 0.3, max_tokens: int = 1000):
-    """Get Hugging Face model via Inference API."""
+    """Get Hugging Face model via Inference API (lightweight, no local download)."""
     key = f"hf:{model or settings.HF_MODEL}"
     if key not in _providers_cache:
-        from langchain_huggingface import HuggingFaceEndpoint
-        _providers_cache[key] = HuggingFaceEndpoint(
+        from langchain_community.llms import HuggingFaceHub
+        _providers_cache[key] = HuggingFaceHub(
             repo_id=model or settings.HF_MODEL,
             huggingfacehub_api_token=settings.HUGGINGFACE_API_KEY,
-            temperature=temperature,
-            max_new_tokens=max_tokens,
+            model_kwargs={"temperature": temperature, "max_new_tokens": max_tokens},
         )
         log.info("llm_provider_init", provider="huggingface", model=model or settings.HF_MODEL)
-    return _providers_cache[key]
-
-
-def get_huggingface_embeddings(model: str = "sentence-transformers/all-MiniLM-L6-v2"):
-    """Get Hugging Face sentence-transformers embeddings (runs locally)."""
-    key = f"hf_embed:{model}"
-    if key not in _providers_cache:
-        from langchain_huggingface import HuggingFaceEmbeddings
-        _providers_cache[key] = HuggingFaceEmbeddings(model_name=model)
-        log.info("embedding_provider_init", provider="huggingface", model=model)
     return _providers_cache[key]
 
 
@@ -102,10 +91,10 @@ def get_best_available_llm(task: str = "general", temperature: float = 0.3, max_
 
 
 def get_best_available_embeddings():
-    """Get the best available embedding model. OpenAI > HuggingFace (local)."""
+    """Get the best available embedding model."""
     if settings.OPENAI_API_KEY:
         return get_openai_embeddings(), "openai"
-    return get_huggingface_embeddings(), "huggingface"
+    raise RuntimeError("No embedding provider configured. Set OPENAI_API_KEY for embeddings.")
 
 
 def list_available_providers() -> list[dict[str, Any]]:

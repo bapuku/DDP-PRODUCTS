@@ -9,6 +9,8 @@ const NAV_SECTIONS = [
     section: "main",
     items: [
       { href: "/", key: "dashboard", icon: "📊" },
+      { href: "/command-center", key: "commandCenter", icon: "🚀" },
+      { href: "/workflows", key: "workflows", icon: "⚙️" },
       { href: "/agents", key: "agentRegistry", icon: "🤖" },
       { href: "/reports", key: "complianceReports", icon: "📋" },
     ],

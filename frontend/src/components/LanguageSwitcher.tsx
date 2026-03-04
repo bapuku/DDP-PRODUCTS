@@ -21,7 +21,7 @@ export default function LanguageSwitcher() {
         type="button"
         onClick={() => setLocale("en")}
         className={`px-3 py-1.5 text-xs font-medium transition ${
-          locale === "en" ? "bg-sky-500 text-white" : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+          locale === "en" ? "bg-teal-600 text-white" : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
         }`}
       >
         EN
@@ -30,7 +30,7 @@ export default function LanguageSwitcher() {
         type="button"
         onClick={() => setLocale("fr")}
         className={`px-3 py-1.5 text-xs font-medium transition ${
-          locale === "fr" ? "bg-sky-500 text-white" : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
+          locale === "fr" ? "bg-teal-600 text-white" : "text-slate-500 hover:text-slate-700 hover:bg-slate-50"
         }`}
       >
         FR

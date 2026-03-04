@@ -97,7 +97,7 @@ export default function SystemAssistant() {
     return (
       <button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-gradient-to-r from-sky-500 to-blue-600 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 px-5 py-3.5 rounded-full bg-gradient-to-r from-teal-600 to-cyan-500 text-white shadow-lg hover:shadow-xl transition-all hover:scale-105"
       >
         <span className="text-xl">🤖</span>
         <span className="text-sm font-semibold">{t("systemAssistant")}</span>
@@ -108,7 +108,7 @@ export default function SystemAssistant() {
   return (
     <div className="fixed bottom-6 right-6 z-50 w-[480px] max-w-[calc(100vw-2rem)] h-[560px] max-h-[calc(100vh-3rem)] rounded-2xl border border-slate-200 bg-white shadow-2xl flex flex-col overflow-hidden">
       {/* Header */}
-      <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-sky-500 to-blue-600 text-white flex-shrink-0">
+      <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-teal-600 to-cyan-500 text-white flex-shrink-0">
         <div className="flex items-center gap-2.5">
           <span className="text-xl">🤖</span>
           <div>

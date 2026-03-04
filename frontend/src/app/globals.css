@@ -3,8 +3,11 @@
 @tailwind utilities;
 
 :root {
-  --foreground: 30 41 59;
+  --foreground: 15 23 42;
   --background: 248 250 252;
+  --brand-primary: 6 95 115;
+  --brand-accent: 0 172 193;
+  --brand-deep: 26 35 126;
 }
 
 body {
@@ -13,24 +16,28 @@ body {
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-/* Smooth transitions for interactive elements */
 a, button, [role="button"] {
   transition: all 150ms ease;
 }
 
-/* Subtle card hover lift */
 .card-hover:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px -5px rgba(0, 0, 0, 0.08), 0 4px 10px -5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 8px 25px -5px rgba(6, 95, 115, 0.12), 0 4px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Active indicator for sidebar */
 .nav-active {
-  background: linear-gradient(135deg, rgb(14 165 233 / 0.15), rgb(56 189 248 / 0.08));
-  border-left: 3px solid rgb(14 165 233);
+  background: linear-gradient(135deg, rgb(6 95 115 / 0.12), rgb(0 172 193 / 0.06));
+  border-left: 3px solid rgb(0 172 193);
 }
 
-/* Scrollbar styling */
+.brand-gradient {
+  background: linear-gradient(135deg, #065f73 0%, #00acc1 50%, #1a237e 100%);
+}
+
+.brand-gradient-subtle {
+  background: linear-gradient(135deg, rgb(6 95 115 / 0.05) 0%, rgb(0 172 193 / 0.03) 100%);
+}
+
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -39,9 +46,9 @@ a, button, [role="button"] {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(203 213 225);
+  background: rgb(176 196 206);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(148 163 184);
+  background: rgb(120 150 165);
 }

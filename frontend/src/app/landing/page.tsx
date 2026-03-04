@@ -141,12 +141,14 @@ export default function LandingPage() {
     <div className="min-h-screen bg-white">
       {/* Hero */}
       <header className="relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-sky-900 to-blue-900" />
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48ZyBmaWxsPSJub25lIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiPjxnIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wMyI+PHBhdGggZD0iTTM2IDE4YzAtOS45NC04LjA2LTE4LTE4LTE4UzAgOC4wNiAwIDE4czguMDYgMTggMTggMTggMTgtOC4wNiAxOC0xOHoiLz48L2c+PC9nPjwvc3ZnPg==')] opacity-30" />
+        <div className="absolute inset-0">
+          <img src="/images/hero-towers.jpg" alt="" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-gradient-to-br from-[#065f73]/90 via-[#00838f]/85 to-[#1a237e]/90" />
+        </div>
         <nav className="relative z-10 max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-white/10 backdrop-blur rounded-xl flex items-center justify-center border border-white/20">
-              <span className="text-white font-bold text-sm">EU</span>
+            <div className="w-10 h-10 bg-gradient-to-br from-teal-400 to-cyan-300 rounded-xl flex items-center justify-center shadow-lg">
+              <span className="text-[#065f73] font-extrabold text-sm">EU</span>
             </div>
             <span className="text-white font-bold text-lg">DPP Platform</span>
           </div>
@@ -155,7 +157,7 @@ export default function LandingPage() {
             <a href="#capabilities" className="text-white/70 hover:text-white text-sm transition">{t("navCapabilities")}</a>
             <a href="#agents" className="text-white/70 hover:text-white text-sm transition">Agents</a>
             <a href="#compliance" className="text-white/70 hover:text-white text-sm transition">{t("navCompliance")}</a>
-            <Link href="/" className="px-4 py-2 bg-white/10 backdrop-blur border border-white/20 rounded-lg text-white text-sm font-medium hover:bg-white/20 transition">
+            <Link href="/" className="px-4 py-2 bg-gradient-to-r from-teal-400 to-cyan-300 text-[#065f73] rounded-lg text-sm font-bold hover:from-teal-300 hover:to-cyan-200 transition shadow-md">
               {t("navPlatform")} →
             </Link>
           </div>
@@ -173,10 +175,10 @@ export default function LandingPage() {
             {t("heroSubtitle")}
           </p>
           <div className="flex items-center justify-center gap-4 mt-10">
-            <Link href="/" className="px-8 py-3.5 bg-white text-sky-700 rounded-xl font-bold shadow-lg hover:shadow-xl transition text-sm">
+            <Link href="/" className="px-8 py-3.5 bg-gradient-to-r from-teal-400 to-cyan-300 text-[#065f73] rounded-xl font-bold shadow-lg hover:shadow-xl transition text-sm">
               {t("heroCtaPrimary")}
             </Link>
-            <a href="#demo" className="px-8 py-3.5 bg-white/10 backdrop-blur border border-white/20 text-white rounded-xl font-medium hover:bg-white/20 transition text-sm">
+            <a href="#demo" className="px-8 py-3.5 bg-white/10 backdrop-blur border border-white/30 text-white rounded-xl font-medium hover:bg-white/20 transition text-sm">
               {t("heroCtaDemo")}
             </a>
           </div>
@@ -224,8 +226,18 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Visual break — circular economy image */}
+      <section className="relative h-64 overflow-hidden">
+        <img src="/images/hero-circular.jpg" alt="Circular Economy" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#065f73]/70 to-transparent flex items-center">
+          <div className="max-w-7xl mx-auto px-6">
+            <p className="text-3xl font-bold text-white max-w-md">Circular Economy Meets Digital Innovation</p>
+          </div>
+        </div>
+      </section>
+
       {/* Live Demo */}
-      <section id="demo" className="bg-slate-50 py-20">
+      <section id="demo" className="bg-gradient-to-b from-slate-50 to-white py-20">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-10">
             <h2 className="text-3xl font-bold text-slate-800">{t("demoSectionTitle")}</h2>
@@ -270,14 +282,30 @@ export default function LandingPage() {
           ))}
         </div>
         <div className="text-center mt-8">
-          <Link href="/agents" className="px-6 py-3 bg-sky-500 text-white rounded-xl font-semibold hover:bg-sky-600 transition shadow-md">
+          <Link href="/agents" className="px-6 py-3 bg-gradient-to-r from-teal-600 to-cyan-500 text-white rounded-xl font-semibold hover:from-teal-500 hover:to-cyan-400 transition shadow-md">
             {t("agentsCta")} →
           </Link>
         </div>
       </section>
 
+      {/* Industry images strip */}
+      <section className="grid grid-cols-3 h-48">
+        <div className="relative overflow-hidden">
+          <img src="/images/industry-manufacturing.jpg" alt="Manufacturing" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-[#065f73]/50 flex items-center justify-center"><span className="text-white font-bold text-sm">Manufacturing</span></div>
+        </div>
+        <div className="relative overflow-hidden">
+          <img src="/images/industry-supply-chain.jpg" alt="Supply Chain" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-[#00838f]/50 flex items-center justify-center"><span className="text-white font-bold text-sm">Supply Chain</span></div>
+        </div>
+        <div className="relative overflow-hidden">
+          <img src="/images/industry-recycling.jpg" alt="Recycling" className="w-full h-full object-cover" />
+          <div className="absolute inset-0 bg-[#1a237e]/50 flex items-center justify-center"><span className="text-white font-bold text-sm">Recycling</span></div>
+        </div>
+      </section>
+
       {/* Compliance */}
-      <section id="compliance" className="bg-slate-50 py-20">
+      <section id="compliance" className="bg-gradient-to-b from-slate-50 to-white py-20">
         <div className="max-w-5xl mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-3xl font-bold text-slate-800">{t("compTitle")}</h2>
@@ -303,9 +331,9 @@ export default function LandingPage() {
             ))}
           </div>
           <div className="text-center mt-8">
-            <Link href="/reports" className="px-6 py-3 bg-sky-500 text-white rounded-xl font-semibold hover:bg-sky-600 transition shadow-md">
-              {t("compCta")} →
-            </Link>
+          <Link href="/reports" className="px-6 py-3 bg-gradient-to-r from-teal-600 to-cyan-500 text-white rounded-xl font-semibold hover:from-teal-500 hover:to-cyan-400 transition shadow-md">
+            {t("compCta")} →
+          </Link>
           </div>
         </div>
       </section>
@@ -337,12 +365,14 @@ export default function LandingPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-gradient-to-r from-sky-600 to-blue-700 py-16">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+      <section className="relative py-20 overflow-hidden">
+        <img src="/images/cover-brand.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-[#065f73]/92 to-[#1a237e]/88" />
+        <div className="relative max-w-3xl mx-auto px-6 text-center">
           <h2 className="text-3xl font-bold text-white">{t("ctaTitle")}</h2>
           <p className="text-white/80 mt-4 text-lg">{t("ctaSubtitle")}</p>
           <div className="flex items-center justify-center gap-4 mt-8">
-            <Link href="/" className="px-8 py-3.5 bg-white text-sky-700 rounded-xl font-bold shadow-lg hover:shadow-xl transition">
+            <Link href="/" className="px-8 py-3.5 bg-gradient-to-r from-teal-400 to-cyan-300 text-[#065f73] rounded-xl font-bold shadow-lg hover:shadow-xl transition">
               {t("ctaPrimary")}
             </Link>
             <a href="mailto:sovereignpialphafrance-contact@startmail.com" className="px-8 py-3.5 bg-white/10 border border-white/30 text-white rounded-xl font-medium hover:bg-white/20 transition">
@@ -353,13 +383,13 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-slate-900 text-white py-12">
+      <footer className="bg-[#0a2e3d] text-white py-12">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 bg-sky-500 rounded-xl flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">EU</span>
+                <div className="w-10 h-10 bg-gradient-to-br from-teal-400 to-cyan-300 rounded-xl flex items-center justify-center">
+                  <span className="text-[#065f73] font-extrabold text-sm">EU</span>
                 </div>
                 <span className="font-bold text-lg">DPP Platform</span>
               </div>
@@ -369,7 +399,7 @@ export default function LandingPage() {
               <div className="mt-4 text-sm text-slate-400">
                 <p className="font-semibold text-slate-300">SovereignPiAlpha France Ltd</p>
                 <p>36 Rue Scheffer, 75116 Paris, France</p>
-                <a href="mailto:sovereignpialphafrance-contact@startmail.com" className="text-sky-400 hover:underline mt-1 inline-block">
+                <a href="mailto:sovereignpialphafrance-contact@startmail.com" className="text-cyan-400 hover:underline mt-1 inline-block">
                   sovereignpialphafrance-contact@startmail.com
                 </a>
               </div>
@@ -396,7 +426,7 @@ export default function LandingPage() {
               </ul>
             </div>
           </div>
-          <div className="border-t border-slate-800 mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <div className="border-t border-[#1a3d4d] mt-10 pt-6 flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-xs text-slate-500">
               © {new Date().getFullYear()} SovereignPiAlpha France Ltd. {t("footerRights")}
             </p>

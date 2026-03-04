@@ -12,7 +12,7 @@ function Header() {
   return (
     <header className="bg-white border-b border-slate-200 px-6 py-3 flex items-center gap-4 shadow-sm">
       <Link href="/" className="flex items-center gap-3 hover:opacity-80 transition">
-        <div className="w-8 h-8 bg-gradient-to-br from-sky-500 to-blue-600 rounded-lg flex items-center justify-center">
+        <div className="w-8 h-8 bg-gradient-to-br from-teal-600 to-cyan-500 rounded-lg flex items-center justify-center">
           <span className="text-white text-sm font-bold">EU</span>
         </div>
         <h1 className="text-base font-semibold text-slate-800">{t("title")}</h1>

@@ -64,7 +64,7 @@ export default function Sidebar() {
   return (
     <aside className="w-60 bg-white border-r border-slate-200 min-h-screen flex flex-col shadow-sm">
       <div className="px-5 py-5 border-b border-slate-100">
-        <p className="text-xs text-sky-600 font-semibold uppercase tracking-wider">{t("platformName")}</p>
+        <p className="text-xs text-teal-700 font-semibold uppercase tracking-wider">{t("platformName")}</p>
         <p className="text-xs text-slate-400 mt-0.5">{t("version")}</p>
       </div>
       <nav className="flex-1 py-3 overflow-auto">
@@ -81,7 +81,7 @@ export default function Sidebar() {
                   href={href}
                   className={`flex items-center gap-3 mx-2 px-3 py-2 text-sm rounded-lg transition ${
                     active
-                      ? "nav-active bg-sky-50 text-sky-700 font-medium"
+                      ? "nav-active bg-teal-50 text-teal-700 font-medium"
                       : "text-slate-600 hover:text-slate-900 hover:bg-slate-50"
                   }`}
                 >

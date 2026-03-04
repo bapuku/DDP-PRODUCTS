@@ -19,6 +19,7 @@ const NAV_SECTIONS = [
       { href: "/dpp", key: "dppExplorer", icon: "🔍" },
       { href: "/dpp/lifecycle/new", key: "newDpp", icon: "➕" },
       { href: "/dpp/battery/new", key: "newBatteryPassport", icon: "🔋" },
+      { href: "/qr", key: "qrGenerator", icon: "📱" },
     ],
   },
   {

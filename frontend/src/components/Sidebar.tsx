@@ -30,6 +30,13 @@ const NAV_SECTIONS = [
     ],
   },
   {
+    section: "integration",
+    items: [
+      { href: "/connectors", key: "connectors", icon: "🔌" },
+      { href: "/blockchain", key: "blockchain", icon: "🔐" },
+    ],
+  },
+  {
     section: "monitoring",
     items: [
       { href: "/human-review", key: "humanReview", icon: "👁️" },
@@ -43,6 +50,7 @@ const SECTION_LABELS: Record<string, { en: string; fr: string }> = {
   main: { en: "Overview", fr: "Vue d'ensemble" },
   dpp: { en: "Product Passports", fr: "Passeports Produit" },
   compliance: { en: "Compliance", fr: "Conformité" },
+  integration: { en: "Integration", fr: "Intégration" },
   monitoring: { en: "Monitoring", fr: "Suivi" },
 };
 

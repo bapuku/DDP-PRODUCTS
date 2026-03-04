@@ -43,6 +43,7 @@ export default function CommandCenterPage() {
 
   async function runFullPipeline() {
     setError(null); setDpp(null); setCompliance(null); setQr(null); setBlockchain(null);
+    let localDppUri = "";
 
     // Step 1: Create DPP
     setStep("creating");
@@ -51,10 +52,12 @@ export default function CommandCenterPage() {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ product_gtin: gtin, serial_number: serial, batch_number: batch || undefined, query: "Create DPP" }),
       });
+      if (!r1.ok) throw new Error(`HTTP ${r1.status}`);
       const d1 = await r1.json();
+      localDppUri = d1.ddp_uri || `https://id.gs1.org/01/${gtin}/21/${serial}`;
       setDpp(d1);
       setStep("created");
-    } catch (e) { setError(`DPP creation failed: ${e}`); setStep("error"); return; }
+    } catch (e: unknown) { setError(`Step 1 — DPP creation: ${e instanceof Error ? e.message : String(e)}`); setStep("error"); return; }
 
     // Step 2: Compliance Check
     setStep("checking");
@@ -63,10 +66,11 @@ export default function CommandCenterPage() {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: query || `Compliance check for ${sector} product GTIN ${gtin}`, product_gtin: gtin }),
       });
+      if (!r2.ok) throw new Error(`HTTP ${r2.status}`);
       const d2 = await r2.json();
       setCompliance(d2);
       setStep("checked");
-    } catch (e) { setError(`Compliance check failed: ${e}`); setStep("error"); return; }
+    } catch (e: unknown) { setError(`Step 2 — Compliance: ${e instanceof Error ? e.message : String(e)}`); setStep("error"); return; }
 
     // Step 3: Generate QR + Data Carriers
     setStep("generating_qr");
@@ -75,23 +79,24 @@ export default function CommandCenterPage() {
         method: "POST", headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ gtin, serial_number: serial, sector }),
       });
+      if (!r3.ok) throw new Error(`HTTP ${r3.status}`);
       const d3 = await r3.json();
       setQr(d3);
       setStep("qr_done");
-    } catch (e) { setError(`QR generation failed: ${e}`); setStep("error"); return; }
+    } catch (e: unknown) { setError(`Step 3 — QR: ${e instanceof Error ? e.message : String(e)}`); setStep("error"); return; }
 
     // Step 4: Blockchain Anchor
     setStep("anchoring");
     try {
-      const dppUri = dpp?.ddp_uri || `https://id.gs1.org/01/${gtin}/21/${serial}`;
       const r4 = await fetch("/api/v1/blockchain/anchor", {
         method: "POST", headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dpp_uri: dppUri, gtin, serial_number: serial, dpp_data: { gtin, serial_number: serial, sector, batch } }),
+        body: JSON.stringify({ dpp_uri: localDppUri, gtin, serial_number: serial, dpp_data: { gtin, serial_number: serial, sector, batch } }),
       });
+      if (!r4.ok) throw new Error(`HTTP ${r4.status}`);
       const d4 = await r4.json();
       setBlockchain(d4);
       setStep("anchored");
-    } catch (e) { setError(`Blockchain anchor failed: ${e}`); setStep("error"); return; }
+    } catch (e: unknown) { setError(`Step 4 — Blockchain: ${e instanceof Error ? e.message : String(e)}`); setStep("error"); return; }
   }
 
   const isRunning = ["creating", "checking", "generating_qr", "anchoring"].includes(step);

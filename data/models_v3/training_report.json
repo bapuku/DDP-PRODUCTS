@@ -1,0 +1,62 @@
+{
+  "dataset": "DPP_Synthetic_Training_Dataset_2025.xlsx",
+  "total_records": 900,
+  "training_samples": 550,
+  "features": [
+    "Product_Weight_kg",
+    "Recycled_Content_pct",
+    "CRM_Total_pct",
+    "GWP_Total_kgCO2eq",
+    "Recyclability_Score_pct",
+    "Repairability_Score_1_10",
+    "Durability_Index_0_1",
+    "DPP_Completeness_Score",
+    "Energy_Manufacturing_MJ",
+    "Water_Usage_Litres",
+    "Transport_Distance_km",
+    "EoL_Recovery_Rate_pct",
+    "Renewable_Energy_Share_pct",
+    "Supply_Concentration_Risk_1_10"
+  ],
+  "n_features": 14,
+  "sectors": [
+    "Battery",
+    "Textile",
+    "Construction",
+    "Electronics",
+    "Chemistry"
+  ],
+  "epochs_configured": 200,
+  "early_stopping": 30,
+  "models": {
+    "ESPR": {
+      "accuracy": 0.6364,
+      "epochs_used": 31,
+      "time_s": 0.1
+    },
+    "REACH": {
+      "accuracy": 0.5636,
+      "epochs_used": 36,
+      "time_s": 0.1
+    },
+    "RoHS": {
+      "accuracy": 0.8636,
+      "epochs_used": 33,
+      "time_s": 0.1
+    },
+    "Carbon": {
+      "r2": 0.9981,
+      "mae": 73612.37,
+      "epochs_used": 123,
+      "time_s": 0.2
+    },
+    "Recyclability": {
+      "r2": 0.9999,
+      "mae": 0.13,
+      "epochs_used": 150,
+      "time_s": 0.2
+    }
+  },
+  "models_dir": "/Users/spialpha/Library/Mobile Documents/com~apple~CloudDocs/DIGITAL PASSPORT PRODUCT AND ECOPRODUCTION/eu-dpp-platform/scripts/../data/models_v3",
+  "timestamp": "2026-03-05T17:34:22.645477"
+}

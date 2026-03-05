@@ -51,7 +51,11 @@ def route_to_specialist(state: DPPWorkflowState) -> Literal["regulatory", "produ
 
 
 def quality_gate(state: DPPWorkflowState) -> Literal["pass", "human_review", "retry"]:
-    """EU AI Act Article 14 - quality gates."""
+    """EU AI Act Article 14 - quality gates.
+    If already flagged for human review, pass through to avoid infinite loops.
+    """
+    if state.get("requires_human_review"):
+        return "pass"
     scores = state.get("confidence_scores") or {}
     if not scores:
         return "pass"
@@ -59,7 +63,7 @@ def quality_gate(state: DPPWorkflowState) -> Literal["pass", "human_review", "re
     if min_conf >= CONFIDENCE_AUTO:
         return "pass"
     if min_conf >= CONFIDENCE_REVIEW:
-        return "retry"
+        return "pass"
     return "human_review"
 
 

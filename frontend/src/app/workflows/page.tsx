@@ -90,6 +90,44 @@ const PRESET_WORKFLOWS = [
     endpoint: "/api/v1/ml/predict/compliance",
     pageLink: "/ml/predictions",
   },
+  {
+    id: "impact_assessment",
+    name: { en: "Product Impact Assessment", fr: "Évaluation d'Impact Produit" },
+    description: { en: "Full LCIA following EU EF 3.1 — 16 impact categories, carbon footprint class, EPD-ready report", fr: "ACV complète selon EU EF 3.1 — 16 catégories d'impact, classe carbone, rapport prêt EPD" },
+    steps: [
+      { agentId: "impact_assessment", action: "Compute LCIA per EF 3.1 with sector-specific factors" },
+      { agentId: "regulatory_compliance", action: "Verify ESPR Art. 9, Battery Reg Art. 7, ISO 14040/14044" },
+      { agentId: "predictive", action: "Predict carbon class and circularity metrics" },
+      { agentId: "document_generation", action: "Generate EPD-ready impact report (PDF export)" },
+      { agentId: "audit_trail", action: "Log assessment with methodology and data quality" },
+    ],
+    endpoint: "/api/v1/impact/run",
+    pageLink: "/impact-assessment",
+  },
+  {
+    id: "blockchain_anchoring",
+    name: { en: "Blockchain Anchoring", fr: "Ancrage Blockchain" },
+    description: { en: "Anchor DPP hash on blockchain for immutable integrity proof (SHA-256 + Merkle tree)", fr: "Ancrer le hash DPP sur la blockchain pour preuve d'intégrité immuable (SHA-256 + arbre de Merkle)" },
+    steps: [
+      { agentId: "ddp_generation", action: "Compute SHA-256 hash of DPP data payload" },
+      { agentId: "audit_trail", action: "Create Merkle tree with previous block hashes" },
+      { agentId: "document_generation", action: "Generate blockchain anchor certificate" },
+    ],
+    endpoint: "/api/v1/blockchain/anchor",
+    pageLink: "/blockchain",
+  },
+  {
+    id: "qr_data_carriers",
+    name: { en: "QR Code & Data Carriers", fr: "QR Code & Transporteurs de Données" },
+    description: { en: "Generate GS1 Digital Link QR code, NFC NDEF payload, RFID SGTIN-96 for physical product identification", fr: "Générer QR code GS1 Digital Link, payload NFC NDEF, RFID SGTIN-96 pour identification physique produit" },
+    steps: [
+      { agentId: "ddp_generation", action: "Build GS1 Digital Link URI from GTIN + serial" },
+      { agentId: "document_generation", action: "Generate QR code (PNG/SVG), NFC NDEF, RFID EPC encoding" },
+      { agentId: "audit_trail", action: "Log data carrier generation event" },
+    ],
+    endpoint: "/api/v1/qr/generate",
+    pageLink: "/qr",
+  },
 ];
 
 function getLocale(): string {

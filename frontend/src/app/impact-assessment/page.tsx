@@ -186,9 +186,16 @@ export default function ImpactAssessmentPage() {
             </div>
           )}
 
-          {/* Print */}
-          <div className="text-center">
-            <button onClick={() => window.print()} className="px-6 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition text-sm">{t("print")}</button>
+          {/* Export */}
+          <div className="rounded-xl border border-slate-200 bg-white p-5 flex items-center justify-between print:hidden">
+            <div>
+              <p className="text-sm font-semibold text-slate-800">Exporter le rapport d&apos;impact</p>
+              <p className="text-xs text-slate-400">Format PDF conforme ESPR Art. 9, ISO 14040/14044, EF 3.1</p>
+            </div>
+            <div className="flex gap-2">
+              <button onClick={() => window.print()} className="px-5 py-2.5 rounded-xl bg-teal-600 text-white font-medium hover:bg-teal-700 transition text-sm">Exporter PDF</button>
+              <Link href={`/report/${gtin}/SN-001`} className="px-4 py-2.5 rounded-xl bg-white border border-slate-200 text-slate-600 font-medium hover:bg-slate-50 transition text-sm">Rapport complet</Link>
+            </div>
           </div>
         </div>
       )}

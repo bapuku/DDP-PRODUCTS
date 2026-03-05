@@ -31,7 +31,8 @@ async def product_history_report(gtin: str, serial: str, locale: str = Depends(g
         )
         if records and records[0].get("p"):
             node = records[0]["p"]
-            product_data = dict(node) if hasattr(node, "items") else {"gtin": gtin_clean, "serial_number": serial}
+            raw = dict(node) if hasattr(node, "items") else {"gtin": gtin_clean, "serial_number": serial}
+            product_data = {k: str(v) if not isinstance(v, (str, int, float, bool, type(None), list, dict)) else v for k, v in raw.items()}
     except Exception:
         pass
 

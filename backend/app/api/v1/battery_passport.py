@@ -100,11 +100,8 @@ async def get_battery_passport(gtin: str, serial: str, lang: Optional[str] = Non
     if not records or not records[0].get("p"):
         raise HTTPException(status_code=404, detail=t("errors.passport_not_found", locale))
     node = records[0]["p"]
-    if isinstance(node, dict):
-        return node
-    if hasattr(node, "items"):
-        return dict(node)
-    return {"gtin": gtin_clean, "serial_number": serial}
+    raw = dict(node) if hasattr(node, "items") else (node if isinstance(node, dict) else {"gtin": gtin_clean, "serial_number": serial})
+    return {k: str(v) if not isinstance(v, (str, int, float, bool, type(None), list, dict)) else v for k, v in raw.items()}
 
 
 @router.put("/{gtin}/{serial}/performance")

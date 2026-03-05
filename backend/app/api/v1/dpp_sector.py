@@ -91,7 +91,8 @@ async def get_dpp(sector: DPPSector, gtin: str, serial: str, locale: str = Depen
     if not records or not records[0].get("p"):
         raise HTTPException(status_code=404, detail=t("errors.dpp_not_found", locale))
     node = records[0]["p"]
-    return dict(node) if hasattr(node, "items") else {"gtin": gtin_clean, "serial_number": serial}
+    data = dict(node) if hasattr(node, "items") else {"gtin": gtin_clean, "serial_number": serial}
+    return {k: str(v) if not isinstance(v, (str, int, float, bool, type(None), list, dict)) else v for k, v in data.items()}
 
 
 @router.get("/supply-chain/{gtin}", response_model=dict)

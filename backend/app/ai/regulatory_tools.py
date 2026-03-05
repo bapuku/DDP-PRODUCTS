@@ -49,17 +49,20 @@ async def check_scip_database(cas_number: str) -> dict:
     SCIP API: https://echa.europa.eu/scip-database
     Returns {cas, svhc_status, svhc_name, threshold_pct, source}.
     """
-    # Known SVHC list (subset for illustration - production uses ECHA REST API)
-    KNOWN_SVHC = {
-        "7440-48-4": {"name": "Cobalt", "threshold_pct": 0.1, "status": "SVHC"},
-        "7439-93-2": {"name": "Lithium", "threshold_pct": None, "status": "Monitored"},
-        "7440-02-0": {"name": "Nickel compounds", "threshold_pct": 0.1, "status": "SVHC"},
-        "117-81-7": {"name": "DEHP", "threshold_pct": 0.1, "status": "SVHC"},
-        "80-05-7": {"name": "BPA", "threshold_pct": 0.1, "status": "SVHC"},
-    }
-    info = KNOWN_SVHC.get(cas_number)
+    try:
+        from app.services.regulation_db import get_svhc_known
+        known = get_svhc_known()
+    except Exception:
+        known = {
+            "7440-48-4": {"name": "Cobalt", "threshold_pct": 0.1, "status": "SVHC"},
+            "7439-93-2": {"name": "Lithium", "threshold_pct": None, "status": "Monitored"},
+            "7440-02-0": {"name": "Nickel compounds", "threshold_pct": 0.1, "status": "SVHC"},
+            "117-81-7": {"name": "DEHP", "threshold_pct": 0.1, "status": "SVHC"},
+            "80-05-7": {"name": "BPA", "threshold_pct": 0.1, "status": "SVHC"},
+        }
+    info = known.get(cas_number)
     if info:
-        return {"cas": cas_number, **info, "source": "ECHA_SCIP_local"}
+        return {"cas": cas_number, **info, "source": "ECHA_SCIP_regulation_db"}
     # Attempt live ECHA API lookup
     try:
         url = f"https://echa.europa.eu/api/substance/cas/{cas_number}"
@@ -77,27 +80,16 @@ def verify_rohs_exemptions(exemption_code: str) -> dict:
     Check RoHS exemption status and expiry (RoHS Directive 2011/65/EU Annex III/IV).
     Returns {code, description, status, expiry, applicable_categories}.
     """
-    ROHS_EXEMPTIONS = {
-        "6(c)": {
-            "description": "Electrical and electronic components containing lead in glass or ceramic",
-            "status": "VALID",
-            "expiry": "2026-07-21",
-            "applicable_categories": ["1-11"],
-        },
-        "7(c)-I": {
-            "description": "Lead in solders for servers, storage and storage array systems",
-            "status": "VALID",
-            "expiry": "2025-07-21",
-            "applicable_categories": ["11"],
-        },
-        "8(b)": {
-            "description": "Mercury in cold cathode fluorescent lamps",
-            "status": "EXPIRED",
-            "expiry": "2022-01-01",
-            "applicable_categories": ["3"],
-        },
-    }
-    info = ROHS_EXEMPTIONS.get(exemption_code)
+    try:
+        from app.services.regulation_db import get_rohs_exemptions
+        exemptions = get_rohs_exemptions()
+    except Exception:
+        exemptions = {
+            "6(c)": {"description": "Electrical and electronic components containing lead in glass or ceramic", "status": "VALID", "expiry": "2026-07-21", "applicable_categories": ["1-11"]},
+            "7(c)-I": {"description": "Lead in solders for servers, storage and storage array systems", "status": "VALID", "expiry": "2025-07-21", "applicable_categories": ["11"]},
+            "8(b)": {"description": "Mercury in cold cathode fluorescent lamps", "status": "EXPIRED", "expiry": "2022-01-01", "applicable_categories": ["3"]},
+        }
+    info = exemptions.get(exemption_code)
     if info:
         return {"code": exemption_code, **info, "source": "RoHS_Annex_III"}
     return {"code": exemption_code, "status": "UNKNOWN", "source": "RoHS_Annex_III"}
@@ -105,10 +97,15 @@ def verify_rohs_exemptions(exemption_code: str) -> dict:
 
 async def get_candidate_list() -> list[dict]:
     """
-    Get current REACH SVHC Candidate List (ECHA API).
-    Returns list of {name, cas, ec_number, reason}.
+    Get current REACH SVHC Candidate List (regulation_db, updated by watcher).
+    Returns list of {name, cas, ec, reason}.
     """
-    # Known top SVHC for DPP sectors
+    try:
+        from app.services.regulation_db import get_svhc_list
+        return get_svhc_list()
+    except Exception:
+        pass
+    # Fallback and optionally extend from live ECHA
     CANDIDATE_LIST = [
         {"name": "Cobalt", "cas": "7440-48-4", "ec": "231-158-0", "reason": "Carcinogen"},
         {"name": "Lead", "cas": "7439-92-1", "ec": "231-100-4", "reason": "Toxic"},
@@ -118,14 +115,13 @@ async def get_candidate_list() -> list[dict]:
         {"name": "Cadmium", "cas": "7440-43-9", "ec": "231-152-8", "reason": "Carcinogen"},
         {"name": "PFOA", "cas": "335-67-1", "ec": "206-397-9", "reason": "Persistent"},
     ]
-    # Optionally extend from live ECHA
     try:
         url = "https://echa.europa.eu/api/candidate-list?page=0&size=10"
         async with httpx.AsyncClient(timeout=_TIMEOUT) as client:
             resp = await client.get(url)
             if resp.status_code == 200:
                 data = resp.json()
-                return data.get("substances", CANDIDATE_LIST)
+                return data.get("substances", data.get("content", CANDIDATE_LIST))
     except Exception:
         pass
     return CANDIDATE_LIST

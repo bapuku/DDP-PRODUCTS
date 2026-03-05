@@ -163,6 +163,24 @@ export const api = {
   complianceCalendar: () =>
     json<{ year: number; regulation: string; deadline: string; description: string }[]>("/api/v1/compliance/calendar"),
 
+  regulations: {
+    version: () => json<{ number: string; updated_at: string }>("/api/v1/regulations/version"),
+    calendar: () => json<{ year: number; regulation: string; deadline: string; description: string }[]>("/api/v1/regulations/calendar"),
+    changelog: () => json<{ version: string; date: string; changes: string[] }[]>("/api/v1/regulations/changelog"),
+    watcherStatus: () =>
+      json<{ updated: boolean; changes: string[]; last_check: string | null; error?: string; version?: { number: string; updated_at: string } }>(
+        "/api/v1/regulations/watcher-status"
+      ),
+    checkUpdates: () =>
+      json<{ updated: boolean; changes: string[]; last_check: string; error?: string }>("/api/v1/regulations/check-updates", {
+        method: "POST",
+      }),
+    retrainStatus: () =>
+      json<{ status: string; last_run: string | null; last_metrics?: Record<string, unknown>; last_error?: string }>(
+        "/api/v1/regulations/retrain-status"
+      ),
+  },
+
   ml: {
     predictCompliance: (body?: { product_id?: string; weight_kg?: number; carbon_footprint_kg_co2e?: number; circularity_index?: number; ddp_completeness?: number; sector?: string }) =>
       json<{ espr_class?: string; rohs_class?: string; reach_class?: string; carbon_footprint_pred?: number; circularity_pred?: number; compliance_score?: number }>(

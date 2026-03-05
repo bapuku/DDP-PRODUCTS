@@ -1,0 +1,110 @@
+{
+  "version": {
+    "number": "1.0.0",
+    "updated_at": "2025-03-02T00:00:00Z"
+  },
+  "changelog": [
+    {
+      "version": "1.0.0",
+      "date": "2025-03-02",
+      "changes": ["Initial regulatory database — ESPR, Battery Reg, REACH, RoHS, WEEE, EU AI Act"]
+    }
+  ],
+  "calendar": {
+    "en": [
+      {"year": 2025, "regulation": "ESPR", "deadline": "2025-08-18", "description": "ESPR delegated acts adoption"},
+      {"year": 2026, "regulation": "Battery Reg", "deadline": "2026-02-18", "description": "Battery passport mandatory (LMT, EV)"},
+      {"year": 2027, "regulation": "ESPR", "deadline": "2027-01-01", "description": "First product categories DPP"},
+      {"year": 2027, "regulation": "Battery Reg", "deadline": "2027-08-18", "description": "Battery passport (industrial, SLI)"},
+      {"year": 2030, "regulation": "Battery Reg", "deadline": "2030-12-31", "description": "Recycled content targets"},
+      {"year": 2031, "regulation": "ESPR", "deadline": "2031-01-01", "description": "Extended product categories"},
+      {"year": 2035, "regulation": "Battery Reg", "deadline": "2035-12-31", "description": "Stricter recycling targets"},
+      {"year": 2036, "regulation": "ESPR", "deadline": "2036-01-01", "description": "Full DPP rollout target"}
+    ],
+    "fr": [
+      {"year": 2025, "regulation": "ESPR", "deadline": "2025-08-18", "description": "Adoption des actes délégués ESPR"},
+      {"year": 2026, "regulation": "Règlement Batteries", "deadline": "2026-02-18", "description": "Passeport batterie obligatoire (LMT, EV)"},
+      {"year": 2027, "regulation": "ESPR", "deadline": "2027-01-01", "description": "Premières catégories de produits DPP"},
+      {"year": 2027, "regulation": "Règlement Batteries", "deadline": "2027-08-18", "description": "Passeport batterie (industriel, SLI)"},
+      {"year": 2030, "regulation": "Règlement Batteries", "deadline": "2030-12-31", "description": "Objectifs de contenu recyclé"},
+      {"year": 2031, "regulation": "ESPR", "deadline": "2031-01-01", "description": "Catégories de produits étendues"},
+      {"year": 2035, "regulation": "Règlement Batteries", "deadline": "2035-12-31", "description": "Objectifs de recyclage renforcés"},
+      {"year": 2036, "regulation": "ESPR", "deadline": "2036-01-01", "description": "Déploiement complet DPP"}
+    ]
+  },
+  "frameworks": {
+    "en": [
+      "ESPR",
+      "Battery Regulation 2023/1542",
+      "REACH",
+      "RoHS",
+      "WEEE",
+      "EU AI Act 2024/1689 (Arts. 12-14)"
+    ],
+    "fr": [
+      "ESPR",
+      "Règlement Batteries 2023/1542",
+      "REACH",
+      "RoHS",
+      "DEEE",
+      "EU AI Act 2024/1689 (Art. 12-14)"
+    ]
+  },
+  "svhc_list": [
+    {"name": "Cobalt", "cas": "7440-48-4", "ec": "231-158-0", "reason": "Carcinogen"},
+    {"name": "Lead", "cas": "7439-92-1", "ec": "231-100-4", "reason": "Toxic"},
+    {"name": "Mercury", "cas": "7439-97-6", "ec": "231-106-7", "reason": "Toxic"},
+    {"name": "DEHP", "cas": "117-81-7", "ec": "204-211-0", "reason": "Reprotoxic"},
+    {"name": "BPA", "cas": "80-05-7", "ec": "201-245-8", "reason": "Endocrine disruptor"},
+    {"name": "Cadmium", "cas": "7440-43-9", "ec": "231-152-8", "reason": "Carcinogen"},
+    {"name": "PFOA", "cas": "335-67-1", "ec": "206-397-9", "reason": "Persistent"},
+    {"name": "Nickel compounds", "cas": "7440-02-0", "ec": null, "reason": "SVHC"},
+    {"name": "Lithium", "cas": "7439-93-2", "ec": null, "reason": "Monitored"}
+  ],
+  "svhc_known": {
+    "7440-48-4": {"name": "Cobalt", "threshold_pct": 0.1, "status": "SVHC"},
+    "7439-93-2": {"name": "Lithium", "threshold_pct": null, "status": "Monitored"},
+    "7440-02-0": {"name": "Nickel compounds", "threshold_pct": 0.1, "status": "SVHC"},
+    "117-81-7": {"name": "DEHP", "threshold_pct": 0.1, "status": "SVHC"},
+    "80-05-7": {"name": "BPA", "threshold_pct": 0.1, "status": "SVHC"}
+  },
+  "rohs_exemptions": {
+    "6(c)": {
+      "description": "Electrical and electronic components containing lead in glass or ceramic",
+      "status": "VALID",
+      "expiry": "2026-07-21",
+      "applicable_categories": ["1-11"]
+    },
+    "7(c)-I": {
+      "description": "Lead in solders for servers, storage and storage array systems",
+      "status": "VALID",
+      "expiry": "2025-07-21",
+      "applicable_categories": ["11"]
+    },
+    "8(b)": {
+      "description": "Mercury in cold cathode fluorescent lamps",
+      "status": "EXPIRED",
+      "expiry": "2022-01-01",
+      "applicable_categories": ["3"]
+    }
+  },
+  "sector_factors": {
+    "batteries": {"co2_per_kg": 8.5, "water_per_kg": 0.25, "energy_mj_per_kg": 120, "acidification": 0.007, "eutrophication": 0.00004, "ozone": 0.000000025, "resource_mineral": 0.000012},
+    "electronics": {"co2_per_kg": 12.0, "water_per_kg": 0.35, "energy_mj_per_kg": 180, "acidification": 0.009, "eutrophication": 0.00005, "ozone": 0.000000030, "resource_mineral": 0.000018},
+    "textiles": {"co2_per_kg": 5.5, "water_per_kg": 1.2, "energy_mj_per_kg": 80, "acidification": 0.004, "eutrophication": 0.00008, "ozone": 0.000000015, "resource_mineral": 0.000003},
+    "vehicles": {"co2_per_kg": 6.0, "water_per_kg": 0.15, "energy_mj_per_kg": 95, "acidification": 0.006, "eutrophication": 0.00003, "ozone": 0.000000020, "resource_mineral": 0.000008},
+    "construction": {"co2_per_kg": 0.8, "water_per_kg": 0.02, "energy_mj_per_kg": 12, "acidification": 0.001, "eutrophication": 0.00001, "ozone": 0.000000005, "resource_mineral": 0.000001},
+    "furniture": {"co2_per_kg": 3.0, "water_per_kg": 0.08, "energy_mj_per_kg": 45, "acidification": 0.003, "eutrophication": 0.00002, "ozone": 0.000000010, "resource_mineral": 0.000002},
+    "plastics": {"co2_per_kg": 6.5, "water_per_kg": 0.05, "energy_mj_per_kg": 90, "acidification": 0.005, "eutrophication": 0.00002, "ozone": 0.000000018, "resource_mineral": 0.000004},
+    "chemicals": {"co2_per_kg": 4.0, "water_per_kg": 0.30, "energy_mj_per_kg": 60, "acidification": 0.008, "eutrophication": 0.00006, "ozone": 0.000000022, "resource_mineral": 0.000006}
+  },
+  "carbon_classes": [
+    ["A", 0, 20],
+    ["B", 20, 40],
+    ["C", 40, 60],
+    ["D", 60, 80],
+    ["E", 80, 100],
+    ["F", 100, 150],
+    ["G", 150, 1e+99]
+  ]
+}

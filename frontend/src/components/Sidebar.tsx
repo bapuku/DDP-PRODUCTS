@@ -29,6 +29,7 @@ const NAV_SECTIONS = [
     items: [
       { href: "/compliance", key: "complianceCheck", icon: "✅" },
       { href: "/compliance/calendar", key: "complianceCalendar", icon: "📅" },
+      { href: "/regulations", key: "regulations", icon: "📜" },
       { href: "/supply-chain", key: "supplyChain", icon: "🔗" },
       { href: "/impact-assessment", key: "impactAssessment", icon: "🌍" },
     ],

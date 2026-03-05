@@ -25,7 +25,17 @@ def get_app() -> FastAPI:
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         log.info("application_startup", environment=settings.ENVIRONMENT)
+        try:
+            from app.services.regulatory_watcher import start_scheduler
+            start_scheduler()
+        except Exception as e:
+            log.warning("regulatory_watcher_start_failed", error=str(e))
         yield
+        try:
+            from app.services.regulatory_watcher import stop_scheduler
+            stop_scheduler()
+        except Exception:
+            pass
         log.info("application_shutdown")
 
     app = FastAPI(

@@ -23,6 +23,7 @@
     "impactAssessment": "Évaluation d'Impact",
     "complianceCheck": "Contrôle de conformité",
     "complianceCalendar": "Calendrier conformité",
+    "regulations": "Réglementation",
     "supplyChain": "Chaîne d'approvisionnement",
     "humanReview": "Revue humaine (Art.14)",
     "auditLog": "Journal d'audit (Art.12)",
@@ -146,6 +147,25 @@
     "regulation": "Réglementation",
     "deadline": "Échéance",
     "descriptionCol": "Description"
+  },
+  "regulations": {
+    "title": "Base réglementaire",
+    "description": "Version de la base réglementaire, historique des mises à jour et statut du veilleur. EUR-Lex, ECHA, JOUE interrogés toutes les 6 h.",
+    "version": "Version",
+    "lastUpdate": "Dernière mise à jour",
+    "changelog": "Historique",
+    "watcherStatus": "Statut du veilleur",
+    "lastCheck": "Dernière vérification",
+    "neverRun": "Jamais exécutée",
+    "forceCheck": "Forcer la vérification",
+    "checking": "Vérification…",
+    "changes": "Modifications",
+    "retrainStatus": "Statut réentraînement ML",
+    "retrainIdle": "Inactif",
+    "retrainRunning": "En cours",
+    "retrainCompleted": "Terminé",
+    "retrainError": "Erreur",
+    "noChangelog": "Aucun historique."
   },
   "supplyChain": {
     "title": "Traçabilité chaîne d'approvisionnement",

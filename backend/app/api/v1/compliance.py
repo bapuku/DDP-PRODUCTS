@@ -8,7 +8,8 @@ from pydantic import BaseModel, Field
 
 from app.agents.state import DPPWorkflowState
 from app.agents.workflow import get_compiled_workflow
-from app.core.i18n import get_locale, t, MESSAGES
+from app.core.i18n import get_locale, t
+from app.services.regulation_db import get_frameworks, get_calendar
 
 router = APIRouter()
 
@@ -21,7 +22,11 @@ class ComplianceCheckRequest(BaseModel):
 @router.get("/status")
 async def compliance_status(request: Request, locale: str = Depends(get_locale)) -> dict:
     """Compliance frameworks supported by the platform."""
-    frameworks = MESSAGES.get(locale, MESSAGES["en"])["frameworks"]
+    loc = "fr" if locale == "fr" else "en"
+    try:
+        frameworks = get_frameworks(loc)
+    except FileNotFoundError:
+        frameworks = ["ESPR", "Battery Regulation 2023/1542", "REACH", "RoHS", "WEEE", "EU AI Act 2024/1689 (Arts. 12-14)"]
     return {"frameworks": frameworks}
 
 
@@ -65,5 +70,9 @@ async def compliance_check(body: ComplianceCheckRequest, request: Request, local
 @router.get("/calendar")
 async def compliance_calendar(request: Request, locale: str = Depends(get_locale)) -> list[dict]:
     """Regulatory compliance calendar (deadlines 2025-2036)."""
-    calendar = MESSAGES.get(locale, MESSAGES["en"])["calendar"]
+    loc = "fr" if locale == "fr" else "en"
+    try:
+        calendar = get_calendar(loc)
+    except FileNotFoundError:
+        calendar = []
     return list(calendar)

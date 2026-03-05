@@ -15,6 +15,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel, Field
 
 from app.core.i18n import get_locale, t
+from app.services.regulation_db import get_sector_factors, get_carbon_classes
 
 router = APIRouter()
 
@@ -34,24 +35,28 @@ class ImpactAssessmentRequest(BaseModel):
     functional_unit: str = Field(default="1 product unit over full lifecycle")
 
 
-SECTOR_FACTORS: dict[str, dict[str, float]] = {
-    "batteries": {"co2_per_kg": 8.5, "water_per_kg": 0.25, "energy_mj_per_kg": 120, "acidification": 0.007, "eutrophication": 0.00004, "ozone": 0.000000025, "resource_mineral": 0.000012},
-    "electronics": {"co2_per_kg": 12.0, "water_per_kg": 0.35, "energy_mj_per_kg": 180, "acidification": 0.009, "eutrophication": 0.00005, "ozone": 0.000000030, "resource_mineral": 0.000018},
-    "textiles": {"co2_per_kg": 5.5, "water_per_kg": 1.2, "energy_mj_per_kg": 80, "acidification": 0.004, "eutrophication": 0.00008, "ozone": 0.000000015, "resource_mineral": 0.000003},
-    "vehicles": {"co2_per_kg": 6.0, "water_per_kg": 0.15, "energy_mj_per_kg": 95, "acidification": 0.006, "eutrophication": 0.00003, "ozone": 0.000000020, "resource_mineral": 0.000008},
-    "construction": {"co2_per_kg": 0.8, "water_per_kg": 0.02, "energy_mj_per_kg": 12, "acidification": 0.001, "eutrophication": 0.00001, "ozone": 0.000000005, "resource_mineral": 0.000001},
-    "furniture": {"co2_per_kg": 3.0, "water_per_kg": 0.08, "energy_mj_per_kg": 45, "acidification": 0.003, "eutrophication": 0.00002, "ozone": 0.000000010, "resource_mineral": 0.000002},
-    "plastics": {"co2_per_kg": 6.5, "water_per_kg": 0.05, "energy_mj_per_kg": 90, "acidification": 0.005, "eutrophication": 0.00002, "ozone": 0.000000018, "resource_mineral": 0.000004},
-    "chemicals": {"co2_per_kg": 4.0, "water_per_kg": 0.30, "energy_mj_per_kg": 60, "acidification": 0.008, "eutrophication": 0.00006, "ozone": 0.000000022, "resource_mineral": 0.000006},
-}
-
-CARBON_CLASSES = [
-    ("A", 0, 20), ("B", 20, 40), ("C", 40, 60), ("D", 60, 80), ("E", 80, 100), ("F", 100, 150), ("G", 150, float("inf")),
-]
+def _get_sector_factors() -> dict[str, dict[str, float]]:
+    try:
+        return get_sector_factors()
+    except FileNotFoundError:
+        return {
+            "batteries": {"co2_per_kg": 8.5, "water_per_kg": 0.25, "energy_mj_per_kg": 120, "acidification": 0.007, "eutrophication": 0.00004, "ozone": 0.000000025, "resource_mineral": 0.000012},
+            "electronics": {"co2_per_kg": 12.0, "water_per_kg": 0.35, "energy_mj_per_kg": 180, "acidification": 0.009, "eutrophication": 0.00005, "ozone": 0.000000030, "resource_mineral": 0.000018},
+            "textiles": {"co2_per_kg": 5.5, "water_per_kg": 1.2, "energy_mj_per_kg": 80, "acidification": 0.004, "eutrophication": 0.00008, "ozone": 0.000000015, "resource_mineral": 0.000003},
+            "vehicles": {"co2_per_kg": 6.0, "water_per_kg": 0.15, "energy_mj_per_kg": 95, "acidification": 0.006, "eutrophication": 0.00003, "ozone": 0.000000020, "resource_mineral": 0.000008},
+            "construction": {"co2_per_kg": 0.8, "water_per_kg": 0.02, "energy_mj_per_kg": 12, "acidification": 0.001, "eutrophication": 0.00001, "ozone": 0.000000005, "resource_mineral": 0.000001},
+            "furniture": {"co2_per_kg": 3.0, "water_per_kg": 0.08, "energy_mj_per_kg": 45, "acidification": 0.003, "eutrophication": 0.00002, "ozone": 0.000000010, "resource_mineral": 0.000002},
+            "plastics": {"co2_per_kg": 6.5, "water_per_kg": 0.05, "energy_mj_per_kg": 90, "acidification": 0.005, "eutrophication": 0.00002, "ozone": 0.000000018, "resource_mineral": 0.000004},
+            "chemicals": {"co2_per_kg": 4.0, "water_per_kg": 0.30, "energy_mj_per_kg": 60, "acidification": 0.008, "eutrophication": 0.00006, "ozone": 0.000000022, "resource_mineral": 0.000006},
+        }
 
 
 def _carbon_class(co2_per_kwh: float) -> str:
-    for cls, lo, hi in CARBON_CLASSES:
+    try:
+        classes = get_carbon_classes()
+    except FileNotFoundError:
+        classes = [("A", 0, 20), ("B", 20, 40), ("C", 40, 60), ("D", 60, 80), ("E", 80, 100), ("F", 100, 150), ("G", 150, float("inf"))]
+    for cls, lo, hi in classes:
         if lo <= co2_per_kwh < hi:
             return cls
     return "G"
@@ -59,7 +64,8 @@ def _carbon_class(co2_per_kwh: float) -> str:
 
 def _compute_lcia(req: ImpactAssessmentRequest) -> dict[str, Any]:
     """Compute full LCIA per EU EF 3.1 — 16 impact categories."""
-    factors = SECTOR_FACTORS.get(req.sector, SECTOR_FACTORS["batteries"])
+    sector_factors = _get_sector_factors()
+    factors = sector_factors.get(req.sector, sector_factors["batteries"])
     w = req.weight_kg
     recycled_reduction = 1.0 - (req.recycled_content_pct / 100 * 0.4)
     transport_co2 = req.transport_km * 0.00012 * w
@@ -236,7 +242,7 @@ def _impact_recommendations(lcia: dict, req: ImpactAssessmentRequest, lang: str)
             recs.append({"priorite": "haute", "categorie": "Empreinte carbone", "recommandation": f"Classe carbone {cls} — réduire l'empreinte (actuellement {co2} kg CO₂-eq). Objectif : classe C ou mieux.", "reglementation": "Battery Reg Art. 7"})
         if req.recycled_content_pct < 16:
             recs.append({"priorite": "haute", "categorie": "Contenu recyclé", "recommandation": f"Contenu recyclé {req.recycled_content_pct}% — objectif minimum 16% Co, 6% Li, 6% Ni d'ici 2031.", "reglementation": "Battery Reg Art. 8"})
-        recs.append({"priorite": "moyenne", "categorie": "Eau", "recommandation": f"Empreinte eau : {round(req.weight_kg * SECTOR_FACTORS.get(req.sector, {}).get('water_per_kg', 0.1), 1)} m³. Optimiser les procédés de fabrication.", "reglementation": "EF 3.1 — Water use (AWARE)"})
+        recs.append({"priorite": "moyenne", "categorie": "Eau", "recommandation": f"Empreinte eau : {round(req.weight_kg * _get_sector_factors().get(req.sector, {}).get('water_per_kg', 0.1), 1)} m³. Optimiser les procédés de fabrication.", "reglementation": "EF 3.1 — Water use (AWARE)"})
         recs.append({"priorite": "normale", "categorie": "EPD", "recommandation": "Préparer la Déclaration Environnementale de Produit (Type III, EN ISO 14025) pour publication.", "reglementation": "EN ISO 14025:2010"})
         recs.append({"priorite": "normale", "categorie": "Vérification", "recommandation": "Faire vérifier l'empreinte carbone par un tiers indépendant (obligatoire batteries EV depuis fév 2025).", "reglementation": "Battery Reg Art. 7(3)"})
     else:
@@ -244,7 +250,7 @@ def _impact_recommendations(lcia: dict, req: ImpactAssessmentRequest, lang: str)
             recs.append({"priority": "high", "category": "Carbon footprint", "recommendation": f"Carbon class {cls} — reduce footprint (currently {co2} kg CO₂-eq). Target: class C or better.", "regulation": "Battery Reg Art. 7"})
         if req.recycled_content_pct < 16:
             recs.append({"priority": "high", "category": "Recycled content", "recommendation": f"Recycled content {req.recycled_content_pct}% — minimum target 16% Co, 6% Li, 6% Ni by 2031.", "regulation": "Battery Reg Art. 8"})
-        recs.append({"priority": "medium", "category": "Water", "recommendation": f"Water footprint: {round(req.weight_kg * SECTOR_FACTORS.get(req.sector, {}).get('water_per_kg', 0.1), 1)} m³. Optimize manufacturing processes.", "regulation": "EF 3.1 — Water use (AWARE)"})
+        recs.append({"priority": "medium", "category": "Water", "recommendation": f"Water footprint: {round(req.weight_kg * _get_sector_factors().get(req.sector, {}).get('water_per_kg', 0.1), 1)} m³. Optimize manufacturing processes.", "regulation": "EF 3.1 — Water use (AWARE)"})
         recs.append({"priority": "normal", "category": "EPD", "recommendation": "Prepare Environmental Product Declaration (Type III, EN ISO 14025) for publication.", "regulation": "EN ISO 14025:2010"})
         recs.append({"priority": "normal", "category": "Verification", "recommendation": "Have carbon footprint verified by independent third party (mandatory EV batteries since Feb 2025).", "regulation": "Battery Reg Art. 7(3)"})
 

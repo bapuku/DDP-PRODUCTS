@@ -23,6 +23,7 @@
     "impactAssessment": "Impact Assessment",
     "complianceCheck": "Compliance Check",
     "complianceCalendar": "Compliance Calendar",
+    "regulations": "Regulations",
     "supplyChain": "Supply Chain",
     "humanReview": "Human Review (Art.14)",
     "auditLog": "Audit Log (Art.12)",
@@ -146,6 +147,25 @@
     "regulation": "Regulation",
     "deadline": "Deadline",
     "descriptionCol": "Description"
+  },
+  "regulations": {
+    "title": "Regulatory database",
+    "description": "Real-time regulatory database version, changelog, and watcher status. EUR-Lex, ECHA, OJEU are polled every 6 hours.",
+    "version": "Version",
+    "lastUpdate": "Last update",
+    "changelog": "Changelog",
+    "watcherStatus": "Watcher status",
+    "lastCheck": "Last check",
+    "neverRun": "Never run",
+    "forceCheck": "Force check",
+    "checking": "Checking…",
+    "changes": "Changes",
+    "retrainStatus": "ML retrain status",
+    "retrainIdle": "Idle",
+    "retrainRunning": "Running",
+    "retrainCompleted": "Completed",
+    "retrainError": "Error",
+    "noChangelog": "No changelog entries."
   },
   "supplyChain": {
     "title": "Supply Chain Traceability",

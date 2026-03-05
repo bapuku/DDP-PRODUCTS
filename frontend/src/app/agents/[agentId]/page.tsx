@@ -35,8 +35,14 @@ export default function AgentDetailPage() {
     fetch(`${API}/api/v1/agents/registry/${agentId}`, {
       headers: { "Accept-Language": getLocale() },
     })
-      .then((r) => r.json())
-      .then(setAgent)
+      .then((r) => r.ok ? r.json() : Promise.reject("not_found"))
+      .then((data) => {
+        if (data && data.id && data.name) {
+          setAgent(data);
+        } else {
+          setAgent(AGENTS.find((a) => a.id === agentId) || null);
+        }
+      })
       .catch(() => setAgent(AGENTS.find((a) => a.id === agentId) || null))
       .finally(() => setLoading(false));
   }, [agentId]);

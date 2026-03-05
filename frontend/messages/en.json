@@ -28,6 +28,7 @@
     "mlPredictions": "ML Predictions",
     "connectors": "Connectors",
     "blockchain": "Blockchain",
+    "productReport": "Product Report",
     "commandCenter": "Command Center",
     "workflows": "Workflows",
     "agentRegistry": "Agent Registry",
@@ -248,6 +249,21 @@
     "processing": "Agents processing...",
     "actionExecuted": "Action executed"
   },
+  "productReport": {
+    "title": "Product History Report",
+    "subtitle": "Full traceability for insurance, compliance audit, and lifecycle management.",
+    "notFound": "Report not available — create the DPP first via Command Center.",
+    "print": "Print / Export PDF",
+    "productInfo": "Product Information",
+    "serial": "Serial Number",
+    "completeness": "Completeness",
+    "lifecycle": "Lifecycle Phases",
+    "aiDecisions": "AI Decisions",
+    "confidence": "Confidence Score",
+    "complianceSummary": "Compliance Summary",
+    "recommendations": "Recommendations",
+    "generated": "Generated:"
+  },
   "commandCenter": {
     "title": "Command Center",
     "description": "One-click pipeline: DPP Creation → Compliance Check → QR Generation → Blockchain Anchoring. All 16 agents orchestrated automatically.",
@@ -277,6 +293,7 @@
     "viewChain": "View blockchain →",
     "pipelineComplete": "Pipeline Complete",
     "pipelineSummary": "DPP created, compliance verified, QR generated, and blockchain anchored.",
+    "viewReport": "View Report",
     "viewDpp": "View DPP",
     "viewAudit": "View Audit Log",
     "createAnother": "Create Another"

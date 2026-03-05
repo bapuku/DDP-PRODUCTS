@@ -79,8 +79,28 @@ async def lifecycle_create(body: LifecycleCreateRequest, locale: str = Depends(g
     except Exception as e:
         raise HTTPException(status_code=500, detail=t("errors.workflow_error", locale, detail=str(e)))
     ddp_uri = result.get("ddp_uri")
-    if ddp_uri:
-        _emit(TOPIC_DDP_CREATED, body.product_gtin, ddp_uri)
+    gtin_clean = "".join(c for c in body.product_gtin if c.isdigit()).zfill(14)
+    if not ddp_uri:
+        ddp_uri = f"https://id.gs1.org/01/{gtin_clean}/21/{body.serial_number}"
+
+    # Persist to Neo4j
+    try:
+        from app.services.neo4j import get_neo4j
+        neo4j = get_neo4j()
+        await neo4j.run_query(
+            """MERGE (p:Product {gtin: $gtin, serial_number: $serial})
+               SET p.dpp_uri = $uri, p.batch_number = $batch,
+                   p.ddp_completeness = $comp, p.sector = 'batteries',
+                   p.created_at = datetime(), p.status = 'published'
+               RETURN p""",
+            {"gtin": gtin_clean, "serial": body.serial_number,
+             "uri": ddp_uri, "batch": body.batch_number,
+             "comp": result.get("ddp_completeness", 0.0)},
+        )
+    except Exception:
+        pass
+
+    _emit(TOPIC_DDP_CREATED, body.product_gtin, ddp_uri)
     return {
         "ddp_uri": ddp_uri,
         "final_response": result.get("final_response"),

@@ -1,7 +1,7 @@
 # API v1
 from fastapi import APIRouter
 
-from app.api.v1 import dpp, compliance, workflow, battery_passport, auth, dpp_sector, lifecycle, ml, human_review, agents_registry, system_assistant, connectors, blockchain, qr_generator
+from app.api.v1 import dpp, compliance, workflow, battery_passport, auth, dpp_sector, lifecycle, ml, human_review, agents_registry, system_assistant, connectors, blockchain, qr_generator, product_report
 
 router = APIRouter()
 router.include_router(auth.router, prefix="/auth", tags=["auth"])
@@ -18,3 +18,4 @@ router.include_router(system_assistant.router, prefix="/assistant", tags=["syste
 router.include_router(connectors.router, prefix="/connectors", tags=["connectors"])
 router.include_router(blockchain.router, prefix="/blockchain", tags=["blockchain"])
 router.include_router(qr_generator.router, prefix="/qr", tags=["qr-generator"])
+router.include_router(product_report.router, prefix="/report", tags=["product-report"])

@@ -37,6 +37,7 @@ const NAV_SECTIONS = [
     items: [
       { href: "/connectors", key: "connectors", icon: "🔌" },
       { href: "/blockchain", key: "blockchain", icon: "🔐" },
+      { href: "/report/06374692674377/DEMO-001", key: "productReport", icon: "📄" },
     ],
   },
   {

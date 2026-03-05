@@ -28,6 +28,7 @@
     "mlPredictions": "Prédictions ML",
     "connectors": "Connecteurs",
     "blockchain": "Blockchain",
+    "productReport": "Rapport Produit",
     "commandCenter": "Centre de Commande",
     "workflows": "Workflows",
     "agentRegistry": "Registre d'Agents",
@@ -248,6 +249,21 @@
     "processing": "Agents en cours de traitement...",
     "actionExecuted": "Action exécutée"
   },
+  "productReport": {
+    "title": "Rapport d'Historique Produit",
+    "subtitle": "Traçabilité complète pour assurance, audit de conformité et gestion du cycle de vie.",
+    "notFound": "Rapport non disponible — créez d'abord le DPP via le Centre de Commande.",
+    "print": "Imprimer / Export PDF",
+    "productInfo": "Informations Produit",
+    "serial": "Numéro de série",
+    "completeness": "Complétude",
+    "lifecycle": "Phases du Cycle de Vie",
+    "aiDecisions": "Décisions IA",
+    "confidence": "Score de Confiance",
+    "complianceSummary": "Résumé de Conformité",
+    "recommendations": "Recommandations",
+    "generated": "Généré le :"
+  },
   "commandCenter": {
     "title": "Centre de Commande",
     "description": "Pipeline en un clic : Création DPP → Contrôle Conformité → Génération QR → Ancrage Blockchain. Les 16 agents orchestrés automatiquement.",
@@ -277,6 +293,7 @@
     "viewChain": "Voir la blockchain →",
     "pipelineComplete": "Pipeline Terminé",
     "pipelineSummary": "DPP créé, conformité vérifiée, QR généré et ancré sur la blockchain.",
+    "viewReport": "Voir le Rapport",
     "viewDpp": "Voir le DPP",
     "viewAudit": "Voir le Journal d'Audit",
     "createAnother": "Créer un Autre"

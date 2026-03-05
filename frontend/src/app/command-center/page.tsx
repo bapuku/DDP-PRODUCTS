@@ -30,8 +30,8 @@ export default function CommandCenterPage() {
   const steps: { id: Step; label: string; icon: string; agent: string }[] = [
     { id: "creating", label: t("step1"), icon: "📋", agent: "data_collection → ddp_generation → validation" },
     { id: "checking", label: t("step2"), icon: "⚖️", agent: "regulatory_compliance" },
-    { id: "generating_qr", label: t("step3"), icon: "📱", agent: "document_generation" },
-    { id: "anchoring", label: t("step4"), icon: "🔐", agent: "audit_trail" },
+    { id: "generating_qr", label: t("step3"), icon: "📱", agent: "document_generation + recycling + destruction" },
+    { id: "anchoring", label: t("step4"), icon: "🔐", agent: "audit_trail (8 agents)" },
   ];
 
   const doneSteps: Record<string, Step> = { creating: "created", checking: "checked", generating_qr: "qr_done", anchoring: "anchored" };
@@ -238,7 +238,8 @@ export default function CommandCenterPage() {
         <div className="rounded-xl border border-emerald-300 bg-emerald-100 p-5 text-center">
           <p className="text-lg font-bold text-emerald-800">✅ {t("pipelineComplete")}</p>
           <p className="text-sm text-emerald-600 mt-1">{t("pipelineSummary")}</p>
-          <div className="flex justify-center gap-3 mt-4">
+          <div className="flex justify-center gap-3 mt-4 flex-wrap">
+            <Link href={`/report/${gtin}/${serial}`} className="px-4 py-2 rounded-lg bg-teal-600 text-white text-sm font-medium hover:bg-teal-700 transition">{t("viewReport")}</Link>
             <Link href={`/dpp/${gtin}/${serial}`} className="px-4 py-2 rounded-lg bg-emerald-600 text-white text-sm font-medium hover:bg-emerald-700 transition">{t("viewDpp")}</Link>
             <Link href="/audit" className="px-4 py-2 rounded-lg bg-white border border-emerald-300 text-emerald-700 text-sm font-medium hover:bg-emerald-50 transition">{t("viewAudit")}</Link>
             <button onClick={() => { setStep("idle"); setDpp(null); setCompliance(null); setQr(null); setBlockchain(null); }} className="px-4 py-2 rounded-lg bg-white border border-slate-200 text-slate-600 text-sm font-medium hover:bg-slate-50 transition">{t("createAnother")}</button>

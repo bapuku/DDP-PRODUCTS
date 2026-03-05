@@ -56,10 +56,58 @@ export default function LifecycleTimelinePage() {
   const serial = params?.serial as string;
   const locale = getLocale();
   const phases = locale === "fr" ? PHASES_FR : PHASES_EN;
-  const [expanded, setExpanded] = useState<string | null>("manufacturing");
+  const [expanded, setExpanded] = useState<string | null>(null);
+  const [productData, setProductData] = useState<Record<string, unknown> | null>(null);
+  const [loadingProduct, setLoadingProduct] = useState(true);
+
+  // Fetch real product data on mount
+  useState(() => {
+    if (!gtin || !serial) return;
+    const sectors = ["batteries", "electronics", "textiles", "vehicles", "construction", "furniture", "plastics", "chemicals"];
+    (async () => {
+      for (const s of sectors) {
+        try {
+          const res = await fetch(`/api/v1/dpp/sector/${s}/${gtin}/${serial}`);
+          if (res.ok) { setProductData(await res.json()); break; }
+        } catch { /* next */ }
+      }
+      setLoadingProduct(false);
+    })();
+  });
 
   const statusColor = { completed: "bg-emerald-100 border-emerald-300 text-emerald-800", current: "bg-teal-100 border-teal-400 text-teal-800 ring-2 ring-teal-300", pending: "bg-slate-50 border-slate-200 text-slate-500" };
   const statusBadge = { completed: { label: locale === "fr" ? "Terminé" : "Completed", color: "bg-emerald-500 text-white" }, current: { label: locale === "fr" ? "En cours" : "In progress", color: "bg-teal-500 text-white" }, pending: { label: locale === "fr" ? "À venir" : "Pending", color: "bg-slate-300 text-slate-600" } };
+
+  function getPhaseProductData(phaseId: string): Record<string, string>[] {
+    if (!productData) return [];
+    const entries: Record<string, string>[] = [];
+    const pd = productData as Record<string, unknown>;
+    const mapping: Record<string, string[]> = {
+      pre_conception: ["sector", "espr_compliance_status", "reach_status", "rohs_compliance"],
+      design: ["weight_kg", "recyclability_score", "circularity_index", "Product_Weight_kg", "Recyclability_Score_pct", "Repairability_Score_1_10", "Durability_Index_0_1"],
+      prototype: ["carbon_footprint_kg_co2eq", "GWP_Total_kgCO2eq", "GWP_A1_A3_Extraction_kgCO2eq", "CRM_Total_pct", "Conformity_Declaration"],
+      supplier_qual: ["Supply_Concentration_Risk_1_10", "Transport_Distance_km", "Transport_GWP_kgCO2eq", "Social_Risk_Score_1_10", "manufacturing_country"],
+      manufacturing: ["gtin", "serial_number", "dpp_uri", "sector", "status", "ddp_completeness", "Manufacturing_Date", "Energy_Manufacturing_MJ", "Renewable_Energy_Share_pct"],
+      distribution: ["dpp_uri", "Transport_Distance_km", "Transport_GWP_kgCO2eq", "EORI"],
+      active_use: ["Expected_Lifetime_Years", "Durability_Index_0_1", "Spare_Parts_Available_Years"],
+      eol: ["Recyclability_Score_pct", "Disassembly_Time_min", "EoL_Recovery_Rate_pct", "circularity_index"],
+      recycling: ["Recycled_Content_pct", "EoL_Recovery_Rate_pct", "Recyclability_Score_pct", "Primary_Material_pct", "Secondary_Material_pct"],
+      destruction: ["EoL_Recovery_Rate_pct", "Hazardous_Substance", "REACH_SVHC_Compliant"],
+    };
+    const keys = mapping[phaseId] || [];
+    for (const k of keys) {
+      const val = pd[k];
+      if (val !== undefined && val !== null && val !== "") {
+        entries.push({ field: k.replace(/_/g, " "), value: String(val) });
+      }
+    }
+    if (entries.length === 0) {
+      for (const [k, v] of Object.entries(pd).slice(0, 6)) {
+        if (v !== undefined && v !== null) entries.push({ field: k.replace(/_/g, " "), value: String(v) });
+      }
+    }
+    return entries;
+  }
 
   return (
     <div className="max-w-4xl space-y-4">
@@ -69,75 +117,150 @@ export default function LifecycleTimelinePage() {
       </div>
       <p className="text-sm text-slate-500">{t("description")}</p>
 
+      {/* Clickable phase tabs — horizontal strip */}
+      <div className="rounded-xl border border-slate-200 bg-white p-3">
+        <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-2">{locale === "fr" ? "Cliquez sur une phase pour voir les données" : "Click a phase to view data"}</p>
+        <div className="flex gap-1 overflow-x-auto pb-1">
+          {phases.map((p, i) => {
+            const active = expanded === p.id;
+            return (
+              <button
+                key={p.id}
+                onClick={() => setExpanded(active ? null : p.id)}
+                className={`flex-shrink-0 flex flex-col items-center px-3 py-2 rounded-xl text-center transition-all cursor-pointer min-w-[90px] border-2 ${
+                  active
+                    ? "border-teal-500 bg-teal-50 shadow-lg scale-105 ring-2 ring-teal-300"
+                    : p.status === "completed"
+                      ? "border-emerald-300 bg-emerald-50 hover:bg-emerald-100 hover:shadow"
+                      : p.status === "current"
+                        ? "border-teal-300 bg-teal-50 hover:bg-teal-100 hover:shadow"
+                        : "border-slate-200 bg-slate-50 hover:bg-slate-100 hover:shadow"
+                }`}
+              >
+                <span className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold mb-1 ${
+                  active ? "bg-teal-600 text-white" : p.status === "completed" ? "bg-emerald-500 text-white" : p.status === "current" ? "bg-teal-500 text-white" : "bg-slate-300 text-slate-600"
+                }`}>
+                  {p.status === "completed" ? "✓" : i}
+                </span>
+                <span className="text-[10px] font-medium leading-tight">{p.label.replace(/Phase \d+\s*[:：]?\s*/, "")}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* Expanded phase detail */}
+      {expanded && (() => {
+        const phase = phases.find(p => p.id === expanded);
+        if (!phase) return null;
+        const badge = statusBadge[phase.status];
+        const realData = getPhaseProductData(phase.id);
+        return (
+          <div className={`rounded-xl border-2 shadow-lg transition-all ${statusColor[phase.status]} p-5 space-y-4`}>
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-bold text-lg">{phase.label}</h3>
+                <p className="text-xs opacity-70 mt-0.5">{phase.regulation} · {phase.agent}</p>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`text-[10px] px-2.5 py-1 rounded-full font-medium ${badge.color}`}>{badge.label}</span>
+                <button onClick={() => setExpanded(null)} className="text-slate-400 hover:text-slate-600 text-lg">✕</button>
+              </div>
+            </div>
+
+            <p className="text-sm text-slate-600">{phase.description}</p>
+
+            {/* Real product data for this phase */}
+            {realData.length > 0 && (
+              <div className="rounded-lg bg-white border border-teal-200 p-4">
+                <h4 className="text-xs font-bold text-teal-700 uppercase tracking-wider mb-3">
+                  {locale === "fr" ? "Données réelles du produit" : "Real Product Data"}
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {realData.map((d, i) => (
+                    <div key={i} className="flex justify-between items-baseline border-b border-slate-100 py-1.5">
+                      <span className="text-xs text-slate-500">{d.field}</span>
+                      <span className="text-xs font-semibold text-slate-800 ml-2 text-right">{d.value}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+            {loadingProduct && (
+              <p className="text-xs text-slate-400">{locale === "fr" ? "Chargement des données…" : "Loading product data…"}</p>
+            )}
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className="rounded-lg bg-white/80 border border-current/10 p-3">
+                <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">{locale === "fr" ? "Données collectées" : "Data Collected"}</h4>
+                <ul className="space-y-1">
+                  {phase.dataFields.map((f, j) => (
+                    <li key={j} className="text-xs text-slate-600 flex items-start gap-1.5">
+                      <span className="text-teal-500 mt-0.5">•</span>{f}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-lg bg-white/80 border border-current/10 p-3">
+                <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">{locale === "fr" ? "Livrables générés" : "Outputs Generated"}</h4>
+                <ul className="space-y-1">
+                  {phase.outputs.map((o, j) => (
+                    <li key={j} className="text-xs text-slate-600 flex items-start gap-1.5">
+                      <span className="text-emerald-500 mt-0.5">→</span>{o}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="flex gap-2 flex-wrap">
+              <Link href={`/agents/${phase.agentId}`} className="text-xs px-3 py-1.5 rounded-lg bg-teal-100 text-teal-700 font-medium hover:bg-teal-200 transition">
+                Agent: {phase.agent} →
+              </Link>
+              <Link href={`/report/${gtin}/${serial}`} className="text-xs px-3 py-1.5 rounded-lg bg-blue-100 text-blue-700 font-medium hover:bg-blue-200 transition">
+                {locale === "fr" ? "Rapport produit" : "Product report"} →
+              </Link>
+              <Link href={`/impact-assessment`} className="text-xs px-3 py-1.5 rounded-lg bg-green-100 text-green-700 font-medium hover:bg-green-200 transition">
+                {locale === "fr" ? "Évaluation d'impact" : "Impact assessment"} →
+              </Link>
+              {phase.status !== "completed" && (
+                <Link href="/command-center" className="text-xs px-3 py-1.5 rounded-lg bg-amber-100 text-amber-700 font-medium hover:bg-amber-200 transition">
+                  {locale === "fr" ? "Déclencher cette phase" : "Trigger this phase"} →
+                </Link>
+              )}
+            </div>
+          </div>
+        );
+      })()}
+
       {/* Progress bar */}
-      <div className="flex gap-0.5 h-3 rounded-full overflow-hidden">
+      <div className="flex gap-0.5 h-2 rounded-full overflow-hidden">
         {phases.map(p => (
           <div key={p.id} className={`flex-1 transition-all ${p.status === "completed" ? "bg-emerald-400" : p.status === "current" ? "bg-teal-400 animate-pulse" : "bg-slate-200"}`} />
         ))}
       </div>
 
-      {/* Phases */}
+      {/* Phase list (vertical) */}
       <div className="space-y-2">
         {phases.map((phase, i) => {
           const isExpanded = expanded === phase.id;
           const badge = statusBadge[phase.status];
           return (
-            <div key={phase.id} className={`rounded-xl border transition-all ${statusColor[phase.status]} ${isExpanded ? "shadow-md" : ""}`}>
-              <button onClick={() => setExpanded(isExpanded ? null : phase.id)} className="w-full flex items-center gap-3 p-4 text-left">
-                <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${phase.status === "completed" ? "bg-emerald-500 text-white" : phase.status === "current" ? "bg-teal-500 text-white" : "bg-slate-200 text-slate-500"}`}>
-                  {phase.status === "completed" ? "✓" : i}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <p className="font-semibold text-sm">{phase.label}</p>
-                  <p className="text-xs opacity-70">{phase.regulation} · {phase.agent}</p>
-                </div>
-                <span className={`text-[10px] px-2 py-1 rounded-full font-medium ${badge.color}`}>{badge.label}</span>
-                <span className="text-slate-400 text-sm">{isExpanded ? "▲" : "▼"}</span>
-              </button>
-
-              {isExpanded && (
-                <div className="px-4 pb-4 space-y-3 border-t border-current/10">
-                  <p className="text-sm text-slate-600 mt-3">{phase.description}</p>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div className="rounded-lg bg-white/80 border border-current/10 p-3">
-                      <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">{locale === "fr" ? "Données collectées" : "Data Collected"}</h4>
-                      <ul className="space-y-1">
-                        {phase.dataFields.map((f, j) => (
-                          <li key={j} className="text-xs text-slate-600 flex items-start gap-1.5">
-                            <span className="text-teal-500 mt-0.5">•</span>{f}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                    <div className="rounded-lg bg-white/80 border border-current/10 p-3">
-                      <h4 className="text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">{locale === "fr" ? "Livrables générés" : "Outputs Generated"}</h4>
-                      <ul className="space-y-1">
-                        {phase.outputs.map((o, j) => (
-                          <li key={j} className="text-xs text-slate-600 flex items-start gap-1.5">
-                            <span className="text-emerald-500 mt-0.5">→</span>{o}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  <div className="flex gap-2 flex-wrap">
-                    <Link href={`/agents/${phase.agentId}`} className="text-xs px-3 py-1.5 rounded-lg bg-teal-100 text-teal-700 font-medium hover:bg-teal-200 transition">
-                      {locale === "fr" ? "Agent" : "Agent"}: {phase.agent} →
-                    </Link>
-                    <Link href={`/report/${gtin}/${serial}`} className="text-xs px-3 py-1.5 rounded-lg bg-blue-100 text-blue-700 font-medium hover:bg-blue-200 transition">
-                      {locale === "fr" ? "Voir rapport produit" : "View product report"} →
-                    </Link>
-                    {phase.status !== "completed" && (
-                      <Link href={`/command-center`} className="text-xs px-3 py-1.5 rounded-lg bg-amber-100 text-amber-700 font-medium hover:bg-amber-200 transition">
-                        {locale === "fr" ? "Déclencher cette phase" : "Trigger this phase"} →
-                      </Link>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
+            <button
+              key={phase.id}
+              onClick={() => setExpanded(isExpanded ? null : phase.id)}
+              className={`w-full rounded-xl border transition-all cursor-pointer text-left ${statusColor[phase.status]} ${isExpanded ? "ring-2 ring-teal-400 shadow-md" : "hover:shadow"} p-3 flex items-center gap-3`}
+            >
+              <span className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold flex-shrink-0 ${phase.status === "completed" ? "bg-emerald-500 text-white" : phase.status === "current" ? "bg-teal-500 text-white" : "bg-slate-200 text-slate-500"}`}>
+                {phase.status === "completed" ? "✓" : i}
+              </span>
+              <div className="flex-1 min-w-0">
+                <p className="font-semibold text-sm">{phase.label}</p>
+                <p className="text-xs opacity-70">{phase.regulation} · {phase.agent}</p>
+              </div>
+              <span className={`text-[10px] px-2 py-1 rounded-full font-medium ${badge.color}`}>{badge.label}</span>
+              <span className="text-slate-400 text-sm">{isExpanded ? "▲" : "▼"}</span>
+            </button>
           );
         })}
       </div>

@@ -15,13 +15,13 @@ from app.core.i18n import get_locale
 
 router = APIRouter()
 
-_DEMO_DATA_PATH = Path(__file__).resolve().parents[3] / "data" / "demo_products.json"
+_DEMO_DATA_PATH = Path(__file__).resolve().parents[2] / "data" / "demo_products.json"
 
 SECTOR_MAP = {"Battery": "batteries", "Electronics": "electronics", "Textile": "textiles", "Vehicle": "vehicles", "Construction": "construction", "Furniture": "furniture"}
 
 
 def _load_demo_products() -> list[dict[str, Any]]:
-    for p in [_DEMO_DATA_PATH, Path(__file__).resolve().parents[3] / "data" / "demo" / "demo_products.json"]:
+    for p in [_DEMO_DATA_PATH, Path(__file__).resolve().parents[3] / "data" / "demo_products.json", Path(__file__).resolve().parents[3] / "data" / "demo" / "demo_products.json"]:
         if p.exists():
             with open(p, encoding="utf-8") as f:
                 return json.load(f)

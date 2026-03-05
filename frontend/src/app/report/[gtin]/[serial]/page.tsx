@@ -26,13 +26,13 @@ export default function ProductReportPage() {
   if (loading) return <p className="text-slate-400 py-12 text-center">{tCommon("loading")}</p>;
   if (!report) return <p className="text-red-600 py-12 text-center">{t("notFound")}</p>;
 
-  const product = (report.product as Record<string, unknown>) || {};
-  const phases = (report.lifecycle_phases as Phase[]) || [];
-  const insurance = (report.insurance_traceability as Record<string, unknown>) || {};
-  const compliance = (report.compliance_summary as Record<string, Record<string, string>>) || {};
-  const recommendations = (report.recommendations as Recommendation[]) || [];
-  const blockchain = (report.blockchain as Record<string, unknown>) || {};
-  const audit = (report.audit_trail as Record<string, unknown>) || {};
+  const product: Record<string, unknown> = (report.product as Record<string, unknown>) || {};
+  const phases: Phase[] = Array.isArray(report.lifecycle_phases) ? report.lifecycle_phases as Phase[] : [];
+  const insurance: Record<string, unknown> = (report.insurance_traceability as Record<string, unknown>) || {};
+  const compliance: Record<string, Record<string, string>> = (report.compliance_summary as Record<string, Record<string, string>>) || {};
+  const recommendations: Recommendation[] = Array.isArray(report.recommendations) ? report.recommendations as Recommendation[] : [];
+  const blockchain: Record<string, unknown> = (report.blockchain as Record<string, unknown>) || {};
+  const audit: Record<string, unknown> = (report.audit_trail as Record<string, unknown>) || {};
 
   const priorityColor: Record<string, string> = { high: "bg-red-100 text-red-700", haute: "bg-red-100 text-red-700", medium: "bg-amber-100 text-amber-700", moyenne: "bg-amber-100 text-amber-700", normal: "bg-blue-100 text-blue-700", normale: "bg-blue-100 text-blue-700" };
 
@@ -62,10 +62,10 @@ export default function ProductReportPage() {
       <div className="rounded-xl border border-slate-200 bg-white p-5">
         <h3 className="font-semibold text-slate-800 mb-3">{t("lifecycle")}</h3>
         <div className="flex gap-1">
-          {phases.map(p => (
-            <div key={p.phase} className={`flex-1 rounded-lg p-2 text-center text-[10px] ${p.status === "completed" ? "bg-emerald-100 text-emerald-700" : p.status === "current" ? "bg-teal-100 text-teal-800 ring-2 ring-teal-400" : "bg-slate-50 text-slate-400"}`}>
-              <span className="font-bold block">{p.phase}</span>
-              <span className="leading-tight block">{p.label}</span>
+          {phases.map((p, idx) => (
+            <div key={idx} className={`flex-1 rounded-lg p-2 text-center text-[10px] ${p.status === "completed" ? "bg-emerald-100 text-emerald-700" : p.status === "current" ? "bg-teal-100 text-teal-800 ring-2 ring-teal-400" : "bg-slate-50 text-slate-400"}`}>
+              <span className="font-bold block">{String(p.phase)}</span>
+              <span className="leading-tight block">{String(p.label)}</span>
             </div>
           ))}
         </div>
@@ -97,6 +97,65 @@ export default function ProductReportPage() {
           </div>
         )}
       </div>
+
+      {/* ESPR Annex III */}
+      {report.espr_annex_iii ? (
+        <div className="rounded-xl border border-slate-200 bg-white p-5">
+          <h3 className="font-semibold text-slate-800 mb-1">📜 ESPR (EU) 2024/1781 — Annex III</h3>
+          <p className="text-xs text-slate-400 mb-3">{String((report.espr_annex_iii as Record<string, unknown>).standard)}</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {Object.entries((report.espr_annex_iii as Record<string, unknown>).categories as Record<string, Record<string, string>>).map(([key, cat]) => (
+              <div key={key} className="flex items-start gap-2 p-2 rounded-lg bg-slate-50 border border-slate-100 text-xs">
+                <span className="font-mono font-bold text-teal-600 w-5">{key}</span>
+                <div className="min-w-0"><p className="font-medium text-slate-700">{cat.name}</p><p className="text-slate-500 truncate">{cat.value}</p></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {/* Battery Annex XIII clusters */}
+      {report.battery_annex_xiii ? (
+        <div className="rounded-xl border border-amber-200 bg-amber-50 p-5">
+          <h3 className="font-semibold text-amber-800 mb-1">🔋 Battery Reg (EU) 2023/1542 — Annex XIII</h3>
+          <p className="text-xs text-amber-600 mb-3">{String((report.battery_annex_xiii as Record<string, unknown>).total_mandatory_attributes)} mandatory attributes</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {Object.entries((report.battery_annex_xiii as Record<string, unknown>).clusters as Record<string, Record<string, unknown>>).map(([key, cluster]) => (
+              <div key={key} className="rounded-lg bg-white border border-amber-100 p-3">
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-xs font-semibold text-amber-700">{String(cluster.name)}</span>
+                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-amber-100 text-amber-600">{String(cluster.fields)} fields</span>
+                </div>
+                <div className="flex flex-wrap gap-1">{(cluster.items as string[]).map((item: string, j: number) => (
+                  <span key={j} className="text-[9px] px-1.5 py-0.5 rounded bg-amber-50 text-amber-600 border border-amber-100">{item}</span>
+                ))}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      ) : null}
+
+      {/* LCA Environmental Footprint */}
+      {report.lca_environmental_footprint ? (() => {
+        const lca = report.lca_environmental_footprint as Record<string, unknown>;
+        const cats = (lca.impact_categories as Array<Record<string, unknown>>) || [];
+        return (
+          <div className="rounded-xl border border-green-200 bg-green-50 p-5">
+            <h3 className="font-semibold text-green-800 mb-1">🌍 {String(lca.standard)}</h3>
+            <p className="text-xs text-green-600 mb-1">{String(lca.methodology)} · {String(lca.system_boundary)}</p>
+            <p className="text-xs text-green-500 mb-3">Total CO₂: <strong className="text-green-800">{String(lca.total_carbon_footprint_kg_co2eq)} kg CO₂-eq</strong> · Class: <strong className="text-green-800">{String(lca.carbon_footprint_class)}</strong></p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-1.5">
+              {cats.map((c: Record<string, unknown>, i: number) => (
+                <div key={i} className="rounded-lg bg-white border border-green-100 p-2 text-center">
+                  <p className="text-[9px] text-slate-400 leading-tight">{String(c.name)}</p>
+                  <p className="text-xs font-bold text-green-700 mt-0.5">{String(c.value)}</p>
+                  <p className="text-[8px] text-slate-400">{String(c.unit)}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })() : null}
 
       {/* Compliance summary */}
       <div className="rounded-xl border border-slate-200 bg-white p-5">

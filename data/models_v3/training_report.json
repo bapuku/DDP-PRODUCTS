@@ -16,9 +16,29 @@
     "Transport_Distance_km",
     "EoL_Recovery_Rate_pct",
     "Renewable_Energy_Share_pct",
-    "Supply_Concentration_Risk_1_10"
+    "Supply_Concentration_Risk_1_10",
+    "LCA_Extraction_pct",
+    "LCA_Manufacturing_pct",
+    "LCA_Use_Phase_pct",
+    "LCA_EoL_pct",
+    "Acidification_molHp",
+    "Eutrophication_kgPeq",
+    "Resource_Depletion_kgSbeq",
+    "Particulate_Matter_kgPM25eq",
+    "Land_Use_m2a",
+    "Bio_Based_Content_pct",
+    "Social_Risk_Score_1_10",
+    "Disassembly_Time_min",
+    "Spare_Parts_Available_Years",
+    "GWP_per_kg",
+    "Energy_per_kg",
+    "Water_per_kg",
+    "Circularity_Index",
+    "Sustainable_Content_pct",
+    "Longevity_Score",
+    "Supply_Risk_Composite"
   ],
-  "n_features": 14,
+  "n_features": 34,
   "sectors": [
     "Battery",
     "Textile",
@@ -30,33 +50,58 @@
   "early_stopping": 30,
   "models": {
     "ESPR": {
-      "accuracy": 0.6364,
+      "accuracy": 0.5364,
+      "f1_score": 0.6277,
+      "cv_f1": 0.7776,
       "epochs_used": 31,
-      "time_s": 0.1
+      "time_s": 0.2,
+      "class_balance": "64.9%/35.1%"
     },
     "REACH": {
-      "accuracy": 0.5636,
-      "epochs_used": 36,
-      "time_s": 0.1
+      "accuracy": 0.5455,
+      "f1_score": 0.6711,
+      "cv_f1": 0.8108,
+      "epochs_used": 45,
+      "time_s": 0.1,
+      "class_balance": "68.4%/31.6%"
     },
     "RoHS": {
-      "accuracy": 0.8636,
-      "epochs_used": 33,
-      "time_s": 0.1
+      "accuracy": 0.8545,
+      "f1_score": 0.92,
+      "cv_f1": 0.9443,
+      "epochs_used": 105,
+      "time_s": 0.2,
+      "class_balance": "89.6%/10.4%"
     },
     "Carbon": {
-      "r2": 0.9981,
-      "mae": 73612.37,
-      "epochs_used": 123,
-      "time_s": 0.2
+      "r2": 0.921,
+      "mae": 1074797.86,
+      "cv_r2": -0.3152,
+      "epochs_used": 186,
+      "time_s": 0.6
     },
     "Recyclability": {
-      "r2": 0.9999,
-      "mae": 0.13,
-      "epochs_used": 150,
-      "time_s": 0.2
+      "r2": 0.938,
+      "mae": 5.36,
+      "cv_r2": 0.8807,
+      "epochs_used": 200,
+      "time_s": 1.0
+    },
+    "EoL_Recovery": {
+      "r2": 0.9226,
+      "mae": 5.32,
+      "cv_r2": 0.917,
+      "epochs_used": 200,
+      "time_s": 0.7
+    },
+    "Water": {
+      "r2": 0.9649,
+      "mae": 63702.61,
+      "cv_r2": -0.8979,
+      "epochs_used": 200,
+      "time_s": 0.8
     }
   },
   "models_dir": "/Users/spialpha/Library/Mobile Documents/com~apple~CloudDocs/DIGITAL PASSPORT PRODUCT AND ECOPRODUCTION/eu-dpp-platform/scripts/../data/models_v3",
-  "timestamp": "2026-03-05T17:34:22.645477"
+  "timestamp": "2026-03-05T17:48:53.093265"
 }

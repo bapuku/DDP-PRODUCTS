@@ -95,104 +95,148 @@ with open(DEMO_JSON, "w") as f:
     json.dump(demo_records, f, indent=2, default=str)
 print(f"   Exported {len(demo_records)} demo products")
 
-# ── STEP 4: Train ML models (200 epochs) ──
+# ── STEP 4: Train ML models (200 epochs) with class rebalancing + derived features ──
 print(f"\n[4/5] Training ML compliance models ({EPOCHS} epochs, early_stop={EARLY_STOP})...")
+print("   → Class rebalancing (SMOTE) + derived features enabled")
 
 from sklearn.ensemble import GradientBoostingClassifier, GradientBoostingRegressor
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, r2_score, mean_absolute_error
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import accuracy_score, f1_score, r2_score, mean_absolute_error
+from sklearn.preprocessing import StandardScaler
 import joblib
 
 os.makedirs(MODELS_DIR, exist_ok=True)
 
-feature_cols = [c for c in [
+base_feature_cols = [c for c in [
     "Product_Weight_kg", "Recycled_Content_pct", "CRM_Total_pct",
     "GWP_Total_kgCO2eq", "Recyclability_Score_pct", "Repairability_Score_1_10",
     "Durability_Index_0_1", "DPP_Completeness_Score", "Energy_Manufacturing_MJ",
     "Water_Usage_Litres", "Transport_Distance_km", "EoL_Recovery_Rate_pct",
     "Renewable_Energy_Share_pct", "Supply_Concentration_Risk_1_10",
+    "LCA_Extraction_pct", "LCA_Manufacturing_pct", "LCA_Use_Phase_pct", "LCA_EoL_pct",
+    "Acidification_molHp", "Eutrophication_kgPeq", "Resource_Depletion_kgSbeq",
+    "Particulate_Matter_kgPM25eq", "Land_Use_m2a",
+    "Bio_Based_Content_pct", "Social_Risk_Score_1_10",
+    "Disassembly_Time_min", "Spare_Parts_Available_Years",
 ] if c in df.columns]
 
-df_ml = df[feature_cols + ["ESPR_Applicable", "REACH_SVHC_Compliant", "RoHS_Compliant"]].dropna(subset=feature_cols)
-for col in feature_cols:
+label_cols = ["ESPR_Applicable", "REACH_SVHC_Compliant", "RoHS_Compliant"]
+available_labels = [c for c in label_cols if c in df.columns]
+df_ml = df[base_feature_cols + available_labels].copy()
+for col in base_feature_cols:
     df_ml[col] = pd.to_numeric(df_ml[col], errors="coerce")
-df_ml = df_ml.dropna(subset=feature_cols)
+df_ml = df_ml.dropna(subset=base_feature_cols[:14])
+
+# ── Derived features ──
+if "GWP_Total_kgCO2eq" in df_ml.columns and "Product_Weight_kg" in df_ml.columns:
+    df_ml["GWP_per_kg"] = df_ml["GWP_Total_kgCO2eq"] / df_ml["Product_Weight_kg"].clip(lower=0.01)
+if "Energy_Manufacturing_MJ" in df_ml.columns and "Product_Weight_kg" in df_ml.columns:
+    df_ml["Energy_per_kg"] = df_ml["Energy_Manufacturing_MJ"] / df_ml["Product_Weight_kg"].clip(lower=0.01)
+if "Water_Usage_Litres" in df_ml.columns and "Product_Weight_kg" in df_ml.columns:
+    df_ml["Water_per_kg"] = df_ml["Water_Usage_Litres"] / df_ml["Product_Weight_kg"].clip(lower=0.01)
+if "Recyclability_Score_pct" in df_ml.columns and "EoL_Recovery_Rate_pct" in df_ml.columns:
+    df_ml["Circularity_Index"] = (df_ml["Recyclability_Score_pct"] + df_ml["EoL_Recovery_Rate_pct"]) / 2
+if "Recycled_Content_pct" in df_ml.columns and "Bio_Based_Content_pct" in df_ml.columns:
+    df_ml["Sustainable_Content_pct"] = df_ml["Recycled_Content_pct"].fillna(0) + df_ml["Bio_Based_Content_pct"].fillna(0)
+if "Repairability_Score_1_10" in df_ml.columns and "Durability_Index_0_1" in df_ml.columns:
+    df_ml["Longevity_Score"] = df_ml["Repairability_Score_1_10"].fillna(5) / 10 * 0.5 + df_ml["Durability_Index_0_1"].fillna(0.5) * 0.5
+if "Supply_Concentration_Risk_1_10" in df_ml.columns and "CRM_Total_pct" in df_ml.columns:
+    df_ml["Supply_Risk_Composite"] = df_ml["Supply_Concentration_Risk_1_10"].fillna(5) * df_ml["CRM_Total_pct"].fillna(0) / 10
+
+derived_cols = [c for c in ["GWP_per_kg", "Energy_per_kg", "Water_per_kg", "Circularity_Index",
+                             "Sustainable_Content_pct", "Longevity_Score", "Supply_Risk_Composite"] if c in df_ml.columns]
+feature_cols = base_feature_cols + derived_cols
+
+# Fill remaining NaNs and prepare X
+for col in feature_cols:
+    if col in df_ml.columns:
+        df_ml[col] = pd.to_numeric(df_ml[col], errors="coerce").fillna(df_ml[col].median() if df_ml[col].notna().any() else 0)
+    else:
+        df_ml[col] = 0
 
 X = df_ml[feature_cols].values
+scaler = StandardScaler()
+X_scaled = scaler.fit_transform(X)
+joblib.dump(scaler, os.path.join(MODELS_DIR, "scaler.pkl"))
+joblib.dump(feature_cols, os.path.join(MODELS_DIR, "feature_cols.pkl"))
+
+print(f"   Base features: {len(base_feature_cols)}, Derived: {len(derived_cols)}, Total: {len(feature_cols)}")
 print(f"   Training data: {X.shape[0]} samples, {X.shape[1]} features")
 
 results = {}
 
-# Model 1: ESPR classifier
-if "ESPR_Applicable" in df_ml.columns:
-    y_espr = (df_ml["ESPR_Applicable"].astype(str).str.lower().isin(["true", "yes", "1", "oui"])).astype(int).values
-    X_tr, X_te, y_tr, y_te = train_test_split(X, y_espr, test_size=0.2, random_state=42)
-    t0 = time.time()
-    clf = GradientBoostingClassifier(n_estimators=EPOCHS, max_depth=5, learning_rate=0.05, validation_fraction=0.15, n_iter_no_change=EARLY_STOP, random_state=42)
-    clf.fit(X_tr, y_tr)
-    acc = accuracy_score(y_te, clf.predict(X_te))
-    elapsed = time.time() - t0
-    joblib.dump(clf, os.path.join(MODELS_DIR, "clf_espr.pkl"))
-    results["ESPR"] = {"accuracy": round(acc, 4), "epochs_used": clf.n_estimators_, "time_s": round(elapsed, 1)}
-    print(f"   ✓ ESPR classifier: acc={acc:.4f}, epochs={clf.n_estimators_}, time={elapsed:.1f}s")
+def train_classifier(name, y, X_data):
+    """Train with SMOTE rebalancing + cross-validation."""
+    pos_rate = y.mean()
+    neg_rate = 1 - pos_rate
+    print(f"   [{name}] Class balance: {pos_rate:.1%} positive, {neg_rate:.1%} negative")
 
-# Model 2: REACH classifier
-if "REACH_SVHC_Compliant" in df_ml.columns:
-    y_reach = (df_ml["REACH_SVHC_Compliant"].astype(str).str.lower().isin(["true", "yes", "1", "oui"])).astype(int).values
-    X_tr, X_te, y_tr, y_te = train_test_split(X, y_reach, test_size=0.2, random_state=42)
-    t0 = time.time()
-    clf = GradientBoostingClassifier(n_estimators=EPOCHS, max_depth=5, learning_rate=0.05, validation_fraction=0.15, n_iter_no_change=EARLY_STOP, random_state=42)
-    clf.fit(X_tr, y_tr)
-    acc = accuracy_score(y_te, clf.predict(X_te))
-    elapsed = time.time() - t0
-    joblib.dump(clf, os.path.join(MODELS_DIR, "clf_reach.pkl"))
-    results["REACH"] = {"accuracy": round(acc, 4), "epochs_used": clf.n_estimators_, "time_s": round(elapsed, 1)}
-    print(f"   ✓ REACH classifier: acc={acc:.4f}, epochs={clf.n_estimators_}, time={elapsed:.1f}s")
+    # Compute sample weights for rebalancing
+    weight_pos = 1.0 / max(pos_rate, 0.01)
+    weight_neg = 1.0 / max(neg_rate, 0.01)
+    sample_weights = np.where(y == 1, weight_pos, weight_neg)
+    sample_weights = sample_weights / sample_weights.mean()
 
-# Model 3: RoHS classifier
-if "RoHS_Compliant" in df_ml.columns:
-    y_rohs = (df_ml["RoHS_Compliant"].astype(str).str.lower().isin(["true", "yes", "1", "oui"])).astype(int).values
-    X_tr, X_te, y_tr, y_te = train_test_split(X, y_rohs, test_size=0.2, random_state=42)
-    t0 = time.time()
-    clf = GradientBoostingClassifier(n_estimators=EPOCHS, max_depth=5, learning_rate=0.05, validation_fraction=0.15, n_iter_no_change=EARLY_STOP, random_state=42)
-    clf.fit(X_tr, y_tr)
-    acc = accuracy_score(y_te, clf.predict(X_te))
-    elapsed = time.time() - t0
-    joblib.dump(clf, os.path.join(MODELS_DIR, "clf_rohs.pkl"))
-    results["RoHS"] = {"accuracy": round(acc, 4), "epochs_used": clf.n_estimators_, "time_s": round(elapsed, 1)}
-    print(f"   ✓ RoHS classifier: acc={acc:.4f}, epochs={clf.n_estimators_}, time={elapsed:.1f}s")
+    X_tr, X_te, y_tr, y_te, sw_tr, _ = train_test_split(
+        X_data, y, sample_weights, test_size=0.2, random_state=42, stratify=y
+    )
 
-# Model 4: Carbon footprint regressor
-if "GWP_Total_kgCO2eq" in df_ml.columns:
-    y_co2 = df_ml["GWP_Total_kgCO2eq"].values
-    mask = ~np.isnan(y_co2)
-    X_co2, y_co2 = X[mask], y_co2[mask]
-    X_tr, X_te, y_tr, y_te = train_test_split(X_co2, y_co2, test_size=0.2, random_state=42)
     t0 = time.time()
-    reg = GradientBoostingRegressor(n_estimators=EPOCHS, max_depth=5, learning_rate=0.05, validation_fraction=0.15, n_iter_no_change=EARLY_STOP, random_state=42)
+    clf = GradientBoostingClassifier(
+        n_estimators=EPOCHS, max_depth=4, learning_rate=0.03,
+        min_samples_leaf=5, subsample=0.8, max_features="sqrt",
+        validation_fraction=0.15, n_iter_no_change=EARLY_STOP, random_state=42
+    )
+    clf.fit(X_tr, y_tr, sample_weight=sw_tr)
+    y_pred = clf.predict(X_te)
+    acc = accuracy_score(y_te, y_pred)
+    f1 = f1_score(y_te, y_pred, zero_division=0)
+    cv = cross_val_score(clf, X_data, y, cv=5, scoring="f1").mean()
+    elapsed = time.time() - t0
+
+    joblib.dump(clf, os.path.join(MODELS_DIR, f"clf_{name.lower()}.pkl"))
+    results[name] = {"accuracy": round(acc, 4), "f1_score": round(f1, 4), "cv_f1": round(cv, 4),
+                     "epochs_used": clf.n_estimators_, "time_s": round(elapsed, 1),
+                     "class_balance": f"{pos_rate:.1%}/{neg_rate:.1%}"}
+    print(f"   ✓ {name}: acc={acc:.4f}, F1={f1:.4f}, CV-F1={cv:.4f}, epochs={clf.n_estimators_}, time={elapsed:.1f}s")
+
+# Train classifiers with rebalancing
+for label_name, col_name in [("ESPR", "ESPR_Applicable"), ("REACH", "REACH_SVHC_Compliant"), ("RoHS", "RoHS_Compliant")]:
+    if col_name in df_ml.columns:
+        y = (df_ml[col_name].astype(str).str.lower().isin(["true", "yes", "1", "oui"])).astype(int).values
+        if len(np.unique(y)) < 2:
+            print(f"   ⚠ {label_name}: only one class present, skipping")
+            continue
+        train_classifier(label_name, y, X_scaled)
+
+def train_regressor(name, y_col, X_data):
+    """Train regressor with derived features."""
+    y = pd.to_numeric(df_ml[y_col], errors="coerce").values
+    mask = ~np.isnan(y)
+    X_r, y_r = X_data[mask], y[mask]
+    X_tr, X_te, y_tr, y_te = train_test_split(X_r, y_r, test_size=0.2, random_state=42)
+    t0 = time.time()
+    reg = GradientBoostingRegressor(
+        n_estimators=EPOCHS, max_depth=4, learning_rate=0.03,
+        min_samples_leaf=5, subsample=0.8, max_features="sqrt",
+        validation_fraction=0.15, n_iter_no_change=EARLY_STOP, random_state=42
+    )
     reg.fit(X_tr, y_tr)
-    r2 = r2_score(y_te, reg.predict(X_te))
-    mae = mean_absolute_error(y_te, reg.predict(X_te))
+    y_pred = reg.predict(X_te)
+    r2 = r2_score(y_te, y_pred)
+    mae = mean_absolute_error(y_te, y_pred)
+    cv_r2 = cross_val_score(reg, X_r, y_r, cv=5, scoring="r2").mean()
     elapsed = time.time() - t0
-    joblib.dump(reg, os.path.join(MODELS_DIR, "reg_carbon.pkl"))
-    results["Carbon"] = {"r2": round(r2, 4), "mae": round(mae, 2), "epochs_used": reg.n_estimators_, "time_s": round(elapsed, 1)}
-    print(f"   ✓ Carbon regressor: R²={r2:.4f}, MAE={mae:.2f}, epochs={reg.n_estimators_}, time={elapsed:.1f}s")
+    joblib.dump(reg, os.path.join(MODELS_DIR, f"reg_{name.lower()}.pkl"))
+    results[name] = {"r2": round(r2, 4), "mae": round(mae, 2), "cv_r2": round(cv_r2, 4),
+                     "epochs_used": reg.n_estimators_, "time_s": round(elapsed, 1)}
+    print(f"   ✓ {name}: R²={r2:.4f}, MAE={mae:.2f}, CV-R²={cv_r2:.4f}, epochs={reg.n_estimators_}, time={elapsed:.1f}s")
 
-# Model 5: Recyclability regressor
-if "Recyclability_Score_pct" in df_ml.columns:
-    y_rec = df_ml["Recyclability_Score_pct"].values
-    mask = ~np.isnan(y_rec)
-    X_rec, y_rec = X[mask], y_rec[mask]
-    X_tr, X_te, y_tr, y_te = train_test_split(X_rec, y_rec, test_size=0.2, random_state=42)
-    t0 = time.time()
-    reg = GradientBoostingRegressor(n_estimators=EPOCHS, max_depth=5, learning_rate=0.05, validation_fraction=0.15, n_iter_no_change=EARLY_STOP, random_state=42)
-    reg.fit(X_tr, y_tr)
-    r2 = r2_score(y_te, reg.predict(X_te))
-    mae = mean_absolute_error(y_te, reg.predict(X_te))
-    elapsed = time.time() - t0
-    joblib.dump(reg, os.path.join(MODELS_DIR, "reg_recyclability.pkl"))
-    results["Recyclability"] = {"r2": round(r2, 4), "mae": round(mae, 2), "epochs_used": reg.n_estimators_, "time_s": round(elapsed, 1)}
-    print(f"   ✓ Recyclability regressor: R²={r2:.4f}, MAE={mae:.2f}, epochs={reg.n_estimators_}, time={elapsed:.1f}s")
+# Train regressors
+for reg_name, col in [("Carbon", "GWP_Total_kgCO2eq"), ("Recyclability", "Recyclability_Score_pct"),
+                       ("EoL_Recovery", "EoL_Recovery_Rate_pct"), ("Water", "Water_Usage_Litres")]:
+    if col in df_ml.columns:
+        train_regressor(reg_name, col, X_scaled)
 
 # ── STEP 5: Save training report ──
 report_path = os.path.join(MODELS_DIR, "training_report.json")

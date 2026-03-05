@@ -1,7 +1,7 @@
 # API v1
 from fastapi import APIRouter
 
-from app.api.v1 import dpp, compliance, workflow, battery_passport, auth, dpp_sector, lifecycle, ml, human_review, agents_registry, system_assistant, connectors, blockchain, qr_generator, product_report, impact_assessment, regulations
+from app.api.v1 import dpp, compliance, workflow, battery_passport, auth, dpp_sector, lifecycle, ml, human_review, agents_registry, system_assistant, connectors, blockchain, qr_generator, product_report, impact_assessment, regulations, demo_workflow
 
 router = APIRouter()
 router.include_router(auth.router, prefix="/auth", tags=["auth"])
@@ -21,3 +21,4 @@ router.include_router(qr_generator.router, prefix="/qr", tags=["qr-generator"])
 router.include_router(product_report.router, prefix="/report", tags=["product-report"])
 router.include_router(impact_assessment.router, prefix="/impact", tags=["impact-assessment"])
 router.include_router(regulations.router, prefix="/regulations", tags=["regulations"])
+router.include_router(demo_workflow.router, prefix="/demo", tags=["demo-workflow"])

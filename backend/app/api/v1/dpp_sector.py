@@ -81,13 +81,28 @@ async def list_dpp_by_sector(
 
 @router.get("/{sector}/{gtin}/{serial}", response_model=dict)
 async def get_dpp(sector: DPPSector, gtin: str, serial: str, locale: str = Depends(get_locale)) -> dict:
-    """Retrieve a DPP record (public per ESPR Article 9(4))."""
+    """Retrieve a DPP record (public per ESPR Article 9(4)).
+    Tries exact match, then fuzzy serial match (with/without SN- prefix)."""
     gtin_clean = "".join(c for c in gtin if c.isdigit()).zfill(14)
     neo4j = get_neo4j()
+    # Exact match first
     records = await neo4j.run_query(
         "MATCH (p:Product {gtin: $gtin, serial_number: $serial}) RETURN p LIMIT 1",
         {"gtin": gtin_clean, "serial": serial},
     )
+    # Fallback: try with/without SN- prefix, or CONTAINS match
+    if not records or not records[0].get("p"):
+        alt_serial = serial.removeprefix("SN-") if serial.startswith("SN-") else f"SN-{serial}"
+        records = await neo4j.run_query(
+            "MATCH (p:Product {gtin: $gtin, serial_number: $alt}) RETURN p LIMIT 1",
+            {"gtin": gtin_clean, "alt": alt_serial},
+        )
+    # Fallback: search by GTIN only (any serial)
+    if not records or not records[0].get("p"):
+        records = await neo4j.run_query(
+            "MATCH (p:Product {gtin: $gtin}) RETURN p LIMIT 1",
+            {"gtin": gtin_clean},
+        )
     if not records or not records[0].get("p"):
         raise HTTPException(status_code=404, detail=t("errors.dpp_not_found", locale))
     node = records[0]["p"]

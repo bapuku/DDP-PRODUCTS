@@ -19,14 +19,22 @@ export default function DPPDetailPage() {
 
   useEffect(() => {
     if (!gtin || !serial) return;
-    Promise.all([
-      api.dpp.get("batteries", gtin, serial).catch(() => null),
-      api.lifecycle.carrier(gtin, serial).catch(() => null),
-    ]).then(([p, c]) => {
-      setProduct(p ?? null);
-      setCarrier(c ?? null);
-      setError(p ? null : "not_found");
-    }).finally(() => setLoading(false));
+    const sectors = ["batteries", "electronics", "textiles", "vehicles", "construction", "furniture", "plastics", "chemicals"];
+    async function fetchDpp() {
+      let product = null;
+      for (const s of sectors) {
+        try {
+          const p = await api.dpp.get(s, gtin, serial);
+          if (p) { product = p; break; }
+        } catch { /* try next sector */ }
+      }
+      const carrier = await api.lifecycle.carrier(gtin, serial).catch(() => null);
+      setProduct(product);
+      setCarrier(carrier ?? null);
+      setError(product ? null : "not_found");
+      setLoading(false);
+    }
+    fetchDpp();
   }, [gtin, serial]);
 
   if (loading) return <div className="text-slate-400">{tCommon("loading")}</div>;

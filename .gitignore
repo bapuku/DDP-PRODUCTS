@@ -46,6 +46,10 @@ models/*.pt
 data/customer/
 data/production/
 
+# Runtime state files (regulatory watcher, auto-retrain)
+**/watcher_state.json
+**/retrain_state.json
+
 # Node
 node_modules/
 .next/
